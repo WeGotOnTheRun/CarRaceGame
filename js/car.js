@@ -1,8 +1,8 @@
 class car{
-  constructor() {
+  constructor(loc) {
     this._model=0
     this._speed=0
-    this._location={x:0,y:0}
+    this._location=loc;
     this._state="before birth"
   }
   set speed(s){
@@ -37,16 +37,34 @@ class playerCar extends car{
 
   constructor()
   {
-    super()
+    super({x:(window.innerWidth/2-13),y:window.innerHeight-100})
+    this._carI=new Image()
     this.draw()
+
   }
   draw()
   {
     let canvas=document.getElementById('myCanvas2');
-    var ctx2 = canvas.getContext("2d");
-    var carI = new Image();
-    carI.src="img/Pink-Car.png"
-    ctx2.drawImage(carI,200,100,carI.width,carI.height,window.innerWidth/2-13,window.innerHeight-100,50,100);
+    var ctx2 = canvas.getContext("2d")
+    this._carI.src="img/Pink-Car.png"
 
+    ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,50,100);
+    this.move("right")
+  }
+  move(direction)
+  {
+    let canvas=document.getElementById('myCanvas2');
+    var ctx2 = canvas.getContext("2d")
+    if(direction=="right")
+    {
+     ctx2.clearRect(this._location.x,this._location.y, 50, 100);
+      ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x+10,this._location.y,50,100);
+    }
+    else
+    {
+      ctx2.clearRect(this._location.x,this._location.y, 50, 100);
+       ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,50,100);
+
+    }
   }
 }
