@@ -46,7 +46,7 @@ class playerCar extends car{
     var ctx2 = canvas.getContext("2d");
     var carI = new Image();
     carI.src="img/Pink-Car.png"
-    ctx2.drawImage(carI,200,100,carI.width,carI.height,673,340,50,100);
+    ctx2.drawImage(carI,200,100,carI.width,carI.height,window.innerWidth/2-13,window.innerHeight-100,50,100);
 
   }
 }
