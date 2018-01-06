@@ -1,4 +1,5 @@
-class  Road{
+// module.exports = require("aggregation.js")
+class  Road {
 
 constructor(themeId,speed) {
     this._themeId=themeId
@@ -7,6 +8,7 @@ constructor(themeId,speed) {
     this._timer='';
     this.draw();
   }
+  //var e=new enemyCar()
   draw()
   {
     let canvas=document.getElementById('myCanvas');
@@ -21,6 +23,7 @@ constructor(themeId,speed) {
         background.src = themes[c]
         ctx.drawImage(background,0,0,background.width,background.height,0,0,canvas.width,canvas.height);
             c=(c+1)%3
+      //  e.draw()
     },
      500);
   }
