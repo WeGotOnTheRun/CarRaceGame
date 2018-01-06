@@ -51,20 +51,26 @@ class playerCar extends car{
     ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,50,100);
     this.move("right")
   }
+
   move(direction)
   {
     let canvas=document.getElementById('myCanvas2');
     var ctx2 = canvas.getContext("2d")
     if(direction=="right")
     {
-     ctx2.clearRect(this._location.x,this._location.y, 50, 100);
+     ctx2.clearRect(this._location.x,this._location.y, 70, 120);
+
       ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x+10,this._location.y,50,100);
+      this.location.x+=10
     }
     else
     {
-      ctx2.clearRect(this._location.x,this._location.y, 50, 100);
+      ctx2.clearRect(this._location.x,this._location.y, 70, 120);
        ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,50,100);
-
+       this.location.x-=10
     }
   }
+
+
+
 }

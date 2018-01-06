@@ -13,5 +13,19 @@ window.onload = function init()
   //var audio= new Audio();
   //audio.src="sounds/driving.mp3"
   //audio.play();
-  
+  window.addEventListener("keydown", keypress, false);
+  function keypress(event)
+  {
+  	console.log(event.keyCode);
+    //left
+  	if(event.keyCode == 37)
+  	{
+  		car.move("left")
+  	}
+    //right
+  	if(event.keyCode == 39)
+  	{
+  		car.move("right")
+  	}
+  }
 }
