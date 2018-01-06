@@ -1,4 +1,4 @@
-class  road{
+class  Road{
 
 constructor(themeId,speed) {
     this._themeId=themeId
@@ -10,6 +10,7 @@ constructor(themeId,speed) {
   draw()
   {
     let canvas=document.getElementById('myCanvas');
+    var ctx = canvas.getContext("2d");
     var background = new Image();
     var c=0;
      var themes=["img/Picture5.png","img/Picture6.png","img/Picture7.png"]

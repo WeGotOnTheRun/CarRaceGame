@@ -4,7 +4,6 @@ class car{
     this._speed=0
     this._location={x:0,y:0}
     this._state="before birth"
-
   }
   set speed(s){
 	this._speed=s
@@ -16,7 +15,7 @@ class car{
   	this._location=l
   }
   set state(s){
-  	this._state=s
+    this._state=s
   }
   get speed(){
   	return this._speed
@@ -35,8 +34,19 @@ class car{
   }
 }
 class enemyCar extends car{
+
   constructor()
   {
-    super();
+    super()
+    this.draw()
+  }
+  draw()
+  {
+    let canvas2=document.getElementById('myCanvas2');
+    ctx = canvas2.getContext("2d");
+    var carI = new Image();
+    carI.src="img/Pink-Car.png"
+    ctx.drawImage(carI,200,100,carI.width,carI.height,0,0,100,200);
+
   }
 }
