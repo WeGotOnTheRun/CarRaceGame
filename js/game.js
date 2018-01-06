@@ -8,6 +8,9 @@ window.onload = function init()
   canvas.height=window.innerHeight;
   canvas2.width=window.innerWidth;
   canvas2.height=window.innerHeight;
-  var car=new enemyCar();
+  var car=new playerCar();
   var road=new Road();
+  //var audio= new Audio();
+  //audio.src="sounds/driving.mp3"
+  //audio.play();
 }

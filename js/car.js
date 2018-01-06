@@ -33,7 +33,7 @@ class car{
   	return this._model
   }
 }
-class enemyCar extends car{
+class playerCar extends car{
 
   constructor()
   {
@@ -42,11 +42,11 @@ class enemyCar extends car{
   }
   draw()
   {
-    let canvas2=document.getElementById('myCanvas2');
-    ctx = canvas2.getContext("2d");
+    let canvas=document.getElementById('myCanvas2');
+    var ctx2 = canvas.getContext("2d");
     var carI = new Image();
     carI.src="img/Pink-Car.png"
-    ctx.drawImage(carI,200,100,carI.width,carI.height,0,0,100,200);
+    ctx2.drawImage(carI,200,100,carI.width,carI.height,673,340,50,100);
 
   }
 }
