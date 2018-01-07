@@ -89,8 +89,7 @@ class enemyCar extends car{
 
   }
   setLocation(direction){
-    let canvas=document.getElementById('myCanvas2');
-    var ctx2 = canvas.getContext("2d")
+    
     if(direction=="right"){
       this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x+10,this._location.y,30,60)
