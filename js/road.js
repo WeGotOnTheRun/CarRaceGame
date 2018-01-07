@@ -4,9 +4,10 @@ constructor(themeId,speed) {
     this._themeId=themeId
     this._speed=speed
     this._picNum=0
-    this._timer='';
-    this.draw();
+    this._timer=''
+    this.draw()
   }
+
   draw()
   {
     let canvas=document.getElementById('myCanvas');

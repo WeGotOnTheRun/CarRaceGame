@@ -18,12 +18,12 @@ window.onload = function init()
   {
   	console.log(event.keyCode);
     //left
-  	if(event.keyCode == 37)
+  	if(event.keyCode == 65)
   	{
   		car.move("left")
   	}
     //right
-  	if(event.keyCode == 39)
+  	if(event.keyCode == 68)
   	{
   		car.move("right")
   	}

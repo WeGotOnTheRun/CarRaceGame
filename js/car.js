@@ -70,7 +70,4 @@ class playerCar extends car{
        this.location.x-=10
     }
   }
-
-
-
 }
