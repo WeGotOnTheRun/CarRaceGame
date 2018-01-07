@@ -32,41 +32,48 @@ class car{
   get model(){
   	return this._model
   }
+
+
 }
 
 class playerCar extends car{
 
   constructor(){
-    super({x:(window.innerWidth/2-13),y:window.innerHeight-100})
+    super({x:(500/2-13),y:600-100})
     this.draw()
   }
+
   draw(){
     this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60);
-    this.move("right")
   }
 
   move(direction){
-    let canvas=document.getElementById('myCanvas2');
-    var ctx2 = canvas.getContext("2d")
+    var A=new Audio()
+    A.src="sounds/TIRE+SKID.wav"
+    A.volume=0.6;
+    A.play()
     if(direction=="right"){
       this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x+10,this._location.y,30,60)
-      this._location.x+=10
+      this._location.x+=50
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
+
     }
     else if (direction=="down"){
       this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y+10,30,60)
-      this._location.y+=10
+      this._location.y+=50
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
+
     }
     else if(direction=="up"){
       this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y-10,30,60)
-      this._location.y-=10
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y-50,30,60)
+      this._location.y-=50
     }
     else if(direction=="left"){
        this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-       this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
-       this._location.x-=10
+        this._location.x-=50
+       this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
+
     }else{
       this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
       this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
@@ -77,7 +84,7 @@ class playerCar extends car{
 
 class enemyCar extends car{
   constructor(x,y) {
-    super({x:(window.innerWidth/2-(x*window.innerWidth)),y:(window.innerHeight/2+((y*window.innerHeight)))})
+    super({x:(500/2-(x*500)),y:(600/2+((y*600)))})
     this._carI=red
     this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
     var myArray = ['left', 'right']

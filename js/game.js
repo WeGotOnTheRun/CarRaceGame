@@ -1,27 +1,25 @@
 x=0
 y=0
 start=13
-// enemy_imgs=['img/red.png','img/blue.png','img/green.png','img/yellow.png']
-// bonus_imgs=['img/time.png','img/money.png','img/gas.png']
 
-let canvas=document.getElementById('myCanvas');
-ctx = canvas.getContext("2d");
-let canvas2=document.getElementById('myCanvas2');
-ctx2 = canvas.getContext("2d");
+var canvas=document.getElementById('myCanvas');
+var canvas2=document.getElementById('myCanvas2');
 
-//var en=new enemyCar()
+var canvas3=document.getElementById('canvas3');
 window.onload = function init(){
 
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
-  canvas2.width=window.innerWidth;
-  canvas2.height=window.innerHeight
-  var road=new Road()
+  canvas.width=500
+  canvas.height=700
+  canvas2.width=500
+  canvas2.height=700
+
+  canvas3.width=window.innerWidth
+  canvas3.height=window.innerHeight
+  var ctx3=canvas3.getContext("2d")
+  ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
+ var road=new Road(1,5)
   var car=new playerCar()
   game_over=0
-  //var audio= new Audio();
-  //audio.src="sounds/driving.mp3"
-  //audio.play();
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
     if(game_over===0){

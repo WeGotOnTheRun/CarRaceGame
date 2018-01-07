@@ -1,7 +1,11 @@
-    canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-
+  #myCanvas{
+    display:block;
+    border:3px dashed #785;
+    background:#000;
     }
-  
+    canvas{
+        position: absolute;
+    }
+    .BR {
+        margin:0px 32% 0;
+    }

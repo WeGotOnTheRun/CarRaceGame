@@ -1,4 +1,6 @@
-var pink=new Image();
+let pink=new Image();
 pink.src="img/Pink-Car.png"
-var red=new Image()
+let red=new Image()
 red.src="img/red.png"
+let roadIm=new Image()
+roadIm.src="img/road.png"
