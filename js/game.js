@@ -1,5 +1,6 @@
 x=0
 y=0
+start=13
 // enemy_imgs=['img/red.png','img/blue.png','img/green.png','img/yellow.png']
 // bonus_imgs=['img/time.png','img/money.png','img/gas.png']
 
@@ -10,6 +11,7 @@ ctx2 = canvas.getContext("2d");
 
 //var en=new enemyCar()
 window.onload = function init(){
+<<<<<<< HEAD
 
   canvas.width=window.innerWidth;
   canvas.height=window.innerHeight;
@@ -18,6 +20,15 @@ window.onload = function init(){
   var road=new Road()
   var car=new playerCar()
   var enemy=new enemyCar()
+=======
+  canvas.width=window.innerWidth
+  canvas.height=window.innerHeight
+  canvas2.width=window.innerWidth
+  canvas2.height=window.innerHeight
+  var road=new Road()
+  var enemy=new enemyCar()
+  var car=new playerCar()
+>>>>>>> e6332f80db7a9f97f026081155a6e4c9cec3bab2
   game_over=0
   //var audio= new Audio();
   //audio.src="sounds/driving.mp3"
@@ -25,6 +36,9 @@ window.onload = function init(){
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
     if(game_over===0){
+      if(event.keyCode===13){
+        enemy.draw()
+      }
     	console.log(event.keyCode);
       //left
     	if(event.keyCode == 37)
@@ -73,6 +87,7 @@ window.onload = function init(){
   }else{
     if(event.keyCode===37||event.keyCode===38||event.keyCode===39||event.keyCode===40){
       car.move("false")
+
       x=0
       y=0
     }
