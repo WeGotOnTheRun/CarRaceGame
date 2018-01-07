@@ -14,11 +14,8 @@ window.onload = function init(){
   canvas2.width=window.innerWidth
   canvas2.height=window.innerHeight
   var road=new Road()
-  var en=new enemyCar()
+  var enemy=new enemyCar()
   var car=new playerCar()
-  var myArray = ['left', 'right']
-  var rand = myArray[Math.floor(Math.random() * myArray.length)]
-  //var enemy=new enemyCar()
   game_over=0
   //var audio= new Audio();
   //audio.src="sounds/driving.mp3"
@@ -27,7 +24,7 @@ window.onload = function init(){
   function keypress(event){
     if(game_over===0){
       if(event.keyCode===13){
-        en.draw()
+        enemy.draw()
       }
     	console.log(event.keyCode);
       //left
