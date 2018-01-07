@@ -1,10 +1,11 @@
 class car{
-  constructor(loc) {
+  constructor(loc,z) {
     this._model=0
     this._speed=0
     this._location=loc
+    this._size=z
     this._state="before birth"
-    this._carI=pink
+    this._carI=myCar
     this._canvas=document.getElementById('myCanvas2');
     this._ctx2 = this._canvas.getContext("2d")
   }
@@ -16,6 +17,9 @@ class car{
   }
   set location(l){
   	this._location=l
+  }
+  set size(z){
+  	this._size=z
   }
   set state(s){
     this._state=s
@@ -29,6 +33,9 @@ class car{
   get location(){
   	return this._location
   }
+  get size(){
+  	return this._size
+  }
   get model(){
   	return this._model
   }
@@ -39,12 +46,13 @@ class car{
 class playerCar extends car{
 
   constructor(){
-    super({x:(500/2-13),y:600-100})
+    super({x:(500/2-13),y:600-100},{w:30,h:60})
     this.draw()
   }
 
   draw(){
-    this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60);
+    this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+    this.move("right")
   }
 
   move(direction){
@@ -79,34 +87,55 @@ class playerCar extends car{
       this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
 
     }
+    // else{
+    //   this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+    //   this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,this._size.w,this._size.h)
+    //
+    // }
   }
 }
 
 class enemyCar extends car{
-  constructor(x,y) {
-    super({x:(500/2-(x*500)),y:(600/2+((y*600)))})
-    this._carI=red
-    this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
-    var myArray = ['left', 'right']
-    var rand = myArray[Math.floor(Math.random() * myArray.length)]
+  constructor(v) {
+    super({x:(window.innerWidth/2-13),y:(window.innerHeight/2+34)},{w:30,h:60})
+    this._carI=enemyCars
+    this._value = v
+    this.draw()
+  }
+
+  set value(v){
+    this._value=v
+  }
+
+  get value(){
+    return this._value
+  }
+
+  draw(){
+  //  this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+    var directionArr = ['left', 'right']
+    var rand = directionArr[Math.floor(Math.random() * directionArr.length)]
     this.setLocation(rand)
-  //}
-
   }
-
   setLocation(direction){
-
     if(direction=="right"){
-      this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
-      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x+10,this._location.y,30,60)
-      this._location.x+=40
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x+30,this._location.y,this._size.w,this._size.h)
     }else if(direction=="left"){
-       this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
-       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
-       this._location.x-=40
+       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-30,this._location.y,this._size.w,this._size.h)
     }
+    valueArr[this._value]=direction
   }
-  move(){
 
-  }
+  move(x,y,w,h){
+      if (valueArr[this._value]=="right"){
+        this._ctx2.clearRect(x,y,w+80,h*2)
+        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x+w,y+h,w,h)
+        this.location.y+=h
+      }else if(valueArr[this._value]=='left'){
+        this._ctx2.clearRect(x,y,w-80,h*2)
+        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x-w,y+h,w,h)
+        this.location.y+=h
+    }
+    }
+
 }

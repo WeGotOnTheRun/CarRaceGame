@@ -1,11 +1,18 @@
 x=0
 y=0
 start=13
+enemyArr= new Array()
+score = 0
 
 var canvas=document.getElementById('myCanvas');
 var canvas2=document.getElementById('myCanvas2');
 
-var canvas3=document.getElementById('canvas3');
+
+function gameover(){
+  prompt("gameover")
+}
+
+
 window.onload = function init(){
 
   canvas.width=500
@@ -19,13 +26,63 @@ window.onload = function init(){
   ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
  var road=new Road(1,5)
   var car=new playerCar()
-  game_over=0
+
+  ge= function generateEnemy(){
+    var enemy= new enemyCar(valueCounter)
+    enemyArr.push(enemy)
+    valueCounter++
+  }
+
+
+//  enemyArr.push(enemy)
+
+
+  me=function moveEnemy(){
+    var i
+    if(checkCollision()===false){
+      for(i=0;i<=enemyArr.length-1;i++){
+        enemyArr[i].move(enemyArr[i].location.x,enemyArr[i].location.y,enemyArr[i].size.w,enemyArr[i].size.h)
+      }
+    }else{
+      gameover()
+    }
+  }
+
+  generateEnemyCars=setInterval(ge,5000)
+  moveEnemyCars=setInterval(me,5000)
+
+
+  function checkCollision(){
+    var i
+    for(i=0;i<=enemyArr.length-1;i++){
+      console.log("enemy:",enemyArr[i].location,enemyArr[i].size)
+      console.log("car:",car.location,car.size)
+
+      if((enemyArr[i].location.x<=car.location.x && enemyArr[i].location.x+enemyArr[i].size.w>=car.location.x )
+      &&(enemyArr[i].location.y<=car.location.y && enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)){
+// ||  ((car.location.x<=enemyArr[0].location.x && car.location.x+car.size.w>=enemyArr[0].location.x )
+  //  &&(car.location.y<=enemyArr[0].location.y && car.location.y+car.size.h>=enemyArr[0].location.y))){
+
+        //715<=725 && 745>=715
+        //401<=464 && 461>=464
+          console.log("collide")
+          return true
+      	}else{
+          console.log("continue")
+          return false
+        }
+    }
+    }
+
+  //var audio= new Audio();
+  //audio.src="sounds/driving.mp3"
+  //audio.play();
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
-    if(game_over===0){
-      if(event.keyCode===13){
-        enemy.draw()
-      }
+    if(checkCollision()===false){
+
+
+//check collision.
     	console.log(event.keyCode);
       //left
     	if(event.keyCode == 37)
@@ -72,12 +129,8 @@ window.onload = function init(){
         }
     	}
   }else{
-    if(event.keyCode===37||event.keyCode===38||event.keyCode===39||event.keyCode===40){
-      car.move("false")
+    gameover()
 
-      x=0
-      y=0
-    }
   }
 }
 }

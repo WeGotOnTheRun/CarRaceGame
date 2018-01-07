@@ -5,7 +5,7 @@ constructor(themeId,speed) {
     this._picNum=0
     this._timer=''
     this.draw()
-   this.generateCar()
+  //  this.generateCar()
   }
   draw()
 {
@@ -52,25 +52,14 @@ constructor(themeId,speed) {
     return this._picNum;
   }
 
-  generateCar()
-  {
-    setInterval(function(){
-    var enemyIndex= (Math.floor(Math.random()*Math.random()*Math.random()*20)*500000)%3
-    var enemy;
-    switch (enemyIndex) {
-      case 0:
-            enemy=new enemyCar(0.02,0.04)
-        break;
-      case 1:
-              enemy=new enemyCar(0.06,0.04)
-      break;
-      case 2:
-              enemy=new enemyCar(-0.05,0.04)
-      break;
-      default:
-
-    }
-},2000)
-  }
+//    generateCar(){
+//     setInterval(function(){
+//     var enemyIndex= (Math.floor(Math.random()*Math.random()*Math.random()*20)*500000)%3
+//     console.log(enemyIndex);
+//     var enemy=new enemyCar()
+//     enemy.draw()
+//
+// },2000)
+//   }
 
 }
