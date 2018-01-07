@@ -84,23 +84,25 @@ class playerCar extends car{
 }
 
 class enemyCar extends car{
-  constructor() {
+  constructor(v) {
     super({x:(window.innerWidth/2-13),y:(window.innerHeight/2+34)},{w:30,h:60})
     this._carI=enemyCars
+    this._value = v
     this.draw()
-  //  this._value=''
   }
-  // set value(v){
-  //   this._value=v
-  // }
-  // get value(){
-  //   return this._value
-  // }
+
+  set value(v){
+    this._value=v
+  }
+
+  get value(){
+    return this._value
+  }
 
   draw(){
   //  this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
-    var myArray = ['left', 'right']
-    var rand = myArray[Math.floor(Math.random() * myArray.length)]
+    var directionArr = ['left', 'right']
+    var rand = directionArr[Math.floor(Math.random() * directionArr.length)]
     this.setLocation(rand)
   }
   setLocation(direction){
@@ -109,15 +111,15 @@ class enemyCar extends car{
     }else if(direction=="left"){
        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-30,this._location.y,this._size.w,this._size.h)
     }
-    value=direction
+    valueArr[this._value]=direction
   }
 
   move(x,y,w,h){
-      if (value=="right"){
+      if (valueArr[this._value]=="right"){
         this._ctx2.clearRect(x,y,w+80,h*2)
         this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x+w,y+h,w,h)
         this.location.y+=h
-      }else if(value=='left'){
+      }else if(valueArr[this._value]=='left'){
         this._ctx2.clearRect(x,y,w-80,h*2)
         this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x-w,y+h,w,h)
         this.location.y+=h

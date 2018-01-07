@@ -48,8 +48,8 @@ constructor(themeId,speed) {
   {
     return this._picNum;
   }
-//
-//   generateCar(){
+
+//    generateCar(){
 //     setInterval(function(){
 //     var enemyIndex= (Math.floor(Math.random()*Math.random()*Math.random()*20)*500000)%3
 //     console.log(enemyIndex);
