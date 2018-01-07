@@ -57,12 +57,16 @@ constructor(themeId,speed) {
     switch (enemyIndex) {
       case 0:
             enemy=new enemyCar(0.02,0.04)
+            enemy.draw()
         break;
       case 1:
               enemy=new enemyCar(0.06,0.04)
+              enemy.draw()
       break;
       case 2:
               enemy=new enemyCar(-0.05,0.04)
+              enemy.draw()
+
       break;
       default:
 

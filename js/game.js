@@ -18,6 +18,7 @@ window.onload = function init(){
   canvas2.height=window.innerHeight
   var road=new Road()
   var car=new playerCar()
+  var enemy = new enemyCar()
   game_over=0
   //var audio= new Audio();
   //audio.src="sounds/driving.mp3"
@@ -25,9 +26,19 @@ window.onload = function init(){
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
     if(game_over===0){
-      if(event.keyCode===13){
-        enemy.draw()
-      }
+
+      console.log("car:",car.location,car.size)
+      console.log("enemy:",enemy.location,enemy.size)
+
+        if((enemy.location.x<=car.location.x && enemy.location.x+enemy.size.w>=car.location.x )
+        &&(enemy.location.y<=car.location.y && enemy.location.y+enemy.size.h>=car.location.y))
+//715<=725 && 745>=715
+//401<=464 && 461>=464
+          console.log("collide")
+      	else
+      		console.log("continue")
+
+
     	console.log(event.keyCode);
       //left
     	if(event.keyCode == 37)
