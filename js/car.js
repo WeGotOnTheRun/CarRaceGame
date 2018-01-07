@@ -78,19 +78,9 @@ class playerCar extends car{
 class enemyCar extends car{
   constructor() {
     super({x:(window.innerWidth/2-13),y:(window.innerHeight/2)})
-<<<<<<< HEAD
     this._carI=red
     this._carI.src="img/red.png"
 
-=======
-    //this.draw()
-    this._timer=''
-    this._speed=0
-  }
-  draw(){
-    this._carI.src="img/red.png"
-    //this._carI.onload = function() {
->>>>>>> e6332f80db7a9f97f026081155a6e4c9cec3bab2
     this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
     var myArray = ['left', 'right']
     var rand = myArray[Math.floor(Math.random() * myArray.length)]
@@ -98,11 +88,6 @@ class enemyCar extends car{
   //}
 
   }
-<<<<<<< HEAD
-  move()
-  {
-
-=======
   setLocation(direction){
     let canvas=document.getElementById('myCanvas2');
     var ctx2 = canvas.getContext("2d")
@@ -115,7 +100,6 @@ class enemyCar extends car{
        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
        this._location.x-=40
     }
->>>>>>> e6332f80db7a9f97f026081155a6e4c9cec3bab2
   }
   move(){}
 
