@@ -4,6 +4,9 @@ class car{
     this._speed=0
     this._location=loc
     this._state="before birth"
+    this._carI=new Image()
+    this._canvas=document.getElementById('myCanvas2');
+    this._ctx2 = this._canvas.getContext("2d")
   }
   set speed(s){
 	this._speed=s
@@ -35,17 +38,12 @@ class playerCar extends car{
 
   constructor(){
     super({x:(window.innerWidth/2-13),y:window.innerHeight-100})
-    this._carI=new Image()
-//    this._fire=new Image()
     this.draw()
 
   }
   draw(){
-    let canvas=document.getElementById('myCanvas2');
-    var ctx2 = canvas.getContext("2d")
     this._carI.src="img/Pink-Car.png"
-
-    ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,50,100);
+    this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60);
     this.move("right")
   }
 
@@ -53,28 +51,42 @@ class playerCar extends car{
     let canvas=document.getElementById('myCanvas2');
     var ctx2 = canvas.getContext("2d")
     if(direction=="right"){
-      ctx2.clearRect(this._location.x,this._location.y, 70, 120)
-      ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x+10,this._location.y,50,100)
+      this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x+10,this._location.y,30,60)
       this._location.x+=10
     }
     else if (direction=="down"){
-      ctx2.clearRect(this._location.x,this._location.y, 70, 120)
-      ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y+10,50,100)
+      this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y+10,30,60)
       this._location.y+=10
     }
     else if(direction=="up"){
-      ctx2.clearRect(this._location.x,this._location.y, 70, 120)
-      ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y-10,50,100)
+      this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y-10,30,60)
       this._location.y-=10
     }
     else if(direction=="left"){
-       ctx2.clearRect(this._location.x,this._location.y, 70, 120)
-       ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,50,100)
+       this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
+       this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
        this._location.x-=10
     }else{
-      ctx2.clearRect(this._location.x,this._location.y, 70, 120)
-      ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,50,100)
+      this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
+      this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
 
     }
   }
+}
+
+class enemyCar extends car{
+  constructor() {
+    super({x:(window.innerWidth/2-13),y:(window.innerHeight/2)})
+    this._carI.src="img/red.png"
+    this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
+    this.move()
+  }
+  move()
+  {
+    
+  }
+
 }
