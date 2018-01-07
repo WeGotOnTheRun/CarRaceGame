@@ -76,11 +76,9 @@ class playerCar extends car{
 }
 
 class enemyCar extends car{
-  constructor() {
-    super({x:(window.innerWidth/2-13),y:(window.innerHeight/2)})
+  constructor(x,y) {
+    super({x:(window.innerWidth/2-(x*window.innerWidth)),y:(window.innerHeight/2+((y*window.innerHeight)))})
     this._carI=red
-    this._carI.src="img/red.png"
-
     this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
     var myArray = ['left', 'right']
     var rand = myArray[Math.floor(Math.random() * myArray.length)]
@@ -88,8 +86,9 @@ class enemyCar extends car{
   //}
 
   }
+
   setLocation(direction){
-    
+
     if(direction=="right"){
       this._ctx2.clearRect(this._location.x,this._location.y, 70, 120)
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x+10,this._location.y,30,60)
@@ -100,8 +99,7 @@ class enemyCar extends car{
        this._location.x-=40
     }
   }
-  move(){}
+  move(){
 
-
-
+  }
 }

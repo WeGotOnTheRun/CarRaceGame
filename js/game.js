@@ -18,7 +18,6 @@ window.onload = function init(){
   canvas2.height=window.innerHeight
   var road=new Road()
   var car=new playerCar()
-  var enemy=new enemyCar()
   game_over=0
   //var audio= new Audio();
   //audio.src="sounds/driving.mp3"
