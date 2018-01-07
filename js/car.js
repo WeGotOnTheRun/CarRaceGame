@@ -74,11 +74,12 @@ class playerCar extends car{
        this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
        this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,this._size.w,this._size.h)
        this._location.x-=10
-    }else{
-      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
-      this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,this._size.w,this._size.h)
-
     }
+    // else{
+    //   this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+    //   this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,this._size.w,this._size.h)
+    //
+    // }
   }
 }
 

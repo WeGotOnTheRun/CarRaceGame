@@ -2,7 +2,7 @@ x=0
 y=0
 start=13
 enemyArr= new Array()
-
+var Iscollide=false
 // enemy_imgs=['img/red.png','img/blue.png','img/green.png','img/yellow.png']
 // bonus_imgs=['img/time.png','img/money.png','img/gas.png']
 
@@ -39,30 +39,37 @@ window.onload = function init(){
   enemyArr.push(enemy)
   ge=function generateEnemy(){
     console.log("enemy:",enemy.location,enemy.size)
-    enemy.move(enemyArr[0].location.x,enemyArr[0].location.y,enemyArr[0].size.w,enemyArr[0].size.h)
+    if(checkCollision()===false){
+      enemy.move(enemyArr[0].location.x,enemyArr[0].location.y,enemyArr[0].size.w,enemyArr[0].size.h)
+    }
   }
 
   generateEnemyCars=setInterval(ge,5000)
+
+  function checkCollision(){
+    //with each car movement and keypress
+    if((enemyArr[0].location.x<=car.location.x && enemyArr[0].location.x+enemyArr[0].size.w>=car.location.x )
+    &&(enemyArr[0].location.y<=car.location.y && enemyArr[0].location.y+enemyArr[0].size.h>=car.location.y)){
+      //715<=725 && 745>=715
+      //401<=464 && 461>=464
+        console.log("collide")
+        return true
+    	}else{
+        console.log("continue")
+        return false
+      }
+    }
 
   //var audio= new Audio();
   //audio.src="sounds/driving.mp3"
   //audio.play();
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
-    if(game_over===0){
+    if(checkCollision()===false){
 
       console.log("car:",car.location,car.size)
       console.log("enemy:",enemy.location,enemy.size)
 //check collision.
-        if((enemy.location.x<=car.location.x && enemy.location.x+enemy.size.w>=car.location.x )
-        &&(enemy.location.y<=car.location.y && enemy.location.y+enemy.size.h>=car.location.y))
-//715<=725 && 745>=715
-//401<=464 && 461>=464
-          console.log("collide")
-      	else
-      		console.log("continue")
-
-
     	console.log(event.keyCode);
       //left
     	if(event.keyCode == 37)
