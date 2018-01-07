@@ -7,15 +7,17 @@ let canvas=document.getElementById('myCanvas');
 ctx = canvas.getContext("2d");
 let canvas2=document.getElementById('myCanvas2');
 ctx2 = canvas.getContext("2d");
+
+//var en=new enemyCar()
 window.onload = function init(){
+
   canvas.width=window.innerWidth;
   canvas.height=window.innerHeight;
   canvas2.width=window.innerWidth;
   canvas2.height=window.innerHeight
-var road=new Road()
-  var en=new enemyCar()
+  var road=new Road()
   var car=new playerCar()
-  //var enemy=new enemyCar()
+  var enemy=new enemyCar()
   game_over=0
   //var audio= new Audio();
   //audio.src="sounds/driving.mp3"
