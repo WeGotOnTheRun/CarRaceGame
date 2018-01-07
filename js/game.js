@@ -2,26 +2,16 @@ x=0
 y=0
 start=13
 enemyArr= new Array()
-var Iscollide=false
-// enemy_imgs=['img/red.png','img/blue.png','img/green.png','img/yellow.png']
-// bonus_imgs=['img/time.png','img/money.png','img/gas.png']
 
-// var enemy = new enemyCar()
-//
-// ge=function generateEnemy(){
-//   console.log("enemy:",enemy.location,enemy.size)
-//   enemy.clear(enemy.location.x,enemy.location.y,enemy.size.w,enemy.size.h)
-// 	enemy.move()
-// 	//}
-// }
 
 let canvas=document.getElementById('myCanvas');
 ctx = canvas.getContext("2d");
 let canvas2=document.getElementById('myCanvas2');
 ctx2 = canvas.getContext("2d");
 
-//var enemy = new enemyCar()
-
+function gameover(){
+  prompt("gameover")
+}
 
 
 window.onload = function init(){
@@ -31,23 +21,25 @@ window.onload = function init(){
   canvas2.width=window.innerWidth
   canvas2.height=window.innerHeight
 
-  game_over=0
 
   var road=new Road()
   var car=new playerCar()
   var enemy = new enemyCar()
   enemyArr.push(enemy)
   ge=function generateEnemy(){
-    console.log("enemy:",enemy.location,enemy.size)
     if(checkCollision()===false){
       enemy.move(enemyArr[0].location.x,enemyArr[0].location.y,enemyArr[0].size.w,enemyArr[0].size.h)
+    }else{
+      gameover()
     }
   }
 
-  generateEnemyCars=setInterval(ge,5000)
+  generateEnemyCars=setInterval(ge,10000)
 
   function checkCollision(){
-    //with each car movement and keypress
+    console.log("enemy:",enemy.location,enemy.size)
+    console.log("car:",car.location,car.size)
+
     if((enemyArr[0].location.x<=car.location.x && enemyArr[0].location.x+enemyArr[0].size.w>=car.location.x )
     &&(enemyArr[0].location.y<=car.location.y && enemyArr[0].location.y+enemyArr[0].size.h>=car.location.y)){
       //715<=725 && 745>=715
@@ -116,12 +108,8 @@ window.onload = function init(){
         }
     	}
   }else{
-    if(event.keyCode===37||event.keyCode===38||event.keyCode===39||event.keyCode===40){
-      car.move("false")
+    gameover()
 
-      x=0
-      y=0
-    }
   }
 }
 }
