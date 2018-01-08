@@ -60,6 +60,7 @@ class playerCar extends car{
     A.src="sounds/TIRE+SKID.wav"
     A.volume=0.6
     A.play()
+    console.log(direction);
     if(direction=="right"){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.x+=50 //switch this line and the next one.
@@ -73,8 +74,9 @@ class playerCar extends car{
     }
     else if(direction=="up"){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y-50,this._size.w,this._size.h)
       this._location.y-=50
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+
     }
     else if(direction=="left"){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
@@ -98,48 +100,34 @@ class enemyCar extends car{
   constructor(v) {
     super({x:(500/2-13),y:(270/2-180)},{w:30,h:60})
     this._carI=enemyCars
-    this._value = v
     this.draw()
-  }
-
-  set value(v){
-    this._value=v
-  }
-
-  get value(){
-    return this._value
   }
 
   draw(){
     var directionArr = ['right','left','center']
+
     var rand = directionArr[Math.floor(Math.random() * directionArr.length)]
+
     this.setLocation(rand)
   }//add center
   setLocation(direction){
     if(direction=="right"){
-      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x+50,this._location.y,this._size.w,this._size.h)
+      this._location.x+=50;
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+
     }else if(direction=="center"){
-       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-50,this._location.y,this._size.w,this._size.h)
+      this._location.x-=50;
+       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }else{
-      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-100,this._location.y,this._size.w,this._size.h)
+      this._location.y-=100;
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }
-    valueArr[this._value]=direction
   }
 
-  move(x,y,w,h){
-      if (valueArr[this._value]=="right"){
-        this._ctx2.clearRect(x,y,w+80,h*2)
-        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x+(w+20),y+h,w,h)
-        this.location.y+=h
-      }else if(valueArr[this._value]=='center'){
-        this._ctx2.clearRect(x,y,w-80,h*2)
-        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x-(w+20),y+h,w,h)
-        this.location.y+=h
-      }else{
-        this._ctx2.clearRect(x,y,w-80,h*2)
-        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x-(w+w+20+20),y+h,w,h)
-        this.location.y+=h
-      }
+  move(){
+        this._ctx2.clearRect(this._location.x,this._location.y,this._size.w,this._size.h)
+        this._location.y+=this._size.h;
+        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this.size.w,this.size.h)
     }
 
 }

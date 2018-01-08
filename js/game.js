@@ -26,113 +26,87 @@ window.onload = function init(){
   //ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
  var road=new Road(1,5)
   var car=new playerCar()
+  var plaay="true";
+  let generateEnemyCars,moveEnemyCars;
 
   ge= function generateEnemy(){
-    var enemy= new enemyCar(valueCounter)
+    if(plaay==="true"){
+    var enemy= new enemyCar()
     enemyArr.push(enemy)
-    valueCounter++
+    console.log("enemy generated");
+    plaay=checkCollision();
   }
-
-
-//  enemyArr.push(enemy)
-
+    else {
+      clearInterval(generateEnemyCars);
+    }
+  }
 
   me=function moveEnemy(){
     var i
-    if(checkCollision()===false){
+    if(plaay==="true"){
       for(i=0;i<=enemyArr.length-1;i++){
-        enemyArr[i].move(enemyArr[i].location.x,enemyArr[i].location.y,enemyArr[i].size.w,enemyArr[i].size.h)
+        enemyArr[i].move()
       }
+      gameOn=checkCollision();
     }else{
-      gameover()
+      clearInterval(moveEnemyCars);
     }
   }
 
-  generateEnemyCars=setInterval(ge,5000)
-  moveEnemyCars=setInterval(me,5000)
-
-
+  generateEnemyCars=setInterval(ge,4000)
+  //ge()
+    moveEnemyCars=setInterval(me,5000)
   function checkCollision(){
-    var i
+    var i;
     for(i=0;i<=enemyArr.length-1;i++){
-      console.log("enemy:",enemyArr[i].location,enemyArr[i].size)
-      console.log("car:",car.location,car.size)
+      console.log(enemyArr[i].location);
+      console.log(car.location);
+      if(((enemyArr[i].location.x<=car.location.x && enemyArr[i].location.x+enemyArr[i].size.w>=car.location.x)
+      ||(enemyArr[i].location.x>car.location.x && enemyArr[i].location.x<car.location.x+car.size.w ))
+      &&(enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)
+      ){
 
-      if((enemyArr[i].location.x<=car.location.x && enemyArr[i].location.x+enemyArr[i].size.w>=car.location.x )
-      &&(enemyArr[i].location.y<=car.location.y && enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)){
-// ||  ((car.location.x<=enemyArr[0].location.x && car.location.x+car.size.w>=enemyArr[0].location.x )
-  //  &&(car.location.y<=enemyArr[0].location.y && car.location.y+car.size.h>=enemyArr[0].location.y))){
-
-        //715<=725 && 745>=715
-        //401<=464 && 461>=464
           console.log("collide")
-          return true
+          return "false"
       	}else{
           console.log("continue")
-          return false
+          return "true"
         }
     }
     }
-
-  //var audio= new Audio();
-  //audio.src="sounds/driving.mp3"
-  //audio.play();
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
-    if(checkCollision()===false){
-
-
-//check collision.
-    	console.log(event.keyCode);
-      //left
+    //left
     	if(event.keyCode == 37)
     	{
+        if(x>=-3){
     		car.move("left")
-        x--
-        console.log(x)
-        if(x<-3){
-          car.move("right")
-          x++
-        }
+        x--}
     	}
       //right
-    	if(event.keyCode == 39)
     	{
+        if(event.keyCode == 39)
+        if(x<3){
     		car.move("right")
-        x++
-        console.log(x)
-        if(x>3){
-          car.move("left")
-          x--
-        }
+        x++}
     	}
       //up
       if(event.keyCode == 38)
     	{
-    		car.move("up")
-        y++
-        console.log(y)
-        if(y>12){
-          car.move("down")
-          y--
+        if(y<12){
+          car.move("up")
+          y++
         }
+
     	}
       //down
       if(event.keyCode == 40)
     	{
-    		car.move("down")
-        y--
-        console.log(y)
-        if(y<0){
-          car.move("up")
-          y++
+        if(y>0){
+          car.move("down")
+          y--
         }
     	}
-  }else{
-    gameover()
 
-  }
+    }
 }
-}
-//get bonus()
-//collision()

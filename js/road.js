@@ -14,14 +14,14 @@ constructor(themeId,speed) {
   var ctx = canvas.getContext("2d"),y=45,roadDec=[];
   let width=400
   let height=720
-    for (var i = 0; i < 6; i++) {
-    roadDec.push([200,y, 10,90,this._speed]);
+    for (var i = 0; i < 7; i++) {
+    roadDec.push([200,y,10,90,this._speed]);
     y+= 90+ 20;
     }
   this._timer= setInterval(
       function () {
         ctx.clearRect(0,0,width,height);
-          for (var i = 0; i <6; i++) {
+          for (var i = 0; i <7; i++) {
            if (roadDec[i][1] <height) {
              roadDec[i][1] += roadDec[i][4];
            } else if (roadDec[i][1] > height - 1) {
@@ -31,7 +31,7 @@ constructor(themeId,speed) {
             ctx.fillRect(roadDec[i][0], roadDec[i][1], roadDec[i][2], roadDec[i][3]);
           }
       }
-    ,2500)
+    ,25);
 }
   stopTimer()
   {
