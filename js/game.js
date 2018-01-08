@@ -1,12 +1,7 @@
-x=0
-y=0
-start=13
-enemyArr= new Array()
-score = 0
-
-var canvas=document.getElementById('myCanvas');
-var canvas2=document.getElementById('myCanvas2');
-
+let canvas=document.getElementById('myCanvas');
+ctx = canvas.getContext("2d");
+let canvas2=document.getElementById('myCanvas2');
+ctx2 = canvas.getContext("2d");
 
 function gameover(){
   prompt("gameover")
@@ -15,16 +10,13 @@ function gameover(){
 
 window.onload = function init(){
 
-  canvas.width=400
-  canvas.height=600
-  canvas2.width=400
-  canvas2.height=700
+  canvas.width=window.innerWidth
+  canvas.height=window.innerHeight
+  canvas2.width=window.innerWidth
+  canvas2.height=window.innerHeight
 
-  canvas3.width=window.innerWidth
-  canvas3.height=window.innerHeight
-  var ctx3=canvas3.getContext("2d")
-  ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
- var road=new Road(1,5)
+
+  var road=new Road()
   var car=new playerCar()
 
   ge= function generateEnemy(){
@@ -35,7 +27,6 @@ window.onload = function init(){
 
 
 //  enemyArr.push(enemy)
-
 
   me=function moveEnemy(){
     var i

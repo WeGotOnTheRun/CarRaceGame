@@ -39,53 +39,41 @@ class car{
   get model(){
   	return this._model
   }
-
-
 }
 
 class playerCar extends car{
 
   constructor(){
-    super({x:(500/2-13),y:600-100},{w:30,h:60})
+    super({x:(window.innerWidth/2-13),y:window.innerHeight-100},{w:30,h:60})
     this.draw()
   }
-
   draw(){
     this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     this.move("right")
   }
 
   move(direction){
-    var A=new Audio()
-    A.src="sounds/TIRE+SKID.wav"
-    A.volume=0.6;
-    A.play()
+    let canvas=document.getElementById('myCanvas2');
+    var ctx2 = canvas.getContext("2d")
     if(direction=="right"){
-      this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-      this._location.x+=50
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
-
+      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x+10,this._location.y,this._size.w,this._size.h)
+      this._location.x+=10
     }
     else if (direction=="down"){
-      this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-      this._location.y+=50
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
-
+      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y+10,this._size.w,this._size.h)
+      this._location.y+=10
     }
     else if(direction=="up"){
-      this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y-50,30,60)
-      this._location.y-=50
+      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y-10,this._size.w,this._size.h)
+      this._location.y-=10
     }
     else if(direction=="left"){
-       this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-        this._location.x-=50
-       this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,30,60)
-
-    }else{
-      this._ctx2.clearRect(this._location.x,this._location.y, 30, 60)
-      this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
-
+       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+       this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,this._size.w,this._size.h)
+       this._location.x-=10
     }
     // else{
     //   this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)

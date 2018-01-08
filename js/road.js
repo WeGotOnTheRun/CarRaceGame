@@ -1,4 +1,6 @@
+// module.exports = require("aggregation.js")
 class  Road {
+
 constructor(themeId,speed) {
     this._themeId=themeId
     this._speed=speed
@@ -7,32 +9,25 @@ constructor(themeId,speed) {
     this.draw()
   //  this.generateCar()
   }
-  draw()
-{
 
-  let canvas=document.getElementById('myCanvas');
-  var ctx = canvas.getContext("2d"),y=45,roadDec=[];
-  let width=400
-  let height=600
-    for (var i = 0; i < 6; i++) {
-    roadDec.push([200,y, 10,90,this._speed]);
-    y+= 90+ 20;
-    }
-  this._timer= setInterval(
-      function () {
-        ctx.clearRect(0,0,width,height);
-          for (var i = 0; i <6; i++) {
-           if (roadDec[i][1] <height) {
-             roadDec[i][1] += roadDec[i][4];
-           } else if (roadDec[i][1] > height - 1) {
-              roadDec[i][1] =-45;
-            }
-           ctx.fillStyle = '#fff';
-            ctx.fillRect(roadDec[i][0], roadDec[i][1], roadDec[i][2], roadDec[i][3]);
-          }
-      }
-    ,25)
-}
+  draw()
+  {
+    let canvas=document.getElementById('myCanvas');
+    var ctx = canvas.getContext("2d");
+    var background = new Image();
+    var c=0;
+     var themes=["img/Picture5.png","img/Picture6.png","img/Picture7.png"]
+
+    this._timer=setInterval(
+      function(){
+
+        background.src = themes[c]
+        ctx.drawImage(background,0,0,background.width,background.height,0,0,canvas.width,canvas.height);
+            c=(c+1)%3
+      //  e.draw()
+    },
+     500);
+  }
   stopTimer()
   {
     clearInterval(this._timer);

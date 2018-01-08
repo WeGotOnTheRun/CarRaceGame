@@ -1,2 +1,2 @@
 # CarRaceGame
-Car race game using javascript, HTML5, CSS3, Canvas.
+car race game using javascript
