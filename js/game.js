@@ -15,9 +15,9 @@ function gameover(){
 
 window.onload = function init(){
 
-  canvas.width=500
-  canvas.height=700
-  canvas2.width=500
+  canvas.width=400
+  canvas.height=600
+  canvas2.width=400
   canvas2.height=700
 
   canvas3.width=window.innerWidth

@@ -9,20 +9,22 @@ constructor(themeId,speed) {
   }
   draw()
 {
+
   let canvas=document.getElementById('myCanvas');
   var ctx = canvas.getContext("2d"),y=45,roadDec=[];
-
+  let width=400
+  let height=600
     for (var i = 0; i < 6; i++) {
-    roadDec.push([250,y, 10,90,this._speed]);
+    roadDec.push([200,y, 10,90,this._speed]);
     y+= 90+ 20;
     }
   this._timer= setInterval(
       function () {
-        ctx.clearRect(0,0,500,600);
+        ctx.clearRect(0,0,width,height);
           for (var i = 0; i <6; i++) {
-           if (roadDec[i][1] < 600) {
+           if (roadDec[i][1] <height) {
              roadDec[i][1] += roadDec[i][4];
-           } else if (roadDec[i][1] > 600 - 1) {
+           } else if (roadDec[i][1] > height - 1) {
               roadDec[i][1] =-45;
             }
            ctx.fillStyle = '#fff';
