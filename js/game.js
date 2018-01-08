@@ -23,7 +23,7 @@ window.onload = function init(){
   canvas3.width=window.innerWidth
   canvas3.height=window.innerHeight
   var ctx3=canvas3.getContext("2d")
-  ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
+  //ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
  var road=new Road(1,5)
   var car=new playerCar()
 
