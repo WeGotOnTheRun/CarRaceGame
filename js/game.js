@@ -30,32 +30,22 @@ window.onload = function init(){
   let generateEnemyCars,moveEnemyCars;
 
   ge= function generateEnemy(){
-    if(plaay==="true"){
     var enemy= new enemyCar()
     enemyArr.push(enemy)
     console.log("enemy generated");
-    plaay=checkCollision();
-  }
-    else {
-      clearInterval(generateEnemyCars);
-    }
   }
 
   me=function moveEnemy(){
     var i
-    if(plaay==="true"){
       for(i=0;i<=enemyArr.length-1;i++){
         enemyArr[i].move()
       }
-      gameOn=checkCollision();
-    }else{
-      clearInterval(moveEnemyCars);
-    }
+      checkCollision();
   }
 
   generateEnemyCars=setInterval(ge,4000)
   //ge()
-    moveEnemyCars=setInterval(me,5000)
+    moveEnemyCars=setInterval(me,400)
   function checkCollision(){
     var i;
     for(i=0;i<=enemyArr.length-1;i++){
@@ -66,11 +56,11 @@ window.onload = function init(){
       &&(enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)
       ){
 
+          clearInterval(moveEnemyCars);
+          clearInterval(generateEnemyCars);
           console.log("collide")
-          return "false"
       	}else{
           console.log("continue")
-          return "true"
         }
     }
     }
