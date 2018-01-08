@@ -13,7 +13,7 @@ constructor(themeId,speed) {
   let canvas=document.getElementById('myCanvas');
   var ctx = canvas.getContext("2d"),y=45,roadDec=[];
   let width=400
-  let height=600
+  let height=720
     for (var i = 0; i < 6; i++) {
     roadDec.push([200,y, 10,90,this._speed]);
     y+= 90+ 20;
@@ -31,7 +31,7 @@ constructor(themeId,speed) {
             ctx.fillRect(roadDec[i][0], roadDec[i][1], roadDec[i][2], roadDec[i][3]);
           }
       }
-    ,25)
+    ,2500)
 }
   stopTimer()
   {

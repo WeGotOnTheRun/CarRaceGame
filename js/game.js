@@ -16,9 +16,9 @@ function gameover(){
 window.onload = function init(){
 
   canvas.width=400
-  canvas.height=600
+  canvas.height=720
   canvas2.width=400
-  canvas2.height=700
+  canvas2.height=720
 
   canvas3.width=window.innerWidth
   canvas3.height=window.innerHeight
@@ -90,7 +90,7 @@ window.onload = function init(){
     		car.move("left")
         x--
         console.log(x)
-        if(x<-10){
+        if(x<-3){
           car.move("right")
           x++
         }
@@ -101,7 +101,7 @@ window.onload = function init(){
     		car.move("right")
         x++
         console.log(x)
-        if(x>10){
+        if(x>3){
           car.move("left")
           x--
         }
@@ -112,7 +112,7 @@ window.onload = function init(){
     		car.move("up")
         y++
         console.log(y)
-        if(y>23){
+        if(y>12){
           car.move("down")
           y--
         }
