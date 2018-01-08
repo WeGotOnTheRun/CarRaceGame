@@ -1,4 +1,14 @@
-body {
-    background-image: url("img/road.png");
-    background-size: 600px 700px;
+  #myCanvas{
+    display:block;
+    border:3px dashed #785;
+    background:#000;
+    }
+    canvas{
+        position: absolute;
+    }
+    #canvas3{
+      background:#6a0;
+    }
+    .BR {
+        margin:0px 35% 0;
     }

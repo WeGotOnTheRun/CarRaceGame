@@ -48,9 +48,6 @@ window.onload = function init(){
   function checkCollision(){
     var i,size=enemyArr.length;
     for(i=0;i<size;i++){
-      console.log(enemyArr[i].location);
-      console.log(car.location);
-      console.log(i);
       checkBorders(enemyArr[i],i);
       size=enemyArr.length;
       if(((enemyArr[i].location.x<=car.location.x && enemyArr[i].location.x+enemyArr[i].size.w>=car.location.x)
