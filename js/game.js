@@ -16,9 +16,9 @@ function gameover(){
 window.onload = function init(){
 
   canvas.width=400
-  canvas.height=720
+  canvas.height=window.innerHeight
   canvas2.width=400
-  canvas2.height=720
+  canvas2.height=window.innerHeight
 
   canvas3.width=window.innerWidth
   canvas3.height=window.innerHeight
@@ -44,25 +44,35 @@ window.onload = function init(){
   }
 
   generateEnemyCars=setInterval(ge,4000)
-  //ge()
     moveEnemyCars=setInterval(me,400)
   function checkCollision(){
-    var i;
-    for(i=0;i<=enemyArr.length-1;i++){
+    var i,size=enemyArr.length;
+    for(i=0;i<size;i++){
       console.log(enemyArr[i].location);
       console.log(car.location);
+      console.log(i);
+      checkBorders(enemyArr[i],i);
+      size=enemyArr.length;
       if(((enemyArr[i].location.x<=car.location.x && enemyArr[i].location.x+enemyArr[i].size.w>=car.location.x)
       ||(enemyArr[i].location.x>car.location.x && enemyArr[i].location.x<car.location.x+car.size.w ))
-      &&(enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)
+      &&((enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)&&(enemyArr[i].location.y+enemyArr[i].size.h<car.location.y+car.size.h) )
       ){
-
           clearInterval(moveEnemyCars);
           clearInterval(generateEnemyCars);
           console.log("collide")
+          break;
       	}else{
           console.log("continue")
         }
     }
+    }
+    function checkBorders(ob,index)
+    {
+        if(ob.location.y>=window.innerHeight-1)
+        {
+          enemyArr.splice(index, 1);
+        }
+
     }
   window.addEventListener("keydown", keypress, false);
   function keypress(event){

@@ -46,7 +46,7 @@ class car{
 class playerCar extends car{
 
   constructor(){
-    super({x:(500/2-100),y:720-100},{w:30,h:60})
+    super({x:(500/2-100),y:window.innerHeight-100},{w:30,h:60})
     this.draw()
   }
 

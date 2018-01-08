@@ -13,7 +13,7 @@ constructor(themeId,speed) {
   let canvas=document.getElementById('myCanvas');
   var ctx = canvas.getContext("2d"),y=45,roadDec=[];
   let width=400
-  let height=720
+  let height=window.innerHeight
     for (var i = 0; i < 7; i++) {
     roadDec.push([200,y,10,90,this._speed]);
     y+= 90+ 20;
