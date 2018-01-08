@@ -60,7 +60,6 @@ class playerCar extends car{
     A.src="sounds/TIRE+SKID.wav"
     A.volume=0.6
     A.play()
-    console.log(direction);
     if(direction=="right"){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.x+=50 //switch this line and the next one.
@@ -83,16 +82,6 @@ class playerCar extends car{
         this._location.x-=50
        this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }
-    // else{
-    //   this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
-    //   this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,30,60)
-    //
-    // }
-    // else{
-    //   this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
-    //   this._ctx2.drawImage("img/green.png",200,100,this._carI.width,this._carI.height,this._location.x-10,this._location.y,this._size.w,this._size.h)
-    //
-    // }
   }
 }
 

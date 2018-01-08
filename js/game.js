@@ -3,18 +3,10 @@ y=0
 start=13
 enemyArr= new Array()
 score = 0
-
-var canvas=document.getElementById('myCanvas');
-var canvas2=document.getElementById('myCanvas2');
-
-
-function gameover(){
-  prompt("gameover")
-}
-
-
 window.onload = function init(){
 
+  var canvas=document.getElementById('myCanvas');
+  var canvas2=document.getElementById('myCanvas2');
   canvas.width=400
   canvas.height=window.innerHeight
   canvas2.width=400
@@ -24,27 +16,51 @@ window.onload = function init(){
   canvas3.height=window.innerHeight
   var ctx3=canvas3.getContext("2d")
   //ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
- var road=new Road(1,5)
+  var pp=new player("yasmine")
+  var road=new Road(1,pp.level.speed)
   var car=new playerCar()
-  var plaay="true";
-  let generateEnemyCars,moveEnemyCars;
+  let generateEnemyCars,moveEnemyCars,increasePlayerBonus;
 
-  ge= function generateEnemy(){
+  function generateEnemy(){
     var enemy= new enemyCar()
     enemyArr.push(enemy)
-    console.log("enemy generated");
   }
 
-  me=function moveEnemy(){
+  function moveEnemy(){
     var i
       for(i=0;i<=enemyArr.length-1;i++){
         enemyArr[i].move()
       }
       checkCollision();
   }
+  function increaseBonus()
+  {
+    pp.score+=1;
+    console.log(pp.score);
+    if(--pp.level.time==0)
+    {
+      console.log(pp.level.number);
+      switch (pp.level.number) {
+        case 1:
+            pp.level=new level(30,10,2,2)
+          break;
+        case 2:
+              pp.level=new level(20,15,3,3)
+          break;
+          case 3:
+              clearInterval(moveEnemyCars);
+              clearInterval(generateEnemyCars);
+              clearInterval(increasePlayerBonus);
+              alert("winner wooooow")
+            break;
+        default:
 
-  generateEnemyCars=setInterval(ge,4000)
-    moveEnemyCars=setInterval(me,400)
+      }
+    }
+  }
+  generateEnemyCars=setInterval(generateEnemy,4000)
+  moveEnemyCars=setInterval(moveEnemy,400)
+  increasePlayerBonus=setInterval(increaseBonus,1000)
   function checkCollision(){
     var i,size=enemyArr.length;
     for(i=0;i<size;i++){
@@ -54,13 +70,16 @@ window.onload = function init(){
       ||(enemyArr[i].location.x>car.location.x && enemyArr[i].location.x<car.location.x+car.size.w ))
       &&((enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)&&(enemyArr[i].location.y+enemyArr[i].size.h<car.location.y+car.size.h) )
       ){
-          clearInterval(moveEnemyCars);
-          clearInterval(generateEnemyCars);
-          console.log("collide")
-          break;
-      	}else{
-          console.log("continue")
-        }
+        if((--pp.lives)==0)
+          {
+
+            clearInterval(moveEnemyCars);
+            clearInterval(generateEnemyCars);
+          clearInterval(increasePlayerBonus);
+            alert("game over");
+              break;
+          }
+      	}
     }
     }
     function checkBorders(ob,index)
@@ -69,7 +88,6 @@ window.onload = function init(){
         {
           enemyArr.splice(index, 1);
         }
-
     }
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
