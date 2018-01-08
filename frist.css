@@ -1,0 +1,71 @@
+.move{
+	position:absolute;
+	animation-name:drive;
+	font:100px Comic Sans MS;
+	margin:50px auto;
+	padding:15px;
+	color: #ff3333;
+	animation-duration: 3s;
+	animation-fill-mode: forwards;
+	
+	
+	
+}
+body{
+	
+	text-align:center;
+	background:black;
+	
+}
+
+#myvideo{
+	width:700px;
+	height:400px;
+	margin:200px auto;
+	padding:15px
+	
+}
+@keyframes drive{
+    from 0%, 60%, 75% to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(700px, 0, 0);
+  }
+
+  75% {
+    transform: translate3d(500px, 0, 0);
+  }
+ 
+
+  to {
+    transform: translatex(550px);
+  }
+
+}
+a {
+  position: fixed;
+  display: block;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px 5px 5px 10px;
+  background: #ff3333;
+  font: 22px Comic Sans MS;
+  color: black;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#play{  right:100px;
+  bottom:100px;}
+  
+  #exit{  left:100px;
+  bottom:100px;}
