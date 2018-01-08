@@ -111,17 +111,17 @@ class enemyCar extends car{
   }
 
   draw(){
-    var directionArr = ['right','left','center']
+    var directionArr = ['left','right','center']
     var rand = directionArr[Math.floor(Math.random() * directionArr.length)]
     this.setLocation(rand)
   }//add center
   setLocation(direction){
     if(direction=="right"){
-      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x+50,this._location.y,this._size.w,this._size.h)
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x+50,this._location.y-30,this._size.w,this._size.h)
     }else if(direction=="center"){
        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-50,this._location.y,this._size.w,this._size.h)
     }else{
-      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-100,this._location.y,this._size.w,this._size.h)
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x-150,this._location.y-30,this._size.w,this._size.h)
     }
     valueArr[this._value]=direction
   }
@@ -136,8 +136,8 @@ class enemyCar extends car{
         this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x-(w+20),y+h,w,h)
         this.location.y+=h
       }else{
-        this._ctx2.clearRect(x,y,w-80,h*2)
-        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x-(w+w+20+20),y+h,w,h)
+        this._ctx2.clearRect(x,y,w-180,h*2)
+        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,x-(w+120),y+h,w,h)
         this.location.y+=h
       }
     }

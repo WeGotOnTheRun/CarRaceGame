@@ -48,8 +48,8 @@ window.onload = function init(){
     }
   }
 
-  generateEnemyCars=setInterval(ge,5000)
-  moveEnemyCars=setInterval(me,5000)
+  generateEnemyCars=setInterval(ge,2000)
+  moveEnemyCars=setInterval(me,2000)
 
 
   function checkCollision(){
