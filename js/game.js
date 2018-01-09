@@ -85,7 +85,6 @@ window.onload = function init(){
       ||(enemyArr[i].location.x>car.location.x && enemyArr[i].location.x<car.location.x+car.size.w ))
       &&((enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)&&(enemyArr[i].location.y+enemyArr[i].size.h<car.location.y+car.size.h) )
       ){
-         console.log(enemyArr[i])
 	       console.log("collide");
         if((--pp.lives)==0)
           {

@@ -8,6 +8,7 @@ class car{
     this._carI=myCar2
     this._canvas=document.getElementById('myCanvas2');
     this._ctx2 = this._canvas.getContext("2d")
+    this._position=""
   }
   set speed(s){
 	this._speed=s
@@ -46,13 +47,13 @@ class car{
 class playerCar extends car{
 
   constructor(){
-    super({x:(500/2-100),y:window.innerHeight-100},{w:30,h:60})
+    super({x:(200),y:window.innerHeight-100},{w:30,h:60})
+     this._position="center"
     this.draw()
   }
 
   draw(){
     this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
-    this.move("right")
   }
 
   move(direction){
@@ -60,28 +61,82 @@ class playerCar extends car{
     A.src="sounds/TIRE+SKID.wav"
     A.volume=0.6
     A.play()
+    let _this=this
     if(direction=="right"){
-      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
-      this._location.x+=50 //switch this line and the next one.
-      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+     //switch this line and the next one.
+        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1,_this._location.y)},1)
     }
     else if (direction=="down"){
-      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.y+=50
-      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
-
+   
     }
     else if(direction=="up"){
-      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.y-=50
-      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
-
+     
     }
     else if(direction=="left"){
+        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x,_this._location.x-1)},1)
+       }
+
+      }
+  clearAndDraw(direction,x)
+  {
+
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
-        this._location.x-=50
-       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+      this._location.x=x 
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+      let _this=this
+
+      if(direction=="right" && this._position=="center")
+       { 
+          
+         if(this._location.x<5*this._canvas.width/6)
+        {
+        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
+        }
+        else
+        {
+          this._position="right"
+        }
+      }
+      else if((direction=="right" && this._position=="left") )
+     {
+       
+         if(this._location.x<this._canvas.width/2)
+        {
+        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
+        }
+        else
+        {
+           this._position="center"
+        }
     }
+    else if ((direction=="left" && this._position=="right") )
+    {
+        
+         if(this._location.x>this._canvas.width/2)
+        {
+        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
+        }
+        else
+        {
+          this._position="center"
+        }
+    }
+    else
+    {
+       if(this._location.x>this._canvas.width/6)
+        {
+        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
+        }
+        else
+        {
+
+          this._position="left"
+        }
+
+    }
+
   }
 }
 
@@ -100,15 +155,15 @@ class enemyCar extends car{
   }//add center
   setLocation(direction){
     if(direction=="right"){
-      this._location.x+=50;
+      this._location.x=5*this._canvas.width/6;
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
 
     }else if(direction=="center"){
-      this._location.x-=50;
+      this._location.x=this._canvas.width/2;
        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }else{
       //tzbet l x wl y for both enemy and bonus+collide.
-      this._location.y-=100;
+      this._location.x=this._canvas.width/6;
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }
   }

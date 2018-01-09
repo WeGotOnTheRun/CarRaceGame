@@ -12,7 +12,7 @@ constructor(themeId,speed) {
   {
     
        ctx.clearRect(0,0,width,height);
-          for (var i = 0; i <7; i++) {
+          for (var i = 0; i <23; i++) {
            if (roadDec[i][1] <height) {
              roadDec[i][1] += roadDec[i][4]
            } else if (roadDec[i][1] > height - 1) {
@@ -29,16 +29,16 @@ constructor(themeId,speed) {
       var ctx = canvas.getContext("2d"),y=45,roadDec=[];
       let width=400
       let height=window.innerHeight
-    for (var i = 0; i < 7; i++) {
-    roadDec.push([200,y,10,90,5]);
-    y+= 90+ 20;
+    for (var i = 0; i < 23; i++) {
+    roadDec.push([canvas.width/3,y,5,40,5]);
+     roadDec.push([2*canvas.width/3,y,5,40,5]);
+    y+= 80+ 10;
     }
     var _this = this;
   this._timer= setInterval(function(){_this.drawLines(canvas,ctx,width,height,y,roadDec)},this._speed);
 }
   stopTimer()
   {
-    console.log("iodsfj")
     clearInterval(this._timer);
   }
   set timer(time)
