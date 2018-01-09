@@ -30,27 +30,42 @@ window.onload = function init(){
     var i
       for(i=0;i<=enemyArr.length-1;i++){
         enemyArr[i].move()
+
       }
       checkCollision();
   }
   function increaseBonus()
   {
     pp.score+=1;
-    console.log(pp.score);
     if(--pp.level.time==0)
     {
-      console.log(pp.level.number);
       switch (pp.level.number) {
         case 1:
             pp.level=new level(30,10,2,2)
+            road.speed=10
+            road.stopTimer()
+            road.timer=road.speed
+            clearInterval(generateEnemy)
+            clearInterval(moveEnemy)
+            generateEnemyCars=setInterval(generateEnemy,500)
+            moveEnemyCars=setInterval(moveEnemy,200)
+           
           break;
         case 2:
               pp.level=new level(20,15,3,3)
+              road.speed=1
+              road.stopTimer()
+              road.timer=road.speed
+              clearInterval(generateEnemy)
+              clearInterval(moveEnemy)
+              generateEnemyCars=setInterval(generateEnemy,200)
+              moveEnemyCars=setInterval(moveEnemy,100)
           break;
           case 3:
               clearInterval(moveEnemyCars);
               clearInterval(generateEnemyCars);
               clearInterval(increasePlayerBonus);
+              road.stopTimer()
               alert("winner wooooow")
             break;
         default:
@@ -58,8 +73,8 @@ window.onload = function init(){
       }
     }
   }
-  generateEnemyCars=setInterval(generateEnemy,4000)
-  moveEnemyCars=setInterval(moveEnemy,400)
+  generateEnemyCars=setInterval(generateEnemy,1000)
+  moveEnemyCars=setInterval(moveEnemy,1)
   increasePlayerBonus=setInterval(increaseBonus,1000)
   function checkCollision(){
     var i,size=enemyArr.length;
@@ -70,14 +85,17 @@ window.onload = function init(){
       ||(enemyArr[i].location.x>car.location.x && enemyArr[i].location.x<car.location.x+car.size.w ))
       &&((enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)&&(enemyArr[i].location.y+enemyArr[i].size.h<car.location.y+car.size.h) )
       ){
+         console.log(enemyArr[i])
+	       console.log("collide");
         if((--pp.lives)==0)
           {
 
             clearInterval(moveEnemyCars);
             clearInterval(generateEnemyCars);
-          clearInterval(increasePlayerBonus);
+            clearInterval(increasePlayerBonus);
+            road.stopTimer()
             alert("game over");
-              break;
+             break;
           }
       	}
     }
@@ -94,21 +112,21 @@ window.onload = function init(){
     //left
     	if(event.keyCode == 37)
     	{
-        if(x>=-3){
+        if(x>-2){
     		car.move("left")
         x--}
     	}
       //right
     	{
         if(event.keyCode == 39)
-        if(x<3){
+        if(x<2){
     		car.move("right")
         x++}
     	}
       //up
       if(event.keyCode == 38)
     	{
-        if(y<12){
+        if(y<10){
           car.move("up")
           y++
         }

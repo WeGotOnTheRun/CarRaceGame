@@ -1,7 +1,7 @@
 var myCar=new Image();
 myCar.src="img/Pink-Car.png"
 var myCar2=new Image()
-myCar2.src="img/yellow.png"
+myCar2.src="img/red.png"
 var enemyCars=new Image()
 enemyCars.src="img/blue.png"
 var valueArr=new Array()

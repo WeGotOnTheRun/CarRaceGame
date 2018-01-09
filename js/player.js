@@ -2,7 +2,7 @@ class player{
   constructor(name) {
     this._name=name
     this._score=0
-    this._level=new level(45,5,1,1)
+    this._level=new level(45,20,1,1)
     this._lives=3
   }
   set lives(i)

@@ -5,7 +5,7 @@ class car{
     this._location=loc
     this._size=z
     this._state="before birth"
-    this._carI=myCar
+    this._carI=myCar2
     this._canvas=document.getElementById('myCanvas2');
     this._ctx2 = this._canvas.getContext("2d")
   }
@@ -51,7 +51,7 @@ class playerCar extends car{
   }
 
   draw(){
-    this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+    this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     this.move("right")
   }
 
@@ -63,24 +63,24 @@ class playerCar extends car{
     if(direction=="right"){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.x+=50 //switch this line and the next one.
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }
     else if (direction=="down"){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.y+=50
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
 
     }
     else if(direction=="up"){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.y-=50
-      this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+      this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
 
     }
     else if(direction=="left"){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
         this._location.x-=50
-       this._ctx2.drawImage(this._carI,200,100,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }
   }
 }
@@ -115,7 +115,7 @@ class enemyCar extends car{
 
   move(){
         this._ctx2.clearRect(this._location.x,this._location.y,this._size.w,this._size.h)
-        this._location.y+=this._size.h;
+        this._location.y+=1;
         this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this.size.w,this.size.h)
     }
 
