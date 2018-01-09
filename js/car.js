@@ -86,7 +86,7 @@ class playerCar extends car{
 }
 
 class enemyCar extends car{
-  constructor(v) {
+  constructor() {
     super({x:(500/2-13),y:(270/2-180)},{w:30,h:60})
     this._carI=enemyCars
     this.draw()
@@ -94,7 +94,6 @@ class enemyCar extends car{
 
   draw(){
     var directionArr = ['right','left','center']
-
     var rand = directionArr[Math.floor(Math.random() * directionArr.length)]
 
     this.setLocation(rand)
@@ -108,6 +107,7 @@ class enemyCar extends car{
       this._location.x-=50;
        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }else{
+      //tzbet l x wl y for both enemy and bonus+collide.
       this._location.y-=100;
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
     }

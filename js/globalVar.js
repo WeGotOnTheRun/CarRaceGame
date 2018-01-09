@@ -8,3 +8,7 @@ var valueArr=new Array()
 var valueCounter=0
 let roadIm=new Image()
 roadIm.src="img/road.png"
+var bonus=new Image()
+bonus.src="img/money.png"
+var bonusValueArr= new Array()
+var bonusValue=0
