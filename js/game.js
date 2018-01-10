@@ -185,6 +185,7 @@ window.onload = function init(){
       generateEnemyCars=setInterval(generateEnemy,1000)
       moveEnemyCars=setInterval(moveEnemy,5)
       increasePlayerBonus=setInterval(increaseBonus,1000)
+      
     }
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
