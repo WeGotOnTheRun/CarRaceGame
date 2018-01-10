@@ -1,5 +1,5 @@
 
-
+window.onload=function(){
 var n=0;
 var img_arr=["img/red2.png","img/yellow2.png","img/white.png"];
 var length = img_arr.length ;
@@ -48,5 +48,5 @@ document.getElementById("choose").addEventListener("click", pause);
 	sessionStorage.setItem("xmodel",n);
 
 
-
+}
 
