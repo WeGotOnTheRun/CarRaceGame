@@ -179,9 +179,11 @@ window.onload = function init(){
             
     function init() {
       // body...
-      drawHeart(canvas2.getContext("2d"),25,10,20,50,"red")
-      drawHeart(canvas2.getContext("2d"),55,10,20,50,"red")
-      drawHeart(canvas2.getContext("2d"),85,10,20,50,"white")
+      canvas3.getContext("2d").font = "20px lighter  Arial";
+      canvas3.getContext("2d").fillText(pp.name, 20, 40);
+      drawHeart(canvas3.getContext("2d"),80,10,20,50,"red")
+      drawHeart(canvas3.getContext("2d"),110,10,20,50,"red")
+      drawHeart(canvas3.getContext("2d"),130,10,20,50,"white")
       generateEnemyCars=setInterval(generateEnemy,1000)
       moveEnemyCars=setInterval(moveEnemy,5)
       increasePlayerBonus=setInterval(increaseBonus,1000)
