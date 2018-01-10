@@ -4,7 +4,7 @@ start=13
 enemyArr= new Array()
 score = 0
 
-  let generateEnemyCars,moveEnemyCars,increasePlayerBonus;
+let generateEnemyCars,moveEnemyCars,increasePlayerBonus;
 window.onload = function init(){
 
   var canvas=document.getElementById('myCanvas');
@@ -70,6 +70,10 @@ window.onload = function init(){
               clearInterval(increasePlayerBonus);
               road.stopTimer()
               car.stopTimer()
+              var A=new Audio()
+              A.src="sounds/winner.wav"
+              A.volume=0.6
+              A.play() 
               alert("winner wooooow")
             break;
         default:
@@ -111,13 +115,15 @@ window.onload = function init(){
         moveEnemyCars=setInterval(moveEnemy,1)
         if((--pp.lives)==0)
           {
-            console.log("o2f ya 7ywan")
             road.stopTimer()
             car.stopTimer()
             clearInterval(moveEnemyCars);
             clearInterval(generateEnemyCars);
             clearInterval(increasePlayerBonus);
-           
+             var A=new Audio()
+             A.src="sounds/loser.wav"
+             A.volume=0.6
+             A.play() 
             alert("game over");
              break;
           }
@@ -131,12 +137,54 @@ window.onload = function init(){
           enemyArr.splice(index, 1);
         }
     }
+
+    function drawHeart(context, x, y, width, height,color){
+        context.save();
+        context.beginPath();
+        var topCurveHeight = height * 0.3;
+        context.moveTo(x, y + topCurveHeight);
+                // top left curve
+        context.bezierCurveTo(
+          x, y, 
+          x - width / 2, y, 
+          x - width / 2, y + topCurveHeight
+        );
+                
+                // bottom left curve
+        context.bezierCurveTo(
+          x - width / 2, y + (height + topCurveHeight) / 2, 
+          x, y + (height + topCurveHeight) / 2, 
+          x, y + height
+        );
+                
+                // bottom right curve
+        context.bezierCurveTo(
+          x, y + (height + topCurveHeight) / 2, 
+          x + width / 2, y + (height + topCurveHeight) / 2, 
+          x + width / 2, y + topCurveHeight
+        );
+                
+                // top right curve
+        context.bezierCurveTo(
+          x + width / 2, y, 
+          x, y, 
+          x, y + topCurveHeight
+        );
+                
+        context.closePath();
+        context.fillStyle = color;
+        context.fill();
+        context.restore();
+      }
+            
     function init() {
       // body...
-
-  generateEnemyCars=setInterval(generateEnemy,1000)
-  moveEnemyCars=setInterval(moveEnemy,5)
-  increasePlayerBonus=setInterval(increaseBonus,1000)
+      drawHeart(canvas2.getContext("2d"),25,10,20,50,"red")
+      drawHeart(canvas2.getContext("2d"),55,10,20,50,"red")
+      drawHeart(canvas2.getContext("2d"),85,10,20,50,"white")
+      generateEnemyCars=setInterval(generateEnemy,1000)
+      moveEnemyCars=setInterval(moveEnemy,5)
+      increasePlayerBonus=setInterval(increaseBonus,1000)
     }
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
