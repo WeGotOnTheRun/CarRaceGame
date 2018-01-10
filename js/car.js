@@ -10,39 +10,46 @@ class car{
     this._ctx2 = this._canvas.getContext("2d")
     this._position=""
   }
+
   set speed(s){
 	this._speed=s
   }
+
   set model(m){
   	this._model=m
-
-
   }
+
   set location(l){
   	this._location=l
   }
+
   set size(z){
   	this._size=z
   }
+
   set state(s){
     this._state=s
   }
+
   get speed(){
   	return this._speed
   }
+
   get state(){
   	return this._state
   }
+
   get location(){
   	return this._location
   }
+
   get size(){
   	return this._size
   }
+
   get model(){
   	return this._model
   }
-
 
 }
 
@@ -52,15 +59,15 @@ class playerCar extends car{
     super({x:(200),y:window.innerHeight-100},{w:30,h:60})
      this._position="center"
      this._lastPos="center"
-     this._timerr='';
+     this._timerr=''
     this.draw()
   }
 
   draw(){
     this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
   }
-  stopTimer()
-  {
+
+  stopTimer(){
     clearTimeout(this._timerr)
   }
 
@@ -74,89 +81,60 @@ class playerCar extends car{
     clearTimeout(this._timerr)
     if(direction=="right"){
      //switch this line and the next one.
-        this.clearAndDraw(direction,_this._location.x+1,_this._location.y)
-    }
-    else if (direction=="down"){
+      this.clearAndDraw(direction,_this._location.x+1,_this._location.y)
+    }else if (direction=="down"){
       this._location.y+=50
-
-    }
-    else if(direction=="up"){
+    }else if(direction=="up"){
       this._location.y-=50
-
-    }
-    else if(direction=="left"){
+    }else if(direction=="left"){
       this.clearAndDraw(direction,_this._location.x,_this._location.x-1)
-       }
+    }
+  }
 
-      }
-  clearAndDraw(direction,x)
-  {
-
+  clearAndDraw(direction,x){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.x=x
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
       let _this=this
-
-      if(direction=="right" && this._position=="center")
-       {
+      if(direction=="right" && this._position=="center"){
          this._lastPos="right"
-         if(this._location.x<5*this._canvas.width/6)
-        {
-        this._timerr=setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
-        }
-        else
-        {
+         if(this._location.x<5*this._canvas.width/6){
+           this._timerr=setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
+         }else{
           this._position="right"
-        }
-      }
-      else if((direction=="right" && this._position=="left") )
-     {
+         }
+      }else if((direction=="right" && this._position=="left")){
          this._lastPos="center"
-         if(this._location.x<this._canvas.width/2)
-        {
-        this._timerr=setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
-        }
-        else
-        {
+         if(this._location.x<this._canvas.width/2){
+           this._timerr=setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
+        }else{
            this._position="center"
         }
-    }
-    else if ((direction=="left" && this._position=="right") )
-    {
+    }else if ((direction=="left" && this._position=="right") ){
          this._lastPos="center"
-         if(this._location.x>this._canvas.width/2)
-        {
-        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
-        }
-        else
-        {
+         if(this._location.x>this._canvas.width/2){
+           setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
+         }else{
           this._position="center"
-        }
-    }
-    else
-    {
+         }
+       }else{
        this._lastPos="left"
-       if(this._location.x>this._canvas.width/6)
-        {
-        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
-        }
-        else
-        {
-
-          this._position="left"
-        }
-
-    }
-
+       if(this._location.x>this._canvas.width/6){
+         setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
+       }else{
+         this._position="left"
+       }
+     }
   }
-  remove()
-  {
+
+  remove(){
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
   }
-  display()
-  {
+
+  display(){
        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
   }
+
 }
 
 class enemyCar extends car{
@@ -189,13 +167,13 @@ class enemyCar extends car{
   }
 
   move(){
-        this._ctx2.clearRect(this._location.x,this._location.y,this._size.w,this._size.h)
-        this._location.y+=1;
-        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this.size.w,this.size.h)
-    }
-     remove()
-  {
-      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+    this._ctx2.clearRect(this._location.x,this._location.y,this._size.w,this._size.h)
+    this._location.y+=1;
+    this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this.size.w,this.size.h)
+  }
+
+  remove(){
+    this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
   }
 
   enemymodel(){
@@ -212,4 +190,5 @@ class enemyCar extends car{
       this._carI=enemyCar3
     }
   }
+  
 }

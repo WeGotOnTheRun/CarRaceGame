@@ -70,8 +70,8 @@ window.onload = function init(){
       if(((bonusArr[i].location.x<=car.location.x && bonusArr[i].location.x+bonusArr[i].size.w>=car.location.x)
       ||(bonusArr[i].location.x>car.location.x && bonusArr[i].location.x<car.location.x+car.size.w ))
       &&((bonusArr[i].location.y+bonusArr[i].size.h>=car.location.y)&&(bonusArr[i].location.y+bonusArr[i].size.h<car.location.y+car.size.h)
-//      || (bonusArr[i].location.y>car.location.y && bonusArr[i].location.y<car.location.y+car.size.h))
-       )){
+      || (bonusArr[i].location.y>car.location.y && bonusArr[i].location.y<car.location.y+car.size.h))
+      ){
           pp.score+=bonusArr[i].value
           console.log(pp.score)
           var A=new Audio()
@@ -124,9 +124,11 @@ window.onload = function init(){
           case 3:
               alert("level 3 passed")
               levelPassed++
-              clearInterval(moveEnemyCars);
-              clearInterval(generateEnemyCars);
-              clearInterval(increasePlayerBonus);
+              clearInterval(moveEnemyCars)
+              clearInterval(generateEnemyCars)
+              clearInterval(increasePlayerBonus)
+              clearInterval(generateBonus)
+              clearInterval(moveBonus)
               road.stopTimer()
               car.stopTimer()
               alert("winner wooooow")
@@ -210,6 +212,8 @@ window.onload = function init(){
             clearInterval(moveEnemyCars)
             clearInterval(generateEnemyCars)
             clearInterval(increasePlayerBonus)
+            clearInterval(generateBonus)
+            clearInterval(moveBonus)
 
             alert("game over")
              break
@@ -235,7 +239,7 @@ window.onload = function init(){
       generateEnemyCars=setInterval(generateEnemy,1000)
       moveEnemyCars=setInterval(moveEnemy,5)
 
-      generateBonus=setInterval(generateBonusfn,7000)
+      generateBonus=setInterval(generateBonusfn,8530)
       moveBonus=setInterval(moveBonusfn,1)
 
       increasePlayerBonus=setInterval(increaseBonus,1000)
