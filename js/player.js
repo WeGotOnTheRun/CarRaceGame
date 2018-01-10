@@ -4,34 +4,55 @@ class player{
     this._score=0
     this._level=new level(45,20,1,1)
     this._lives=3
+    this._playerAchievements='null'
+    this._car=''
   }
-  set lives(i)
-  {
+
+  set playerAchievements(a){
+    this._playerAchievements=a
+  }
+
+  set car(c){
+    this._car=c
+  }
+
+  set lives(i){
       this._lives=i
   }
-  get lives()
-  {
+
+  get lives(){
     return this._lives
   }
+
   set level(l){
 	this._level=l
-}
+  }
+
  set score(s){
 	this._score=s
-}
-set name(s)
-{
-  this._name=s
-}
+  }
+
+  set name(s){
+    this._name=s
+  }
+
   get level(){
-	return this._level
-}
- get score(){
-	return this._score
-}
-get name()
-{
-  return this._name
-}
+	   return this._level
+  }
+  get score(){
+  	return this._score
+  }
+
+  get name(){
+    return this._name
+  }
+
+  get car(){
+    return this._car
+  }
+
+  get playerAchievements(){
+    return this._playerAchievements
+  }
 
 }

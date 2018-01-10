@@ -8,6 +8,7 @@ deathNo=0
 levelPassed=0
 checkWinningLevels=0
 originalLives=3
+var Achievementsoundcounter=0
 
 let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
 
@@ -30,7 +31,7 @@ window.onload = function init(){
   var achievement = new achievements()
 
 
-let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
+  let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
 
   function generateEnemy(){
     var enemy= new enemyCar()
@@ -41,9 +42,8 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
     var i
       for(i=0;i<=enemyArr.length-1;i++){
         enemyArr[i].move()
-
       }
-      checkCollision();
+      checkCollision()
   }
 
   //get bonus type and value.
@@ -62,43 +62,41 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
   }
 
 
-    function GetBonus(){
-      var i,size=bonusArr.length;
-      for(i=0;i<size;i++){
-        removeBonus(bonusArr[i],i);
-        size=bonusArr.length;
-        if(((bonusArr[i].location.x<=car.location.x && bonusArr[i].location.x+bonusArr[i].size.w>=car.location.x)
-        ||(bonusArr[i].location.x>car.location.x && bonusArr[i].location.x<car.location.x+car.size.w ))
-        &&((bonusArr[i].location.y+bonusArr[i].size.h>=car.location.y)&&(bonusArr[i].location.y+bonusArr[i].size.h<car.location.y+car.size.h)
-        || (bonusArr[i].location.y>car.location.y && bonusArr[i].location.y<car.location.y+car.size.h))){
-            pp.score+=bonusArr[i].value
-            console.log(pp.score)
-            var A=new Audio()
-            A.src="sounds/money.mp3" //wow sound.
-            A.volume=0.9
-            A.play()
-            console.log("WOW! you earned ",bonusArr[i].value)// d ttgher b3d kda ll value bt3to wl rkm bt3o
-            bonusArr[i].remove()
-            bonusArr.splice(i,1)
-            size=size-1
-            break
-        }
+  function GetBonus(){
+    var i,size=bonusArr.length;
+    for(i=0;i<size;i++){
+      removeBonus(bonusArr[i],i)
+      size=bonusArr.length
+      if(((bonusArr[i].location.x<=car.location.x && bonusArr[i].location.x+bonusArr[i].size.w>=car.location.x)
+      ||(bonusArr[i].location.x>car.location.x && bonusArr[i].location.x<car.location.x+car.size.w ))
+      &&((bonusArr[i].location.y+bonusArr[i].size.h>=car.location.y)&&(bonusArr[i].location.y+bonusArr[i].size.h<car.location.y+car.size.h)
+//      || (bonusArr[i].location.y>car.location.y && bonusArr[i].location.y<car.location.y+car.size.h))
+       )){
+          pp.score+=bonusArr[i].value
+          console.log(pp.score)
+          var A=new Audio()
+          A.src="sounds/money.mp3" //wow sound.
+          A.volume=0.9
+          A.play()
+          console.log("WOW! you earned ",bonusArr[i].value)// d ttgher b3d kda ll value bt3to wl rkm bt3o
+          bonusArr[i].remove()
+          bonusArr.splice(i,1)
+          size=size-1
+          break
       }
     }
+  }
 
     //generate bonus type!
 
-  function increaseBonus()
-  {
-    pp.score+=1;
+  function increaseBonus(){
+    pp.score+=1
     console.log(pp.level.time)
     checkAchievements()
-
-    if(--pp.level.time==0)
-    {
+    if(--pp.level.time==0){
       switch (pp.level.number) {
         case 1:
-        alert("level 1 passed")
+            alert("level 1 passed")
             pp.level=new level(30,10,2,2)
             road.speed=12
             road.stopTimer()
@@ -108,11 +106,10 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
             generateEnemyCars=setInterval(generateEnemy,800)
             moveEnemyCars=setInterval(moveEnemy,3)
             levelPassed++
+            break
 
-          break;
         case 2:
-        alert("level 2 passed")
-
+              alert("level 2 passed")
               pp.level=new level(20,15,3,3)
               road.speed=8
               road.stopTimer()
@@ -122,23 +119,22 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
               generateEnemyCars=setInterval(generateEnemy,600)
               moveEnemyCars=setInterval(moveEnemy,1)
               levelPassed++
+              break
 
-          break;
           case 3:
-          alert("level 3 passed")
-          levelPassed++
+              alert("level 3 passed")
+              levelPassed++
               clearInterval(moveEnemyCars);
               clearInterval(generateEnemyCars);
               clearInterval(increasePlayerBonus);
               road.stopTimer()
               car.stopTimer()
               alert("winner wooooow")
-            break;
-        default:
-
+              break
+          default:
+        }
       }
     }
-  }
 
   function checkAchievements(){
     //win3levels
@@ -160,10 +156,13 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
 
     if(pp.score>achievement.highScore){
       achievement.highScore=pp.score
-      var A=new Audio()
-      A.src="sounds/wow.wav"
-      A.volume=0.9
-      A.play()
+      if(Achievementsoundcounter===0){
+        var achievementSound=new Audio()
+        achievementSound.src="sounds/wow.wav"
+        achievementSound.volume=0.9
+        achievementSound.play()
+        soundcounter++
+      }
       console.log("New high Score",achievement.highScore)
     }
 
@@ -171,22 +170,22 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
 
 
 
-  function appearCrash(c)
-  {
+  function appearCrash(c){
     if(c<7){
       if(c%2!=0)
-      car.remove()
+        car.remove()
       else
-      car.display()
-     setTimeout(function(){appearCrash(++c)
-          }
-          ,100)
+        car.display()
+      setTimeout(function(){
+        appearCrash(++c)
+      },100)
+    }
   }
-  }
+
   function checkCollision(){
     var i,size=enemyArr.length;
     for(i=0;i<size;i++){
-      checkBorders(enemyArr[i],i);
+      checkBorders(enemyArr[i],i)
       size=enemyArr.length;
       if(((enemyArr[i].location.x<=car.location.x && enemyArr[i].location.x+enemyArr[i].size.w>=car.location.x)
       ||(enemyArr[i].location.x>car.location.x && enemyArr[i].location.x<car.location.x+car.size.w ))
@@ -208,39 +207,41 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
             console.log("o2f ya 7ywan")
             road.stopTimer()
             car.stopTimer()
-            clearInterval(moveEnemyCars);
-            clearInterval(generateEnemyCars);
-            clearInterval(increasePlayerBonus);
+            clearInterval(moveEnemyCars)
+            clearInterval(generateEnemyCars)
+            clearInterval(increasePlayerBonus)
 
-            alert("game over");
-             break;
+            alert("game over")
+             break
           }
       	}
     }
     }
-    function checkBorders(ob,index)
-    {
-        if(ob.location.y>=window.innerHeight-1)
-        {
-          enemyArr.splice(index, 1);
+
+    function checkBorders(ob,index){
+        if(ob.location.y>=window.innerHeight-1){
+          enemyArr.splice(index, 1)
         }
     }
+
     function removeBonus(ob,index){
         if(ob.location.y>=window.innerHeight-1){
-          bonusArr.splice(index, 1);
+          bonusArr.splice(index, 1)
         }
     }
+
     function init() {
-      // body...
+        // body...
+      generateEnemyCars=setInterval(generateEnemy,1000)
+      moveEnemyCars=setInterval(moveEnemy,5)
 
-  generateEnemyCars=setInterval(generateEnemy,1000)
-  moveEnemyCars=setInterval(moveEnemy,5)
+      generateBonus=setInterval(generateBonusfn,7000)
+      moveBonus=setInterval(moveBonusfn,1)
 
-  generateBonus=setInterval(generateBonusfn,7000)
-  moveBonus=setInterval(moveBonusfn,1)
+      increasePlayerBonus=setInterval(increaseBonus,1000)
 
-  increasePlayerBonus=setInterval(increaseBonus,1000)
     }
+
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
     //left
