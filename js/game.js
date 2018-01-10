@@ -3,6 +3,8 @@ y=0
 start=13
 enemyArr= new Array()
 score = 0
+
+  let generateEnemyCars,moveEnemyCars,increasePlayerBonus;
 window.onload = function init(){
 
   var canvas=document.getElementById('myCanvas');
@@ -37,35 +39,37 @@ window.onload = function init(){
   function increaseBonus()
   {
     pp.score+=1;
+    console.log(pp.level.time)
     if(--pp.level.time==0)
     {
       switch (pp.level.number) {
         case 1:
             pp.level=new level(30,10,2,2)
-            road.speed=10
+            road.speed=12
             road.stopTimer()
             road.timer=road.speed
-            clearInterval(generateEnemy)
-            clearInterval(moveEnemy)
-            generateEnemyCars=setInterval(generateEnemy,500)
-            moveEnemyCars=setInterval(moveEnemy,200)
+            clearInterval(generateEnemyCars)
+            clearInterval(moveEnemyCars)
+            generateEnemyCars=setInterval(generateEnemy,800)
+            moveEnemyCars=setInterval(moveEnemy,3)
            
           break;
         case 2:
               pp.level=new level(20,15,3,3)
-              road.speed=1
+              road.speed=8
               road.stopTimer()
               road.timer=road.speed
-              clearInterval(generateEnemy)
-              clearInterval(moveEnemy)
-              generateEnemyCars=setInterval(generateEnemy,200)
-              moveEnemyCars=setInterval(moveEnemy,100)
+              clearInterval(generateEnemyCars)
+              clearInterval(moveEnemyCars)
+              generateEnemyCars=setInterval(generateEnemy,600)
+              moveEnemyCars=setInterval(moveEnemy,1)
           break;
           case 3:
               clearInterval(moveEnemyCars);
               clearInterval(generateEnemyCars);
               clearInterval(increasePlayerBonus);
               road.stopTimer()
+              car.stopTimer()
               alert("winner wooooow")
             break;
         default:
@@ -73,9 +77,18 @@ window.onload = function init(){
       }
     }
   }
-  generateEnemyCars=setInterval(generateEnemy,1000)
-  moveEnemyCars=setInterval(moveEnemy,1)
-  increasePlayerBonus=setInterval(increaseBonus,1000)
+  function appearCrash(c)
+  {
+    if(c<7){
+      if(c%2!=0)
+      car.remove()
+      else
+      car.display()
+     setTimeout(function(){appearCrash(++c)
+          }
+          ,100)
+  }
+  }
   function checkCollision(){
     var i,size=enemyArr.length;
     for(i=0;i<size;i++){
@@ -85,14 +98,25 @@ window.onload = function init(){
       ||(enemyArr[i].location.x>car.location.x && enemyArr[i].location.x<car.location.x+car.size.w ))
       &&((enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)&&(enemyArr[i].location.y+enemyArr[i].size.h<car.location.y+car.size.h) )
       ){
-	       console.log("collide");
+        clearInterval(moveEnemyCars);
+        var A=new Audio()
+        A.src="sounds/crash.wav"
+        A.volume=0.6
+        A.play()    
+        appearCrash(0)
+        enemyArr[i].remove()
+        enemyArr.splice(i,1)
+        size=size-1
+        moveEnemyCars=setInterval(moveEnemy,1)
         if((--pp.lives)==0)
           {
-
+            console.log("o2f ya 7ywan")
+            road.stopTimer()
+            car.stopTimer()
             clearInterval(moveEnemyCars);
             clearInterval(generateEnemyCars);
             clearInterval(increasePlayerBonus);
-            road.stopTimer()
+           
             alert("game over");
              break;
           }
@@ -105,6 +129,13 @@ window.onload = function init(){
         {
           enemyArr.splice(index, 1);
         }
+    }
+    function init() {
+      // body...
+
+  generateEnemyCars=setInterval(generateEnemy,1000)
+  moveEnemyCars=setInterval(moveEnemy,5)
+  increasePlayerBonus=setInterval(increaseBonus,1000)
     }
   window.addEventListener("keydown", keypress, false);
   function keypress(event){
@@ -141,4 +172,5 @@ window.onload = function init(){
     	}
 
     }
+    init()
 }

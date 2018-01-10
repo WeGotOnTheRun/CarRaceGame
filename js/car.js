@@ -49,11 +49,17 @@ class playerCar extends car{
   constructor(){
     super({x:(200),y:window.innerHeight-100},{w:30,h:60})
      this._position="center"
+     this._lastPos="center"
+     this._timerr='';
     this.draw()
   }
 
   draw(){
     this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
+  }
+  stopTimer()
+  {
+    clearTimeout(this._timerr)
   }
 
   move(direction){
@@ -62,9 +68,11 @@ class playerCar extends car{
     A.volume=0.6
     A.play()
     let _this=this
+    this._position=this._lastPos
+    clearTimeout(this._timerr)
     if(direction=="right"){
      //switch this line and the next one.
-        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1,_this._location.y)},1)
+        this.clearAndDraw(direction,_this._location.x+1,_this._location.y)
     }
     else if (direction=="down"){
       this._location.y+=50
@@ -75,7 +83,7 @@ class playerCar extends car{
      
     }
     else if(direction=="left"){
-        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x,_this._location.x-1)},1)
+      this.clearAndDraw(direction,_this._location.x,_this._location.x-1)
        }
 
       }
@@ -89,10 +97,10 @@ class playerCar extends car{
 
       if(direction=="right" && this._position=="center")
        { 
-          
+         this._lastPos="right"
          if(this._location.x<5*this._canvas.width/6)
         {
-        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
+        this._timerr=setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
         }
         else
         {
@@ -101,10 +109,10 @@ class playerCar extends car{
       }
       else if((direction=="right" && this._position=="left") )
      {
-       
+         this._lastPos="center"
          if(this._location.x<this._canvas.width/2)
         {
-        setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
+        this._timerr=setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
         }
         else
         {
@@ -113,7 +121,7 @@ class playerCar extends car{
     }
     else if ((direction=="left" && this._position=="right") )
     {
-        
+         this._lastPos="center"
          if(this._location.x>this._canvas.width/2)
         {
         setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
@@ -125,6 +133,7 @@ class playerCar extends car{
     }
     else
     {
+       this._lastPos="left"
        if(this._location.x>this._canvas.width/6)
         {
         setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
@@ -137,6 +146,14 @@ class playerCar extends car{
 
     }
 
+  }
+  remove()
+  {
+      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+  }
+  display()
+  {
+       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
   }
 }
 
@@ -173,5 +190,8 @@ class enemyCar extends car{
         this._location.y+=1;
         this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this.size.w,this.size.h)
     }
-
+     remove()
+  {
+      this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+  }
 }
