@@ -14,6 +14,8 @@ class car{
   }
   set model(m){
   	this._model=m
+	
+	
   }
   set location(l){
   	this._location=l

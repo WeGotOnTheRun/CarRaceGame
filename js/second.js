@@ -1,4 +1,5 @@
-window.onload=function(){
+
+
 var n=0;
 var img_arr=["img/red2.png","img/yellow2.png","img/white.png"];
 var length = img_arr.length ;
@@ -24,6 +25,7 @@ pause=function(){
 rotateAnimation("img1",30);
 back=function(){
   n=(n+length-1)%length;
+  sessionStorage.setItem("xmodel",n);
   img.src=img_arr[n];
   degrees = 1;
   clearInterval(looper);
@@ -32,6 +34,7 @@ back=function(){
 frword=function(){
   n=(n+1)%length;
   img.src=img_arr[n];
+  sessionStorage.setItem("xmodel",n);
   clearInterval(looper);
   degrees = 1;
   rotateAnimation("img1",30);
@@ -39,4 +42,11 @@ frword=function(){
 document.getElementById("back").addEventListener("click", back);
 document.getElementById("forward").addEventListener("click", frword);
 document.getElementById("choose").addEventListener("click", pause);
-}
+
+
+	
+	sessionStorage.setItem("xmodel",n);
+
+
+
+
