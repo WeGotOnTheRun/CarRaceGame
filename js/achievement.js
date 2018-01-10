@@ -1,22 +1,22 @@
-class achievement{
-  constructor(time,score,win) {
-    this.high-score=score
-    this.win3level=win
-    
-   set high-score(m){
-   this.high-score=m
+class achievements{
+  constructor() {
+    this._highScore=2000
+    this._win3level=false
+  }
+
+   set highScore(h){
+   this._highScore=h
    }
-   
+
    set win3level(w){
-   this.win3level=w
+   this._win3level=w
   }
-   get high-score(){
-   return this.high-score
+   get highScore(){
+   return this._highScore
    }
-   
+
    get win3level(){
-   return this.win3level
+   return this._win3level
   }
-  
-  }
-  
+
+}
