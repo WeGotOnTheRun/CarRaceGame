@@ -1,16 +1,17 @@
 var myCar=new Image();
 myCar.src="img/Pink-Car.png"
-var img_array=["img/r.png","img/green.png","img/w.png"];
+var img_array=["img/red.png","img/y1.png","img/w1.png"];
 var myCar2=new Image();
 myCar2.src=img_array[localStorage.getItem("xmodel")]
 
 var playerI=new Image()
 playerI.src="img/drive-icon.png"
 
+
 var enemyCar1=new Image()
 enemyCar1.src="img/blue.png"
 var enemyCar2=new Image()
-enemyCar2.src="img/yellow.png"
+enemyCar2.src="img/purple.png"
 var enemyCar3=new Image()
 enemyCar3.src="img/green.png"
 
