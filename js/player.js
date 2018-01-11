@@ -1,11 +1,16 @@
 class player{
-  constructor(name) {
+  constructor(name,car,winning,highScore) {
     this._name=name
     this._score=0
     this._level=new level(45,20,1,1)
     this._lives=3
-    this._playerAchievements='null'
-    this._car=''
+    this._playerAchievements={winning,highScore}
+    this._car=car
+    this._status=0
+  }
+
+  set status(s){
+    this._status=s
   }
 
   set playerAchievements(a){
@@ -53,6 +58,10 @@ class player{
 
   get playerAchievements(){
     return this._playerAchievements
+  }
+
+  get status(){
+    return this._status
   }
 
 }

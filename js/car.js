@@ -6,9 +6,13 @@ class car{
     this._size=z
     this._state="before birth"
     this._carI=myCar2
-    this._canvas=document.getElementById('myCanvas2');
+    this._canvas=document.getElementById('myCanvas2')
     this._ctx2 = this._canvas.getContext("2d")
     this._position=""
+  }
+
+  set car(c){
+    this._carI=c
   }
 
   set speed(s){
@@ -31,6 +35,10 @@ class car{
     this._state=s
   }
 
+  get car(){
+    return this._carI
+  }
+  
   get speed(){
   	return this._speed
   }
@@ -190,5 +198,5 @@ class enemyCar extends car{
       this._carI=enemyCar3
     }
   }
-  
+
 }

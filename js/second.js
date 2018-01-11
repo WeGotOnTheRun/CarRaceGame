@@ -23,12 +23,13 @@ window.onload=function(){
   }
 
   rotateAnimation("img1",30)
+
   back=function(){
     n=(n+length-1)%length
     sessionStorage.setItem("xmodel",n)
-    img.src=img_arr[n];
-    degrees = 1;
-    clearInterval(looper);
+    img.src=img_arr[n]
+    degrees = 1
+    clearInterval(looper)
     rotateAnimation("img1",30)
   }
 
@@ -44,8 +45,6 @@ window.onload=function(){
   document.getElementById("back").addEventListener("click", back)
   document.getElementById("forward").addEventListener("click", frword)
   document.getElementById("choose").addEventListener("click", pause)
-
-
 
   sessionStorage.setItem("xmodel",n)
 

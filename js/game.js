@@ -25,9 +25,9 @@ window.onload = function init(){
   canvas3.height=window.innerHeight
   var ctx3=canvas3.getContext("2d")
   //ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
-  var pp=new player("yasmine")
-  var road=new Road(1,pp.level.speed)
   var car=new playerCar()
+  var pp=new player("yasmine",car.car,false,0)
+  var road=new Road(1,pp.level.speed)
   var achievement = new achievements()
 
 
@@ -88,6 +88,15 @@ window.onload = function init(){
   }
 
     //generate bonus type!
+  function showResult(){
+
+    pp.playerAchievements.winning,pp.playerAchievements.highScore=checkAchievements()
+    if(pp.score<pp.playerAchievements.highScore){
+      pp.playerAchievements.highScore=0
+    }
+    console.log("your name: ",pp.name,"finish at level: ", pp.level.number,"your Score: ",pp.score,"achievements ( won three levels in a row: ",
+    pp.playerAchievements.winning,")(new highScore: ",pp.playerAchievements.highScore,"your car: ",pp.car)
+  }
 
   function increaseBonus(){
     pp.score+=1
@@ -132,6 +141,7 @@ window.onload = function init(){
               road.stopTimer()
               car.stopTimer()
               alert("winner wooooow")
+              showResult()
               break
           default:
         }
@@ -163,10 +173,11 @@ window.onload = function init(){
         achievementSound.src="sounds/wow.wav"
         achievementSound.volume=0.9
         achievementSound.play()
-        soundcounter++
+        Achievementsoundcounter++
       }
       console.log("New high Score",achievement.highScore)
     }
+    return achievement.win3level,achievement.highScore
 
   }
 
@@ -214,8 +225,8 @@ window.onload = function init(){
             clearInterval(increasePlayerBonus)
             clearInterval(generateBonus)
             clearInterval(moveBonus)
-
             alert("game over")
+            showResult()
              break
           }
       	}
