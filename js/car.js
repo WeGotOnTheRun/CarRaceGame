@@ -38,7 +38,7 @@ class car{
   get car(){
     return this._carI
   }
-  
+
   get speed(){
   	return this._speed
   }
@@ -64,11 +64,12 @@ class car{
 class playerCar extends car{
 
   constructor(){
-    super({x:(200),y:window.innerHeight-100},{w:30,h:60})
-     this._position="center"
-     this._lastPos="center"
-     this._timerr=''
-    this.draw()
+   super({x:(200),y:window.innerHeight-100},{w:30,h:60})
+   this._position="center"
+   this._lastPos="center"
+   this._timerr=''
+   this.carModel()
+   this.draw()
   }
 
   draw(){
@@ -143,6 +144,16 @@ class playerCar extends car{
        this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
   }
 
+  carModel(){
+    if(sessionStorage.xmodel==="0"){
+      this._model='red_1233'
+    }else if(sessionStorage.xmodel==="1"){
+      this._model='yellow_1420'
+    }else{
+      this._model='white_6002'
+    }
+  }
+
 }
 
 class enemyCar extends car{
@@ -188,13 +199,13 @@ class enemyCar extends car{
     var modelArr = [1,2,3]
     var rand = modelArr[Math.floor(Math.random() * modelArr.length)]
     if(rand===1){
-      this._model=1
+      this._model='blue5671'
       this._carI=enemyCar1
     }else if(rand===2){
-      this._model=2
+      this._model='purple5007'
       this._carI=enemyCar2
     }else{
-      this._model=3
+      this._model='green_1001'
       this._carI=enemyCar3
     }
   }

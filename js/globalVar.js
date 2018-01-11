@@ -4,6 +4,7 @@ var img_array=["img/red.png","img/y1.png","img/w1.png"];
 var myCar2=new Image();
 myCar2.src=img_array[sessionStorage.xmodel]
 
+
 var enemyCar1=new Image()
 enemyCar1.src="img/blue.png"
 var enemyCar2=new Image()

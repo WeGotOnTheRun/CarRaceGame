@@ -9,7 +9,7 @@ levelPassed=0
 checkWinningLevels=0
 originalLives=3
 var Achievementsoundcounter=0
-
+//add player _status
 let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
 
 window.onload = function init(){
@@ -26,7 +26,7 @@ window.onload = function init(){
   var ctx3=canvas3.getContext("2d")
   //ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
   var car=new playerCar()
-  var pp=new player("yasmine",car.car,false,0)
+  var pp=new player("yasmine",car.model,false,0)
   var road=new Road(1,pp.level.speed)
   var achievement = new achievements()
 
@@ -91,11 +91,15 @@ window.onload = function init(){
   function showResult(){
 
     pp.playerAchievements.winning,pp.playerAchievements.highScore=checkAchievements()
+    if(pp.lives>0){
+      pp.lives*=3000
+    }
     if(pp.score<pp.playerAchievements.highScore){
       pp.playerAchievements.highScore=0
     }
+
     console.log("your name: ",pp.name,"finish at level: ", pp.level.number,"your Score: ",pp.score,"achievements ( won three levels in a row: ",
-    pp.playerAchievements.winning,")(new highScore: ",pp.playerAchievements.highScore,"your car: ",pp.car)
+    pp.playerAchievements.winning,")(new highScore: ",pp.playerAchievements.highScore,"your car: ",pp.cModel,"you won:", pp.status )
   }
 
   function increaseBonus(){
@@ -133,6 +137,7 @@ window.onload = function init(){
           case 3:
               alert("level 3 passed")
               levelPassed++
+              pp.status=true
               clearInterval(moveEnemyCars)
               clearInterval(generateEnemyCars)
               clearInterval(increasePlayerBonus)
@@ -181,8 +186,6 @@ window.onload = function init(){
 
   }
 
-
-
   function appearCrash(c){
     if(c<7){
       if(c%2!=0)
@@ -205,7 +208,8 @@ window.onload = function init(){
       &&(((enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)&&(enemyArr[i].location.y+enemyArr[i].size.h<car.location.y+car.size.h) )
       || (enemyArr[i].location.y>car.location.y && enemyArr[i].location.y<car.location.y+car.size.h))
       ){
-        clearInterval(moveEnemyCars);
+        clearInterval(moveEnemyCars)
+        originalLives--
         var A=new Audio()
         A.src="sounds/crash.wav"
         A.volume=0.6
@@ -218,6 +222,7 @@ window.onload = function init(){
         if((--pp.lives)==0)
           {
             console.log("o2f ya 7ywan")
+            pp.status=false
             road.stopTimer()
             car.stopTimer()
             clearInterval(moveEnemyCars)
@@ -247,7 +252,7 @@ window.onload = function init(){
 
     function init() {
         // body...
-      generateEnemyCars=setInterval(generateEnemy,1000)
+      generateEnemyCars=setInterval(generateEnemy,1200)
       moveEnemyCars=setInterval(moveEnemy,5)
 
       generateBonus=setInterval(generateBonusfn,8530)
