@@ -142,7 +142,17 @@ var u=2;
       clearInterval(moveEnemyCars)
       clearInterval(increasePlayerBonus)
       clearInterval(GameTimer )
+      if(pp.level.number==1)
+      {
+        localStorage.setItem("level","2")
+        document.getElementById("level").innerText="level 2->";
+      }
+      else {
+          localStorage.setItem("level","3")
+          document.getElementById("level").innerText="level 3->";
+      }
       document.getElementById("div").style.opacity="1"
+
     }
     else if (pp.level.time==0 && pp.level.number==3){
       aud.src="sounds/winner.wav"
@@ -152,6 +162,13 @@ var u=2;
       clearInterval(moveEnemyCars)
       clearInterval(increasePlayerBonus)
       clearInterval(GameTimer )
+      document.getElementById("img").src="img/winner.png";
+      document.getElementById("header").innerHTML="WoOooOooW";
+      document.getElementById("text").innerHTML="you win";
+      document.getElementById("level").innerText="play again";
+       document.getElementById("level").onclick=function(){  location.href="frist.html";}
+       document.getElementById("div").style.opacity="1"
+
 
     }
   }
@@ -254,6 +271,8 @@ var u=2;
              A.src="sounds/loser.wav"
              A.volume=0.6
              A.play()
+
+
             // alert("game over");
              break;
           break;

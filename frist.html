@@ -5,11 +5,16 @@
      <meta charset="utf-8"/>
 	 <title>nada</title>
      <link rel="stylesheet" href="css/frist.css">
-	 <script src="intro.js"></script>
+	 <script>
+      if(localStorage.getItem("level")===null)
+      {
+        localStorage.setItem("level","1");
+      }
+   </script>
 </head>
+
 <body>
 	<header class="move">CarRacing</header>
-
 		<video poster="img/maxresdefault.jpg" id="myvideo"src="sounds/Cars Video Game Trailer HD.mp4"  autoplay></video>
 		<a id="play"href="second.html">let's play</a>
 		<a id="exit"href="last.html">Exit</a>
