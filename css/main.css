@@ -7,8 +7,15 @@
         position: absolute;
     }
     #canvas3{
-      background:#6a0;
+      background:#a23;
     }
     .BR {
         margin:0px 35% 0;
     }
+body {
+  background: #B7004E;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

@@ -15,8 +15,8 @@ class car{
   }
   set model(m){
   	this._model=m
-	
-	
+
+
   }
   set location(l){
   	this._location=l
@@ -78,11 +78,11 @@ class playerCar extends car{
     }
     else if (direction=="down"){
       this._location.y+=50
-   
+
     }
     else if(direction=="up"){
       this._location.y-=50
-     
+
     }
     else if(direction=="left"){
       this.clearAndDraw(direction,_this._location.x,_this._location.x-1)
@@ -93,12 +93,13 @@ class playerCar extends car{
   {
 
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
-      this._location.x=x 
+      this._location.x=x
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
-      let _this=this
-
+       let _this=this
+      // console.log(x)
+      // console.log(this._position)
       if(direction=="right" && this._position=="center")
-       { 
+       {
          this._lastPos="right"
          if(this._location.x<5*this._canvas.width/6)
         {
@@ -162,7 +163,8 @@ class playerCar extends car{
 class enemyCar extends car{
   constructor() {
     super({x:(500/2-13),y:(270/2-180)},{w:30,h:60})
-    this._carI=enemyCars
+    this._carI=enemyCar1
+    this.enemymodel()
     this.draw()
   }
 
@@ -195,5 +197,20 @@ class enemyCar extends car{
      remove()
   {
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
+  }
+
+  enemymodel(){
+    var modelArr = [1,2,3]
+    var rand = modelArr[Math.floor(Math.random() * modelArr.length)]
+    if(rand===1){
+      this._model=1
+      this._carI=enemyCar1
+    }else if(rand===2){
+      this._model=2
+      this._carI=enemyCar2
+    }else{
+      this._model=3
+      this._carI=enemyCar3
+    }
   }
 }

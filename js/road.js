@@ -10,17 +10,31 @@ constructor(themeId,speed) {
     this._y=45
     this._width=400
     this._height=window.innerHeight
+    this._finishLine=finish2
+    this._finish=0
+    this._finishH=0
     this.draw()
   //  this.generateCar()
   }
-
+    drawFinish2()
+  {
+       this._finish=1;
+       this._ctx.drawImage(this._finishLine,0,0,this._finishLine.width,this._finishLine.height,0,this._finishH,this._canvas.width,60)
+     
+  }
   drawLines()
   {
     
        this._ctx.clearRect(0,0,this._width,this._height);
+         if(this._finish==1)
+          {
+             this._finishH+=this._speed*(2/3)
+            this._ctx.drawImage(this._finishLine,0,0,this._finishLine.width,this._finishLine.height,0,this._finishH,this._canvas.width,60)
+       
+          }
           for (var i = 0; i <23; i++) {
            if (this._roadDec[i][1] <this._height) {
-             this._roadDec[i][1] += this._roadDec[i][4]
+             this._roadDec[i][1] += this._speed*(2/3)
            } else if (this._roadDec[i][1] > this._height - 1) {
               this._roadDec[i][1] =-45;
             }
@@ -38,7 +52,7 @@ constructor(themeId,speed) {
     this._y+= 80+ 10;
     }
     var _this = this;
-  this._timer= setInterval(function(){_this.drawLines()},this._speed);
+  this._timer= setInterval(function(){_this.drawLines()},10);
 }
   stopTimer()
   {
@@ -48,6 +62,7 @@ constructor(themeId,speed) {
   {
     var _this=this;
     clearInterval(this._timer)
+    console.log(time)
     this._timer= setInterval(function (){_this.drawLines()},time);
   }
   set themes(th)

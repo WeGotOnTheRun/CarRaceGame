@@ -1,10 +1,51 @@
  class level{
-  constructor(time,speed,number,theme) {
+  constructor(time,speed,number,theme,s1,s2,s3,s4) {
     this._time=time
     this._speed=speed
     this._number=number
 	  this._theme=theme
+    this._generateEnemySpeed=s1
+    this._moveEnemySpeed=s2
+    this._generateScore=s3
+    this._slowTime=s4
   }
+
+    set slowTime(s4)
+    {
+      this._slowTime=s4
+    }
+
+    get slowTime()
+    {
+      return this._slowTime
+    }
+
+    set generateEnemySpeed(s1)
+    {
+      this._generateEnemySpeed=s1
+
+    }
+    get generateEnemySpeed()
+    {
+      return this._generateEnemySpeed
+    }
+    set moveEnemySpeed(s2)
+    {
+      this._moveEnemySpeed=s2
+    }
+    get moveEnemySpeed()
+    {
+      return this._moveEnemySpeed
+    }
+    set generateScore(s3)
+    {
+      this._generateScore=s3
+   }
+    get generateScore()
+    {
+      return this._generateScore
+    }
+
     set speed(s){
   	this._speed=s
   }
