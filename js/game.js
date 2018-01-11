@@ -8,7 +8,7 @@ deathNo=0
 levelPassed=0
 checkWinningLevels=0
 originalLives=3
-
+let time=0;
 let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus,GameTimer,Timer
 
 
@@ -32,25 +32,23 @@ window.onload = function init(){
       switch(l)
         {
           case "1":
-                var l=new level(60,5,1,1,1000,5,1000,13)
+                var l=new level(60,5,1,1,1000,5,1000,10)
                 console.log(l)
                 pp.level=l
                 break;
           case "2":
-               var l=new level(45,10,2,1,500,2,500,10)
+               var l=new level(45,10,2,1,500,2,500,9)
                pp.level=l
                break;
           case "3":
-              var l=new level(30,20,3,1,300,0.5,100,5)
+              var l=new level(30,20,3,1,300,0.5,100,8)
               pp.level=l
           break;
           break;
         }
   var road=new Road(1,pp.level.speed)
-
+  time=pp.level.time;
   var car=new playerCar()
-  var pp=new player("yasmine",car.model,false,0)
-  var road=new Road(1,pp.level.speed)
   var achievement = new achievements()
 
   var btn=document.getElementById("level").onclick = function () {
@@ -67,8 +65,9 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
     var i
       for(i=0;i<=enemyArr.length-1;i++){
         enemyArr[i].move()
+
       }
-      checkCollision()
+      checkCollision();
   }
 
   //get bonus type and value.
@@ -87,36 +86,35 @@ let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
   }
 
 
-  function GetBonus(){
-    var i,size=bonusArr.length;
-    for(i=0;i<size;i++){
-      removeBonus(bonusArr[i],i)
-      size=bonusArr.length
-      if(((bonusArr[i].location.x<=car.location.x && bonusArr[i].location.x+bonusArr[i].size.w>=car.location.x)
-      ||(bonusArr[i].location.x>car.location.x && bonusArr[i].location.x<car.location.x+car.size.w ))
-      &&((bonusArr[i].location.y+bonusArr[i].size.h>=car.location.y)&&(bonusArr[i].location.y+bonusArr[i].size.h<car.location.y+car.size.h)
-      || (bonusArr[i].location.y>car.location.y && bonusArr[i].location.y<car.location.y+car.size.h))
-      ){
-          pp.score+=bonusArr[i].value
-          console.log(pp.score)
-          var A=new Audio()
-          A.src="sounds/money.mp3" //wow sound.
-          A.volume=0.9
-          A.play()
-          console.log("WOW! you earned ",bonusArr[i].value)// d ttgher b3d kda ll value bt3to wl rkm bt3o
-          bonusArr[i].remove()
-          bonusArr.splice(i,1)
-          size=size-1
-          break
+    function GetBonus(){
+      var i,size=bonusArr.length;
+      for(i=0;i<size;i++){
+        removeBonus(bonusArr[i],i);
+        size=bonusArr.length;
+        if(((bonusArr[i].location.x<=car.location.x && bonusArr[i].location.x+bonusArr[i].size.w>=car.location.x)
+        ||(bonusArr[i].location.x>car.location.x && bonusArr[i].location.x<car.location.x+car.size.w ))
+        &&((bonusArr[i].location.y+bonusArr[i].size.h>=car.location.y)&&(bonusArr[i].location.y+bonusArr[i].size.h<car.location.y+car.size.h)
+        || (bonusArr[i].location.y>car.location.y && bonusArr[i].location.y<car.location.y+car.size.h))){
+            pp.score+=bonusArr[i].value
+            console.log(pp.score)
+            var A=new Audio()
+            A.src="sounds/money.mp3" //wow sound.
+            A.volume=0.9
+            A.play()
+            console.log("WOW! you earned ",bonusArr[i].value)// d ttgher b3d kda ll value bt3to wl rkm bt3o
+            bonusArr[i].remove()
+            bonusArr.splice(i,1)
+            size=size-1
+            break
+        }
       }
     }
-  }
 
     //generate bonus type!
 var u=2;
   function timerUp() {
     // body...
-
+    pp.level.time--;
     if(pp.level.time<=pp.level.slowTime && pp.level.time>=0)
     {
             road.speed=pp.level.time/2
@@ -129,12 +127,12 @@ var u=2;
              u+=2;
 
     }
-    if(pp.level.time==pp.level.slowTime)
+    if(pp.level.time==(pp.level.slowTime-4))
     {
        road.drawFinish2()
     }
 
-    if(--pp.level.time==0 &&pp.level.number<3)
+    if(pp.level.time==0 &&pp.level.number<3)
     {
 
       aud.src="sounds/clapping.wav"
@@ -146,7 +144,7 @@ var u=2;
       clearInterval(GameTimer )
       document.getElementById("div").style.opacity="1"
     }
-    else if (--pp.level.time==0 && pp.level.number==3){
+    else if (pp.level.time==0 && pp.level.number==3){
       aud.src="sounds/winner.wav"
       aud.play();
       road.stopTimer()
@@ -165,25 +163,9 @@ var u=2;
     canvas3.getContext("2d").font = "35px lighter verdana ";
     canvas3.getContext("2d").fillStyle = "#fff";
     canvas3.getContext("2d").fillText(pp.score,0.74 *window.innerWidth, 0.101*window.innerHeight);
-    checkAchievements()
+  //  checkAchievements()
 
   }
-
-  function showResult(){
-
-    pp.playerAchievements.winning,pp.playerAchievements.highScore=checkAchievements()
-    if(pp.lives>0){
-      pp.lives*=3000
-    }
-    if(pp.score<pp.playerAchievements.highScore){
-      pp.playerAchievements.highScore=0
-    }
-
-    console.log("your name: ",pp.name,"finish at level: ", pp.level.number,"your Score: ",pp.score,"achievements ( won three levels in a row: ",
-    pp.playerAchievements.winning,")(new highScore: ",pp.playerAchievements.highScore,"your car: ",pp.cModel,"you won:", pp.status )
-  }
-
-
 
   function checkAchievements(){
     //win3levels
@@ -205,43 +187,40 @@ var u=2;
 
     if(pp.score>achievement.highScore){
       achievement.highScore=pp.score
-      if(Achievementsoundcounter===0){
-        var achievementSound=new Audio()
-        achievementSound.src="sounds/wow.wav"
-        achievementSound.volume=0.9
-        achievementSound.play()
-        Achievementsoundcounter++
-      }
+      var A=new Audio()
+      A.src="sounds/wow.wav"
+      A.volume=0.9
+      A.play()
       console.log("New high Score",achievement.highScore)
     }
-    return achievement.win3level,achievement.highScore
 
   }
 
-  function appearCrash(c){
+
+
+  function appearCrash(c)
+  {
     if(c<7){
       if(c%2!=0)
-        car.remove()
+      car.remove()
       else
-        car.display()
-      setTimeout(function(){
-        appearCrash(++c)
-      },100)
-    }
+      car.display()
+     setTimeout(function(){appearCrash(++c)
+          }
+          ,100)
   }
-
+  }
   function checkCollision(){
     var i,size=enemyArr.length;
     for(i=0;i<size;i++){
-      checkBorders(enemyArr[i],i)
+      checkBorders(enemyArr[i],i);
       size=enemyArr.length;
       if(((enemyArr[i].location.x<=car.location.x && enemyArr[i].location.x+enemyArr[i].size.w>=car.location.x)
       ||(enemyArr[i].location.x>car.location.x && enemyArr[i].location.x<car.location.x+car.size.w ))
       &&(((enemyArr[i].location.y+enemyArr[i].size.h>=car.location.y)&&(enemyArr[i].location.y+enemyArr[i].size.h<car.location.y+car.size.h) )
       || (enemyArr[i].location.y>car.location.y && enemyArr[i].location.y<car.location.y+car.size.h))
       ){
-        clearInterval(moveEnemyCars)
-        originalLives--
+        clearInterval(moveEnemyCars);
         var A=new Audio()
         A.src="sounds/crash.wav"
         A.volume=0.6
@@ -284,10 +263,11 @@ var u=2;
       	}
     }
     }
-
-    function checkBorders(ob,index){
-        if(ob.location.y>=window.innerHeight-1){
-          enemyArr.splice(index, 1)
+    function checkBorders(ob,index)
+    {
+        if(ob.location.y>=window.innerHeight-1)
+        {
+          enemyArr.splice(index, 1);
         }
     }
 
@@ -333,6 +313,7 @@ var u=2;
       var rSec = 0;
       var aEnd,aWidth;
       var sec=0;
+
       function drawTimer(context,x,y,time){
         context.clearRect(x,y,174,174);
       	context.beginPath();
@@ -419,14 +400,13 @@ var u=2;
     canvas3.getContext("2d").fillStyle = "#fff";
     canvas3.getContext("2d").fillText(pp.score,0.74 *window.innerWidth, 0.101*window.innerHeight);
 
-
-    Timer=setInterval(function(){drawTimer(canvas3.getContext("2d"),0.9 *window.innerWidth, 0.101*window.innerHeight,pp.level.time)},50)
+    Timer=setInterval(function(){drawTimer(canvas3.getContext("2d"),0.9 *window.innerWidth, 0.101*window.innerHeight,time)},50)
 
 
       generateEnemyCars=setInterval(generateEnemy,pp.level.generateEnemySpeed)
       moveEnemyCars=setInterval(moveEnemy,pp.level.moveEnemySpeed)
       GameTimer=setInterval(timerUp,1000)
-      generateBonus=setInterval(generateBonusfn,8530)
+      //generateBonus=setInterval(generateBonusfn,7000)
 
       increasePlayerBonus=setInterval(increaseBonus,pp.level.generateScore)
      }

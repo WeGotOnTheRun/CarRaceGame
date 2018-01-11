@@ -5,7 +5,7 @@ constructor(themeId,speed) {
     this._picNum=0
     this._timer=''
     this._roadDec=[]
-    this._canvas=document.getElementById('myCanvas')
+    this._canvas=document.getElementById('myCanvas');
     this._ctx =this._canvas.getContext("2d")
     this._y=45
     this._width=400
@@ -14,6 +14,7 @@ constructor(themeId,speed) {
     this._finish=0
     this._finishH=0
     this.draw()
+  //  this.generateCar()
   }
     drawFinish2()
   {
@@ -42,11 +43,13 @@ constructor(themeId,speed) {
           }
 
   }
-  draw(){
+  draw()
+{
+
     for (var i = 0; i < 23; i++) {
-      this._roadDec.push([this._canvas.width/3,this._y,5,40,5])
-      this._roadDec.push([2*this._canvas.width/3,this._y,5,40,5])
-      this._y+= 80+ 10
+    this._roadDec.push([this._canvas.width/3,this._y,5,40,5]);
+    this._roadDec.push([2*this._canvas.width/3,this._y,5,40,5]);
+    this._y+= 80+ 10;
     }
     var _this = this;
   this._timer= setInterval(function(){_this.drawLines()},10);
@@ -55,34 +58,35 @@ constructor(themeId,speed) {
   {
     clearInterval(this._timer);
   }
-
-  set timer(time){
-    var _this=this
+  set timer(time)
+  {
+    var _this=this;
     clearInterval(this._timer)
-    this._timer= setInterval(function (){_this.drawLines()},time)
+    console.log(time)
+    this._timer= setInterval(function (){_this.drawLines()},time);
   }
-
-  set themes(th){
+  set themes(th)
+  {
     this._themes=th
   }
-
-  get themes (){
+  get themes ()
+  {
     return this._themes
   }
-
-  set picNum(s){
+  set picNum(s)
+  {
     this._picNum=s
   }
-
-  get picNum(){
-    return this._picNum
+  get picNum()
+  {
+    return this._picNum;
   }
-
-  set speed(sp){
+  set speed(sp)
+  {
     this._speed=sp
   }
-
-  get speed(){
+  get speed()
+  {
     return this._speed
   }
 //    generateCar(){

@@ -43,7 +43,7 @@ document.getElementById("back").addEventListener("click", back);
 document.getElementById("forward").addEventListener("click", frword);
 document.getElementById("choose").addEventListener("click", pause);
 
-	localStorage.setItem("xmodel",n);
+localStorage.setItem("xmodel",n);
 
 
 }
