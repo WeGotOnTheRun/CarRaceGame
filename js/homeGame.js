@@ -16,17 +16,17 @@ window.onload = function init(){
   canvas3.height=window.innerHeight
 
   let car=new playerCar()
-  let player=new Player("yasmine",car.model,false,0)
+  var pp=new player("yasmine",car.model,false,0,0,0,0,0,false,false,false)
   player.car=car
   switch (localStorage.getItem("level")) {
     case "1":
-              player.level=new level(60,5,1,1,1000,5,1000,10)
+              player.level=new level(60,5,1,1,1000,5,2000,1000,1000,10)
       break;
     case "2":
-              player.level=new level(45,10,2,1,500,2,500,9)
+              player.level=new level(45,10,2,1,500,2,4000,1000,500,9)
       break;
     case "3":
-              player.level=new level(30,20,3,1,300,0.5,100,8)
+              player.level=new level(30,20,3,1,300,0.5,5000,1000,100,8)
       break;
 
     default:
@@ -38,8 +38,7 @@ window.onload = function init(){
       location.href = "forth.html";
   }
 
-  function init()
-  {
+  function init(){
     levelTimer=new Timer(canvas3.getContext("2d"),0.9,0.101,30,60)
     playerIcon=new PlayerIcon(canvas3.getContext("2d"),playerI,"yasmine")
     playerlevel=new LevelIcon(canvas3.getContext("2d"),localStorage.getItem("level"))

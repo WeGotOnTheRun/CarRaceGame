@@ -2,10 +2,11 @@
 class bonus{
   constructor(x,y,w,h) {
     this._type=0
-    this._value=1000
+    this._value=0
     this._speed=0
     this._location={x,y}
     this._size={w,h}
+    this._state=0
     this._bonus=Bonus1
     this._canvas=document.getElementById('myCanvas2');
     this._ctx2 = this._canvas.getContext("2d")
@@ -115,17 +116,22 @@ class bonus{
       this._bonus=Bonus1
       this._value=1000
     }else if(rand===2){
-      this._type=2
+      this._type=1
       this._bonus=Bonus2
       this._value=500
-    }else{
-      this._type=3
+    }else if (rand===3){
+      this._type=1
       this._bonus=Bonus3
       this._value=200
+    }else if (rand===4){
+      this._type=2
+      this._bonus=BonusTime
+      this._value=5 //seconds
+    }else{
+      this._type=3
+      this._bonus=BonusLife
+      this._value=1
     }
   }
-
-  //change bonus voice for each type.
-
 
 }
