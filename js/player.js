@@ -2,7 +2,7 @@ class player{
   constructor(name,m,winning,highScore,bestTime,time1,time2,time3,goldCollecter,silverCollecter,bronzeCollecter) {
     this._name=name
     this._score=0
-    this._level=new level(45,20,1,1)
+    this._level=''
     this._lives=3
     this._playerAchievements={winning,highScore,bestTime,time1,time2,time3,goldCollecter,silverCollecter,bronzeCollecter}
     this._cModel=m

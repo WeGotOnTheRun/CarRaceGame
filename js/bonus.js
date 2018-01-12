@@ -109,7 +109,7 @@ class bonus{
  }
 
   bonusType(){
-    var typeArr = [1,2,3]
+    var typeArr = [1,2,3,4,5]
     var rand = typeArr[Math.floor(Math.random() * typeArr.length)]
     if(rand===1){
       this._type=1

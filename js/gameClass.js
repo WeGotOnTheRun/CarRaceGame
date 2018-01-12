@@ -20,7 +20,7 @@ class Game{
     this.moveEnemies()
 
     this.fireBonus()
-    this.moveBonus()
+    this.moveBonuss()
     this.fireGameTimer()
   }
 
@@ -64,8 +64,8 @@ class Game{
 
   generateBonus(){
     console.log("new bonus")
-    let _bonus= new bonus()
-    this._bonusArr.push(_bonus)
+    let _bonus1= new bonus((500/2-13),(270/2-180),30,60)
+    this._bonusArr.push(_bonus1)
   }
 
   moveBonus(){
@@ -103,7 +103,7 @@ class Game{
     clearInterval(this._moveEnemiesTimer)
   }
 
-  moveBonus(){
+  moveBonuss(){
     let _this=this
     this._movebonusTimer=setInterval(function (){_this.moveBonus()},this._player.level.moveBonusSpeed)
   }
@@ -180,7 +180,7 @@ removeBonus(ob,index){
     }
 }
 
-GetBonus(){
+getBonus(){
    let size=this._bonusArr.length;
    for(let i=0;i<size;i++){
      this.removeBonus(this._bonusArr[i],i)
@@ -224,7 +224,7 @@ GetBonus(){
        this._bonusArr[i].remove()
        this._bonusArr.splice(i,1)
        size=size-1
-       this.moveBonus()
+       this.moveBonuss()
      }
    }
  }
@@ -241,8 +241,8 @@ timerUp(){
      this.stopFiringBonus()
      this.stopMovingBonus()
      let _this=this
-     this._moveEnemiesTimer=setInterval(function (){_this.moveBonus()},this._road.speed+this._val)
-     this._generateEnemiesTimer=setInterval(function (){_this.generateBonus()},5*this._player.level.generateEnemySpeed)
+     this._moveEnemiesTimer=setInterval(function (){_this.moveEnemy()},this._road.speed+this._val)
+     this._generateEnemiesTimer=setInterval(function (){_this.generateEnemy()},5*this._player.level.generateEnemySpeed)
      this._moveBonusTimer=setInterval(function (){_this.moveBonus()},this._road.speed+this._val)
      this._generateBonusTimer=setInterval(function (){_this.generateBonus()},5*this._player.level.generateBonusSpeed)
      this._val+=2
