@@ -41,7 +41,7 @@
     this._generateBonusSpeed=b1
 
   }
-  get generateEnemySpeed(){
+  get generateBonusSpeed(){
     return this._generateBonusSpeed
   }
 
