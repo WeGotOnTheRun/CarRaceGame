@@ -119,8 +119,8 @@ var u=2;
             clearInterval(generateEnemyCars)
             clearInterval(moveEnemyCars)
 
-            generateEnemyCars=setInterval(generateEnemy,5*pp.level.generateEnemySpeed)
-             moveEnemyCars=setInterval(moveEnemy,road.speed+u)
+           generateEnemyCars=setInterval(generateEnemy,5*pp.level.generateEnemySpeed)
+            moveEnemyCars=setInterval(moveEnemy,road.speed+u)
              u+=2;
 
     }
@@ -420,7 +420,7 @@ var u=2;
     Timer=setInterval(function(){drawTimer(canvas3.getContext("2d"),0.9 *window.innerWidth, 0.101*window.innerHeight,time)},50)
 
 
-      generateEnemyCars=setInterval(generateEnemy,pp.level.generateEnemySpeed)
+     generateEnemyCars=setInterval(generateEnemy,pp.level.generateEnemySpeed)
       moveEnemyCars=setInterval(moveEnemy,pp.level.moveEnemySpeed)
       GameTimer=setInterval(timerUp,1000)
       //generateBonus=setInterval(generateBonusfn,7000)
@@ -440,17 +440,18 @@ var u=2;
       if(event.keyCode == 37)
       {
         if(car.location.x>canvas.width/6){
-            console.log("left");
-        car.move("left")
+         console.log("in function move left");
+          car.move("left")
       }
       }
        //right
 
         if(event.keyCode == 39)
       {
-        console.log("right");
-       if(car.location.x<5*canvas2.width/6){
-        car.move("right")
+
+           console.log("in function move right");
+           car.move("right")
+           if(car.location.x<5*canvas2.width/6){
       }
       }
 

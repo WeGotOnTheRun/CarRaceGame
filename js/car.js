@@ -85,12 +85,12 @@ class playerCar extends car{
     A.src="sounds/TIRE+SKID.wav"
     A.volume=0.6
     A.play()
-    if(direction=="right"){
+    if(direction=="left"){
      //switch this line and the next one.
-      this.clearAndDraw(direction,this._location.x+1)
-    }
-    else if(direction=="left"){
       this.clearAndDraw(direction,this._location.x-1)
+    }
+    else{
+      this.clearAndDraw(direction,this._location.x+1)
     }
   }
 
@@ -100,19 +100,19 @@ class playerCar extends car{
       this._location.x=x
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
       let _this=this
-      if(direction=="right" && this._location.x>=this._canvas.width/2 &&this._location.x<5*this._canvas.width/6 ){
+      if(direction=="right"  && this._location.x<5*this._canvas.width/6 && this._location.x>this._canvas.width/2){
           console.log("to right in right");
            this._timerr=setTimeout(function(){_this.clearAndDraw("right",_this._location.x+1)},1)
       }
-    else if((direction=="right" && this._location.x>=this._canvas.width/6 &&this._location.x<this._canvas.width/2)){
+    else if((direction=="right" && this._location.x>this._canvas.width/6 &&this._location.x<this._canvas.width/2)){
         console.log("to center in right");
            this._timerr=setTimeout(function(){_this.clearAndDraw("right",_this._location.x+1)},1)
     }
-    else if ((direction=="left" && this._location.x<=5*this._canvas.width/6 &&this._location.x>this._canvas.width/2) ){
+    else if ((direction=="left" && this._location.x<5*this._canvas.width/6 &&this._location.x>this._canvas.width/2) ){
             console.log("to center in left");
            setTimeout(function(){_this.clearAndDraw("left",_this._location.x-1)},1)
        }
-    else if((direction=="left" && this._location.x>=this._canvas.width/6 &&this._location.x<this._canvas.width/2)){
+    else if((direction=="left" && this._location.x>this._canvas.width/6 &&this._location.x<this._canvas.width/2)){
           console.log("to left in left");
          setTimeout(function(){_this.clearAndDraw("left",_this._location.x-1)},1)
 
