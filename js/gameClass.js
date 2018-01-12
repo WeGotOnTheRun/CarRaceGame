@@ -193,7 +193,7 @@ getBonus(){
        this.stopMovingBonus()
        if(this._bonusArr[i].type===1){
          this._player.score+=this._bonusArr[i].value
-         console.log(pp.score)
+         console.log( this._player.score)
          aud.src="sounds/money.mp3" //wow sound.
          aud.volume=0.9
          aud.play()
@@ -244,7 +244,7 @@ timerUp(){
      this._moveEnemiesTimer=setInterval(function (){_this.moveEnemy()},this._road.speed+this._val)
      this._generateEnemiesTimer=setInterval(function (){_this.generateEnemy()},5*this._player.level.generateEnemySpeed)
      this._moveBonusTimer=setInterval(function (){_this.moveBonus()},this._road.speed+this._val)
-     this._generateBonusTimer=setInterval(function (){_this.generateBonus()},5*this._player.level.generateBonusSpeed)
+     this._generateBonusTimer=setInterval(function (){_this.generateBonus()},this._player.level.generateBonusSpeed)
      this._val+=2
    }
    if(this._player.level.time==(this._player.level.slowTime-4)){
