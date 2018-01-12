@@ -40,8 +40,8 @@ window.onload = function init(){
 
   function init()
   {
-    levelTimer=new Timer(canvas3.getContext("2d"),0.9,0.101,30,60)
-    playerIcon=new PlayerIcon(canvas3.getContext("2d"),playerI,"yasmine")
+    levelTimer=new Timer(canvas3.getContext("2d"),0.9,0.101,30,player.level.time)
+    playerIcon=new PlayerIcon(canvas3.getContext("2d"),playerI,player.name)
     playerlevel=new LevelIcon(canvas3.getContext("2d"),localStorage.getItem("level"))
     playerLives=new  Lives(canvas3.getContext("2d"),0.23,0.055,0.02,0.061,"blue")
     playerScore=new ScoreIcon(canvas3.getContext("2d"),player)
