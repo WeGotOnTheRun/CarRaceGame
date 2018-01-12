@@ -81,13 +81,15 @@ class playerCar extends car{
   }
 
   move(direction){
+
+    clearTimeout(this._timerr)
     var A=new Audio()
     A.src="sounds/TIRE+SKID.wav"
     A.volume=0.6
     A.play()
     let _this=this
     this._position=this._lastPos
-    clearTimeout(this._timerr)
+
     if(direction=="right"){
      //switch this line and the next one.
       this.clearAndDraw(direction,_this._location.x+1,_this._location.y)
@@ -101,6 +103,7 @@ class playerCar extends car{
   }
 
   clearAndDraw(direction,x){
+    clearTimeout(this._timerr)
       this._ctx2.clearRect(this._location.x,this._location.y, this._size.w,this._size.h)
       this._location.x=x
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)

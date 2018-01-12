@@ -1,9 +1,13 @@
 window.onload = function init()
 {
-  console.log( localStorage.getItem("level"));
+  document.getElementById("1").onclick=function () {
+      localStorage.setItem("level",1);
+      location.href="index.html"
+  }
   document.getElementById("2").onclick=function () {
-    if(  localStorage.getItem("level")==2)
+    if(localStorage.getItem("highLevel")>=2)
     {
+      localStorage.setItem("level",2);
       location.href="index.html"
     }
     else {
@@ -11,8 +15,9 @@ window.onload = function init()
     }
   }
   document.getElementById("3").onclick=function () {
-    if(  localStorage.getItem("level")==3)
+    if(localStorage.getItem("highLevel")==3)
     {
+      localStorage.setItem("level",3);
       location.href="index.html"
     }
     else {

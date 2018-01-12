@@ -26,14 +26,11 @@ window.onload = function init(){
   var ctx3=canvas3.getContext("2d")
   //ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
   var pp=new player("yasmine")
-
   var l=localStorage.getItem("level")
-  console.log(l)
       switch(l)
         {
           case "1":
                 var l=new level(60,5,1,1,1000,5,1000,10)
-                console.log(l)
                 pp.level=l
                 break;
           case "2":
@@ -144,11 +141,12 @@ var u=2;
       clearInterval(GameTimer )
       if(pp.level.number==1)
       {
-        localStorage.setItem("level","2")
+        if(parseInt(localStorage.getItem("highLevel"))<2)
+        localStorage.setItem("highLevel",2)
         document.getElementById("level").innerText="level 2->";
       }
       else {
-          localStorage.setItem("level","3")
+          localStorage.setItem("highLevel",3)
           document.getElementById("level").innerText="level 3->";
       }
       document.getElementById("div").style.opacity="1"
@@ -438,19 +436,25 @@ var u=2;
    window.addEventListener("keydown", keypress, false);
   function keypress(event){
     //left
+
       if(event.keyCode == 37)
       {
-        if(x>-2){
+        if(car.location.x>canvas.width/6){
+            console.log("left");
+
         car.move("left")
-        x--}
+    console.log(car.location);
+      }
       }
       //right
 
         if(event.keyCode == 39)
       {
-       if(x<2){
+
+       if(car.location.x<5*canvas2.width/6){
         car.move("right")
-        x++}
+        console.log(car.location);
+      }
       }
 
     }
