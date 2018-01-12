@@ -20,13 +20,13 @@ window.onload = function init(){
   player.car=car
   switch (localStorage.getItem("level")) {
     case "1":
-              player.level=new level(60,5,1,1,1000,5,1000,10)
+              player.level=new level(60,5,1,1,1000,5,1000,9)
       break;
     case "2":
-              player.level=new level(45,10,2,1,500,2,500,9)
+              player.level=new level(45,10,2,1,600,2,500,9)
       break;
     case "3":
-              player.level=new level(30,20,3,1,300,0.5,100,8)
+              player.level=new level(30,20,3,1,400,0.5,100,9)
       break;
 
     default:
@@ -40,7 +40,7 @@ window.onload = function init(){
 
   function init()
   {
-    levelTimer=new Timer(canvas3.getContext("2d"),0.9,0.101,30,60)
+    levelTimer=new Timer(canvas3.getContext("2d"),0.9,0.101,30,player.level.time)
     playerIcon=new PlayerIcon(canvas3.getContext("2d"),playerI,"yasmine")
     playerlevel=new LevelIcon(canvas3.getContext("2d"),localStorage.getItem("level"))
     playerLives=new  Lives(canvas3.getContext("2d"),0.23,0.055,0.02,0.061,"blue")
