@@ -2,7 +2,6 @@ class  Road {
 constructor(themeId,speed) {
     this._themeId=themeId
     this._speed=speed
-    this._picNum=0
     this._timer=''
     this._roadDec=[]
     this._canvas=document.getElementById('myCanvas');
@@ -89,14 +88,4 @@ constructor(themeId,speed) {
   {
     return this._speed
   }
-//    generateCar(){
-//     setInterval(function(){
-//     var enemyIndex= (Math.floor(Math.random()*Math.random()*Math.random()*20)*500000)%3
-//     console.log(enemyIndex);
-//     var enemy=new enemyCar()
-//     enemy.draw()
-//
-// },2000)
-//   }
-
 }

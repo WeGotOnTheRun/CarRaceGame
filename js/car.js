@@ -4,7 +4,6 @@ class car{
     this._speed=0
     this._location=loc
     this._size=z
-    this._state="before birth"
     this._carI=myCar2
     this._canvas=document.getElementById('myCanvas2')
     this._ctx2 = this._canvas.getContext("2d")
@@ -77,7 +76,19 @@ class playerCar extends car{
   stopTimer(){
     clearTimeout(this._timerr)
   }
-
+  appearCrash(c)
+  {
+    let _this=this
+    if (c<7) {
+      if (c%2!=0) {
+        this.remove()
+      }
+      else {
+        this.display()
+      }
+      setTimeout(function(){_this.appearCrash(++c)},100)
+    }
+  }
   move(direction){
 
     clearTimeout(this._timerr)
@@ -101,19 +112,19 @@ class playerCar extends car{
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
       let _this=this
       if(direction=="right"  && this._location.x<5*this._canvas.width/6 && this._location.x>this._canvas.width/2){
-          console.log("to right in right");
+        //  console.log("to right in right");
            this._timerr=setTimeout(function(){_this.clearAndDraw("right",_this._location.x+1)},1)
       }
     else if((direction=="right" && this._location.x>this._canvas.width/6 &&this._location.x<this._canvas.width/2)){
-        console.log("to center in right");
+      //  console.log("to center in right");
            this._timerr=setTimeout(function(){_this.clearAndDraw("right",_this._location.x+1)},1)
     }
     else if ((direction=="left" && this._location.x<5*this._canvas.width/6 &&this._location.x>this._canvas.width/2) ){
-            console.log("to center in left");
+          //  console.log("to center in left");
            setTimeout(function(){_this.clearAndDraw("left",_this._location.x-1)},1)
        }
     else if((direction=="left" && this._location.x>this._canvas.width/6 &&this._location.x<this._canvas.width/2)){
-          console.log("to left in left");
+          //console.log("to left in left");
          setTimeout(function(){_this.clearAndDraw("left",_this._location.x-1)},1)
 
      }
@@ -128,9 +139,9 @@ class playerCar extends car{
   }
 
   carModel(){
-    if(sessionStorage.xmodel==="0"){
+    if(localStorage.xmodel==="0"){
       this._model='red_1233'
-    }else if(sessionStorage.xmodel==="1"){
+    }else if(localStorage.xmodel==="1"){
       this._model='yellow_1420'
     }else{
       this._model='white_6002'

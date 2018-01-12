@@ -6,7 +6,6 @@ class bonus{
     this._speed=0
     this._location={x,y}
     this._size={w,h}
-    this._state=0
     this._bonus=Bonus1
     this._canvas=document.getElementById('myCanvas2');
     this._ctx2 = this._canvas.getContext("2d")

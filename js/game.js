@@ -1,16 +1,8 @@
-x=0
-y=0
-start=13
 enemyArr= new Array()
 bonusArr=new Array()
-score=0
-deathNo=0
 levelPassed=0
 checkWinningLevels=0
-originalLives=3
-let time=0;
-let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus,GameTimer,Timer
-
+let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus,GameTimer
 
 window.onload = function init(){
 
@@ -24,8 +16,10 @@ window.onload = function init(){
   canvas3.width=window.innerWidth
   canvas3.height=window.innerHeight
   var ctx3=canvas3.getContext("2d")
-  //ctx3.drawImage(roadIm,0,0,roadIm.width,roadIm.height,0,0,canvas3.width,canvas3.height)
-  var pp=new player("yasmine")
+
+  var car=new playerCar()
+  var pp=new player("yasmine",car.model,false,0)
+
   var l=localStorage.getItem("level")
       switch(l)
         {
@@ -44,11 +38,9 @@ window.onload = function init(){
           break;
         }
   var road=new Road(1,pp.level.speed)
-  time=pp.level.time;
-  var car=new playerCar()
-  var achievement = new achievements()
+//  var achievement = new achievements()
 
-  var btn=document.getElementById("level").onclick = function () {
+  document.getElementById("level").onclick = function () {
         location.href = "forth.html";
     };
 let generateEnemyCars,moveEnemyCars,increasePlayerBonus,generateBonus,moveBonus
@@ -178,17 +170,17 @@ var u=2;
     canvas3.getContext("2d").font = "35px lighter verdana ";
     canvas3.getContext("2d").fillStyle = "#fff";
     canvas3.getContext("2d").fillText(pp.score,0.74 *window.innerWidth, 0.101*window.innerHeight);
-  //  checkAchievements()
+    checkAchievements()
 
   }
 
   function checkAchievements(){
     //win3levels
-    if(levelPassed===1&&originalLives===3){
+    if(levelPassed===1&&pp.lives===3){
       checkWinningLevels+=1
-    }if(levelPassed===2&&originalLives===3){
+    }if(levelPassed===2&&pp.lives===3){
       checkWinningLevels+=1
-    }if(levelPassed===3&&originalLives===3){
+    }if(levelPassed===3&&pp.lives===3){
       checkWinningLevels+=1
     }
     if(checkWinningLevels===3){
@@ -249,15 +241,15 @@ var u=2;
         {
           case 2:
             canvas3.getContext("2d").clearRect(0.28 *window.innerWidth, 0.055*window.innerHeight,0.02 *window.innerWidth, 0.061*window.innerHeight);
-            drawHeart(canvas3.getContext("2d"),0.29 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"white")
+          //  drawHeart(canvas3.getContext("2d"),0.29 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"white")
           break;
           case 1:
            canvas3.getContext("2d").clearRect(0.25 *window.innerWidth, 0.055*window.innerHeight,0.02 *window.innerWidth, 0.061*window.innerHeight);
-           drawHeart(canvas3.getContext("2d"),0.26 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"white")
+           //drawHeart(canvas3.getContext("2d"),0.26 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"white")
           break;
           case 0:
            canvas3.getContext("2d").clearRect(0.22 *window.innerWidth, 0.055*window.innerHeight,0.02 *window.innerWidth, 0.061*window.innerHeight);
-           drawHeart(canvas3.getContext("2d"),0.23 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"white")
+           //drawHeart(canvas3.getContext("2d"),0.23 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"white")
             road.stopTimer()
             car.stopTimer()
             clearInterval(moveEnemyCars);
@@ -288,142 +280,21 @@ var u=2;
         }
     }
 
-
-    function drawHeart(context, x, y, width, height,color){
-        context.save();
-        context.beginPath();
-        var topCurveHeight = height * 0.3;
-        context.moveTo(x, y + topCurveHeight);
-                // top left curve
-        context.bezierCurveTo(
-          x, y,
-          x - width / 2, y,
-          x - width / 2, y + topCurveHeight
-        );
-
-                // bottom left curve
-        context.bezierCurveTo(
-          x - width / 2, y + (height + topCurveHeight) / 2,
-          x, y + (height + topCurveHeight) / 2,
-          x, y + height
-        );
-
-                // bottom right curve
-        context.bezierCurveTo(
-          x, y + (height + topCurveHeight) / 2,
-          x + width / 2, y + (height + topCurveHeight) / 2,
-          x + width / 2, y + topCurveHeight
-        );
-
-                // top right curve
-        context.bezierCurveTo(
-          x + width / 2, y,
-          x, y,
-          x, y + topCurveHeight
-        );
-
-        context.closePath();
-        context.fillStyle = color;
-        context.fill();
-        context.restore();
-      }
-      var rSec = 0;
-      var aEnd,aWidth;
-      var sec=0;
-
-      function drawTimer(context,x,y,time){
-        context.clearRect(x,y,174,174);
-      	context.beginPath();
-      	context.arc (
-      		x,
-      		y,
-      		30,
-      		0,
-      		(2 * Math.PI) );
-      	context.fillStyle = 'blue';
-      	context.lineWidth = 1;
-      	context.stroke();
-      	context.fill();
-
-
-      	context.beginPath();
-      	context.arc (
-      		x,
-      		y,
-      		20,
-      		0,
-      		(2 * Math.PI)
-      	);
-      	context.fillStyle = '#a23';
-      	context.stroke();
-      	context.fill();
-
-        aWidth = 1.5-( 2 / (time*20) ) * rSec;
-      	aEnd=aWidth* Math.PI;
-
-      	context.beginPath();
-      	context.arc (
-      		x,
-      		y,
-      		25,
-      		1.5*Math.PI,
-      		aEnd,
-      		true
-      	);
-      	context.lineWidth = 10;
-      	context.strokeStyle = '#ddd';
-      	context.stroke();
-
-      	if((rSec%20)==0)
-      	{
-      		sec=rSec/20
-
-      	}
-
-      	context.font = '30px Calibri';
-      	context.fillStyle = 'white';
-      	context.fillText(sec,x-0.007*window.innerWidth,y+0.011*window.innerHeight);
-      	rSec++;
-      }
-
     function init() {
       // body...
-    canvas3.getContext("2d").drawImage(playerI,0,0,playerI.width,playerI.height,0.02 *window.innerWidth,0.02*window.innerHeight,0.07*window.innerWidth,0.1*window.innerHeight)
+    //let p=new PlayerIcon(  canvas3.getContext("2d"),playerI,"yasmine")
+    //p.playerName="mena"
+    //p.drawIcon()
 
-    canvas3.getContext("2d").font = "20px lighter verdana ";
-    canvas3.getContext("2d").fillStyle = "#fff";
-    canvas3.getContext("2d").fillText(pp.name,0.03 *window.innerWidth, 0.14*window.innerHeight);
-
-    canvas3.getContext("2d").font = '30px Calibri';
-    canvas3.getContext("2d").lineWidth = 1.5;
-    canvas3.getContext("2d").strokeStyle = 'blue';
-    canvas3.getContext("2d").strokeText("level :",0.1 *window.innerWidth, 0.1*window.innerHeight);
-
-    canvas3.getContext("2d").font = "35px lighter verdana ";
-    canvas3.getContext("2d").fillStyle = "#fff";
-    canvas3.getContext("2d").fillText(pp.level.number,0.16 *window.innerWidth, 0.101*window.innerHeight);
-
-     drawHeart(canvas3.getContext("2d"),0.23 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"blue")
-     drawHeart(canvas3.getContext("2d"),0.26 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"blue")
-     drawHeart(canvas3.getContext("2d"),0.29 *window.innerWidth, 0.055*window.innerHeight,0.02*window.innerWidth,0.061*window.innerHeight,"blue")
-
-
-     canvas3.getContext("2d").font = '30px Calibri';
-     canvas3.getContext("2d").lineWidth = 1.5;
-     canvas3.getContext("2d").strokeStyle = 'blue';
-     canvas3.getContext("2d").strokeText("Score :",0.67 *window.innerWidth, 0.1*window.innerHeight);
-
-    canvas3.getContext("2d").font = "35px lighter verdana ";
-    canvas3.getContext("2d").fillStyle = "#fff";
-    canvas3.getContext("2d").fillText(pp.score,0.74 *window.innerWidth, 0.101*window.innerHeight);
-
-    Timer=setInterval(function(){drawTimer(canvas3.getContext("2d"),0.9 *window.innerWidth, 0.101*window.innerHeight,time)},50)
-
+    //let l=new  LevelIcon(canvas3.getContext("2d"),1)
+    let s=new ScoreIcon(canvas3.getContext("2d"),23)
+    //Timer=setInterval(function(){drawTimer(canvas3.getContext("2d"),0.9 *window.innerWidth, 0.101*window.innerHeight,time)},50)
+    //let t=new Timer(canvas3.getContext("2d"),0.9,0.101,30,60)
 
      generateEnemyCars=setInterval(generateEnemy,pp.level.generateEnemySpeed)
       moveEnemyCars=setInterval(moveEnemy,pp.level.moveEnemySpeed)
       GameTimer=setInterval(timerUp,1000)
-      //generateBonus=setInterval(generateBonusfn,7000)
+      generateBonus=setInterval(generateBonusfn,7000)
 
       increasePlayerBonus=setInterval(increaseBonus,pp.level.generateScore)
      }

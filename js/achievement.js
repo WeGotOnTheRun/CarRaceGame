@@ -14,7 +14,6 @@ class achievements{
    get highScore(){
    return this._highScore
    }
-
    get win3level(){
    return this._win3level
   }
