@@ -1,5 +1,4 @@
-class LevelIcon
-{
+class LevelIcon{
   constructor(contex,levelNumber)
   {
     this._contex=contex

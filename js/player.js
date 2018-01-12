@@ -1,21 +1,32 @@
-class Player{
-  constructor(name,m,winning,highScore) {
+class player{
+  constructor(name,m,winning,highScore,bestTime,time1,time2,time3,goldCollecter,silverCollecter,bronzeCollecter) {
     this._name=name
     this._score=0
     this._level=''
     this._lives=3
-    this._playerAchievements={winning,highScore}
+    this._playerAchievements={winning,highScore,bestTime,time1,time2,time3,goldCollecter,silverCollecter,bronzeCollecter}
     this._cModel=m
+    this._status=0
+    this._time=0
     this._car=''
   }
-  set car(car)
-  {
+
+  set car(car){
     this._car=car
   }
-  get car()
-  {
+
+  get car(){
     return this._car
   }
+
+  set status(s){
+    this._status=s
+  }
+
+  set time(t){
+    this._time=t
+  }
+
   set playerAchievements(a){
     this._playerAchievements=a
   }
@@ -47,6 +58,11 @@ class Player{
   get level(){
 	   return this._level
   }
+
+  get time(){
+    return this._time
+  }
+
   get score(){
   	return this._score
   }
@@ -61,6 +77,10 @@ class Player{
 
   get playerAchievements(){
     return this._playerAchievements
+  }
+
+  get status(){
+    return this._status
   }
 
 }
