@@ -441,19 +441,16 @@ var u=2;
       {
         if(car.location.x>canvas.width/6){
             console.log("left");
-
         car.move("left")
-    console.log(car.location);
       }
       }
-      //right
+       //right
 
         if(event.keyCode == 39)
       {
-
+        console.log("right");
        if(car.location.x<5*canvas2.width/6){
         car.move("right")
-        console.log(car.location);
       }
       }
 

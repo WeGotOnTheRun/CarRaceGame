@@ -65,8 +65,6 @@ class playerCar extends car{
 
   constructor(){
    super({x:(200),y:window.innerHeight-100},{w:30,h:60})
-   this._position="center"
-   this._lastPos="center"
    this._timerr=''
    this.carModel()
    this.draw()
@@ -87,18 +85,12 @@ class playerCar extends car{
     A.src="sounds/TIRE+SKID.wav"
     A.volume=0.6
     A.play()
-    let _this=this
-    this._position=this._lastPos
-
     if(direction=="right"){
      //switch this line and the next one.
-      this.clearAndDraw(direction,_this._location.x+1,_this._location.y)
-    }else if (direction=="down"){
-      this._location.y+=50
-    }else if(direction=="up"){
-      this._location.y-=50
-    }else if(direction=="left"){
-      this.clearAndDraw(direction,_this._location.x,_this._location.x-1)
+      this.clearAndDraw(direction,this._location.x+1)
+    }
+    else if(direction=="left"){
+      this.clearAndDraw(direction,this._location.x-1)
     }
   }
 
@@ -108,34 +100,22 @@ class playerCar extends car{
       this._location.x=x
       this._ctx2.drawImage(this._carI,0,0,this._carI.width,this._carI.height,this._location.x,this._location.y,this._size.w,this._size.h)
       let _this=this
-      if(direction=="right" && this._position=="center"){
-         this._lastPos="right"
-         if(this._location.x<5*this._canvas.width/6){
-           this._timerr=setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
-         }else{
-          this._position="right"
-         }
-      }else if((direction=="right" && this._position=="left")){
-         this._lastPos="center"
-         if(this._location.x<this._canvas.width/2){
-           this._timerr=setTimeout(function(){_this.clearAndDraw(direction,_this._location.x+1)},1)
-        }else{
-           this._position="center"
-        }
-    }else if ((direction=="left" && this._position=="right") ){
-         this._lastPos="center"
-         if(this._location.x>this._canvas.width/2){
-           setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
-         }else{
-          this._position="center"
-         }
-       }else{
-       this._lastPos="left"
-       if(this._location.x>this._canvas.width/6){
-         setTimeout(function(){_this.clearAndDraw(direction,_this._location.x-1)},1)
-       }else{
-         this._position="left"
+      if(direction=="right" && this._location.x>=this._canvas.width/2 &&this._location.x<5*this._canvas.width/6 ){
+          console.log("to right in right");
+           this._timerr=setTimeout(function(){_this.clearAndDraw("right",_this._location.x+1)},1)
+      }
+    else if((direction=="right" && this._location.x>=this._canvas.width/6 &&this._location.x<this._canvas.width/2)){
+        console.log("to center in right");
+           this._timerr=setTimeout(function(){_this.clearAndDraw("right",_this._location.x+1)},1)
+    }
+    else if ((direction=="left" && this._location.x<=5*this._canvas.width/6 &&this._location.x>this._canvas.width/2) ){
+            console.log("to center in left");
+           setTimeout(function(){_this.clearAndDraw("left",_this._location.x-1)},1)
        }
+    else if((direction=="left" && this._location.x>=this._canvas.width/6 &&this._location.x<this._canvas.width/2)){
+          console.log("to left in left");
+         setTimeout(function(){_this.clearAndDraw("left",_this._location.x-1)},1)
+
      }
   }
 
