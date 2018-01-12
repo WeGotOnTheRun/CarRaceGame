@@ -112,6 +112,14 @@ class Game
                 aud.src="sounds/loser.wav"
                 aud.volume=0.6
                 aud.play()
+                document.getElementById("img").src="img/sad.ico"
+                document.getElementById("header").src="Game over"
+                document.getElementById("level").innerText="play again->";
+                document.getElementById("level").onclick=function(){
+                  location.href="frist.html"
+                }
+            document.getElementById("div").style.opacity="1"
+
             break;
          break;
        }
