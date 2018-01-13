@@ -449,16 +449,27 @@ timerUp() {
    if(this._player.playerAchievements.bestTime>this._achievement.bestTime){
      this._player.playerAchievements.bestTime=0
    }
+   var resultDiv=document.getElementById("innerResult")
 
-   // document.getElementById("name").innerHTML="your name is: "+this._player.name
-   // document.getElementById("level").innerHTML="finish at level: "+this._player.level.number
-   // document.getElementById("score").innerHTML="your score is: "+this._player.score
-   // document.getElementById("cModel").innerHTML="your car model is: "+this._player.cModel
-   // if(this._player.status===true){
-   //   document.getElementById("status").innerHTML="you won!"
-   // }else{
-   //   document.getElementById("status").innerHTML="you lost!"
-   // }
+   var finishName = document.createTextNode("your name is: "+this._player.name)
+   resultDiv.appendChild(finishName)
+
+   var finishLevel = document.createTextNode("finish at level: "+this._player.level.number)
+   resultDiv.appendChild(finishLevel)
+
+   var finishScore = document.createTextNode("your score is: "+this._player.score)
+   resultDiv.appendChild(finishScore)
+
+   var finishCar = document.createTextNode("your car model is: "+this._player.cModel)
+   resultDiv.appendChild(finishCar)
+
+   if(this._player.status===true){
+     var finishResult = document.createTextNode("you won!")
+     resultDiv.appendChild(finishResult)
+   }else{
+     var finishResult = document.createTextNode("you lost!")
+     resultDiv.appendChild(finishResult)
+   }
    //
    // //achievements.
    // if(this._player.playerAchievements.winning===true){
@@ -467,16 +478,21 @@ timerUp() {
    // if(this._player.playerAchievements.highScore>0){
    //   document.getElementById("highScore").src="img/newHighScore.png"
    // }
-   // if(this._player.playerAchievements.goldCollecter===true){
-   //   document.getElementById("win10gold").appendChild.src="img/gold10.png"
-   // }
-   // if(this._player.playerAchievements.silverCollecter===true){
-   //   document.getElementById("win5silver").src="img/silver5.png"
-   // }
+   if(this._player.playerAchievements.goldCollecter===true){
+     var goldimg = document.createElement("img")
+     goldimg.src = "img/gold10.png"
+     resultDiv.appendChild(goldimg)
+   }
+   if(this._player.playerAchievements.silverCollecter===true){
+     var silverimg = document.createElement("img")
+     silverimg.src = "img/silver5.png"
+     // silverimg.width=200
+     // silverimg.height=300
+     resultDiv.appendChild(silverimg)
+   }
    if(this._player.playerAchievements.bronzeCollecter===true){
       var bronzeimg = document.createElement("img")
       bronzeimg.src = "img/bronze3.png"
-      var resultDiv=document.getElementById("result")
       resultDiv.appendChild(bronzeimg)
    }
    // if(this._player.playerAchievements.bestTime>0){

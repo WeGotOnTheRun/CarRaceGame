@@ -21,13 +21,13 @@ window.onload = function init(){
   player.car=car
   switch (localStorage.getItem("level")) {
     case "1":
-              player.level=new level(60,5,1,1,1000,5,1000,9,5)
+              player.level=new level(45,5,1,1,1000,5,1000,9,5)
       break;
     case "2":
-              player.level=new level(45,10,2,1,600,2,500,9,10)
+              player.level=new level(60,10,2,1,600,2,500,9,10)
       break;
     case "3":
-              player.level=new level(30,20,3,1,1032,0.5,100,9,15)
+              player.level=new level(80,20,3,1,1032,0.5,100,9,15)
       break;
 
     default:
