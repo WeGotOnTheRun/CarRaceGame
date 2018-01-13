@@ -23,10 +23,6 @@ finish2.src="img/finish2.png"
 var valueArr=new Array()
 var valueCounter=0
 
-let roadIm=new Image()
-roadIm.src="img/road.png"
-
-
 var Bonus1=new Image()
 Bonus1.src="img/gold.png"
 var Bonus2=new Image()

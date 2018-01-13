@@ -17,6 +17,7 @@ window.onload = function init(){
 
   let car=new playerCar()
   let player=new Player("yasmine",car.model,false,0)
+
   player.car=car
   switch (localStorage.getItem("level")) {
     case "1":
@@ -43,7 +44,7 @@ window.onload = function init(){
     levelTimer=new Timer(canvas3.getContext("2d"),0.9,0.101,30,player.level.time)
     playerIcon=new PlayerIcon(canvas3.getContext("2d"),playerI,"yasmine")
     playerlevel=new LevelIcon(canvas3.getContext("2d"),localStorage.getItem("level"))
-    playerLives=new  Lives(canvas3.getContext("2d"),0.23,0.055,0.02,0.061,"blue")
+    playerLives=new  Lives(canvas3.getContext("2d"),0.23,0.055,0.02,0.061,"blue",player.lives)
     playerScore=new ScoreIcon(canvas3.getContext("2d"),player)
     game =new Game(player,road,levelTimer,playerIcon,playerlevel,playerLives,playerScore)
 

@@ -1,6 +1,6 @@
 class Lives
 {
-    constructor(context,beginX,beginY,width,height,color)
+    constructor(context,beginX,beginY,width,height,color,lives)
     {
         this._context=context
         this._beginX=beginX
@@ -9,10 +9,11 @@ class Lives
         this._height=height*window.innerHeight
         this._color=color
 
-        for(let i=0;i<3;i++)
+        for(let i=0;i<lives;i++)
         {
           this.drawHeart((beginX+(0.03*i))*window.innerWidth,color)
         }
+      
     }
     drawHeart(x,color){
         this._context.save();

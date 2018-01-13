@@ -92,8 +92,12 @@ class Game
   {
   let size=this._bonusArr.length;
    for(let i=0;i<size;i++){
-     this.checkBorders(this._bonusArr[i],i,1);
+     this.checkBorders(this._bonusArr[i],i,1)
      size=this._bonusArr.length
+     if(size==0)
+     {
+        break
+     }
      if(((this._bonusArr[i].location.x<=this._player.car.location.x && this._bonusArr[i].location.x+this._bonusArr[i].size.w>=this._player.car.location.x)
      ||(this._bonusArr[i].location.x>this._player.car.location.x && this._bonusArr[i].location.x<this._player.car.location.x+this._player.car.size.w ))
      &&(((this._bonusArr[i].location.y+this._bonusArr[i].size.h>=this._player.car.location.y)&&(this._bonusArr[i].location.y+this._bonusArr[i].size.h<this._player.car.location.y+this._player.car.size.h) )
@@ -127,9 +131,20 @@ class Game
            A.volume=0.9
            A.play()
            console.log("WOW! you now have time extra",this._bonusArr[i].value ,"secs")
-         }else{ //type=3
+         }else if(this._bonusArr[i].type===3){ //type=3
+           switch (this._player.lives) {
+             case 1:
+                    this._playerLives.drawHeart(0.26*window.innerWidth,"blue")
+                    sessionStorage.setItem("lives",2)
+               break
+             case 2:
+                    this._playerLives.drawHeart(0.29*window.innerWidth,"blue")
+                    sessionStorage.setItem("lives",3)
+              break
+             default:
+
+           }
            this._player.lives+=this._bonusArr[i].value
-           console.log(this._player.lives)
            var A=new Audio()
            A.src="sounds/wow.wav" //wow sound.
            A.volume=0.9
@@ -146,7 +161,6 @@ class Game
    }
    size=this._enemyArr.length;
 
-if(this._bonusFlag==0){
    for(let i=0;i<size;i++)
    {
      this.checkBorders(this._enemyArr[i],i,0);
@@ -158,6 +172,15 @@ if(this._bonusFlag==0){
      ){
        console.log("collide");
        this.stopMovingEnemies()
+
+       if(this._bonusFlag==1){
+         this._enemyArr[i].remove()
+         this._enemyArr.splice(i,1)
+         size=size-1
+         this.moveEnemies()
+         this._bonusFlag=0
+         continue;
+       }
        aud.src="sounds/crash.wav"
        aud.volume=0.6
        aud.play()
@@ -170,12 +193,15 @@ if(this._bonusFlag==0){
        {
          case 2:
               this._playerLives.drawHeart(0.29*window.innerWidth,"white")
+              sessionStorage.setItem("lives",2)
           break;
          case 1:
                 this._playerLives.drawHeart(0.26*window.innerWidth,"white")
+                sessionStorage.setItem("lives",1)
            break;
          case 0:
                 this._playerLives.drawHeart(0.23*window.innerWidth,"white")
+                sessionStorage.setItem("lives",3)
                 this._road.stopTimer()
                 this._player.car.stopTimer()
 
@@ -202,7 +228,7 @@ if(this._bonusFlag==0){
 
        }
    }
-}
+
   this._bonusFlag=0
    }
   checkBorders(ob,index,type)

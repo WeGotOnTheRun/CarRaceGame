@@ -108,7 +108,8 @@ class BonusOrBomb{
  }
 
   bonusType(){
-    var rand = typeArr[Math.floor(Math.random() *5)]
+    var typeArr = [1,2,3,4,5,6,7,8]
+    var rand = typeArr[Math.floor(Math.random() * typeArr.length)]
     if(rand===1){
       this._type=1
       this._bonus=Bonus1
@@ -125,10 +126,22 @@ class BonusOrBomb{
       this._type=2
       this._bonus=BonusTime
       this._value=5 //seconds
-    }else{
+    }else if (rand===5){
       this._type=3
       this._bonus=BonusLife
       this._value=1
+    }else if(rand===6){
+    this._type=4
+    this._bonus=bombScore
+    this._value=-1000
+    }else if (rand===7){
+    this._type=5
+    this._bonus=bombTime
+    this._value=-5 //seconds
+    }else{
+    this._type=6
+    this._bonus=bombLife
+    this._value=1
     }
   }
 }

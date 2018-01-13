@@ -3,7 +3,13 @@ class Player{
     this._name=name
     this._score=0
     this._level=''
-    this._lives=3
+    if(sessionStorage.getItem("lives")===null)
+    {
+      this._lives=3
+    }
+    else {
+      this._lives=sessionStorage.getItem("lives")
+    }
     this._playerAchievements={winning,highScore}
     this._cModel=m
     this._car=''
