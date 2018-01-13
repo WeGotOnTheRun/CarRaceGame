@@ -16,10 +16,7 @@ var degrees = 0;
 	if(degrees > 359){
 		degrees = 1;
 }}
-pause=function(){
-  img.src=img_arr[n];
 
-}
 
 rotateAnimation("img1",30);
 back=function(){
@@ -41,9 +38,9 @@ frword=function(){
 }
 document.getElementById("back").addEventListener("click", back);
 document.getElementById("forward").addEventListener("click", frword);
-document.getElementById("choose").addEventListener("click", pause);
+
 
 localStorage.setItem("xmodel",n);
-sessionStorage.setItem("lives",3)
+
 
 }

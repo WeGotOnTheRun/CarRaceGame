@@ -16,7 +16,8 @@ window.onload = function init(){
   canvas3.height=window.innerHeight
 
   let car=new playerCar()
-  let player=new Player("yasmine",car.model,false,0,0,0,0,0,false,false,false)
+  console.log(sessionStorage.getItem("playername"));
+  let player=new Player(sessionStorage.getItem("playername"),car.model,false,0,0,0,0,0,false,false,false)
 
   player.car=car
   switch (localStorage.getItem("level")) {
@@ -41,7 +42,7 @@ window.onload = function init(){
 
   function init(){
     levelTimer=new Timer(canvas3.getContext("2d"),0.9,0.101,30,player.level.time)
-    playerIcon=new PlayerIcon(canvas3.getContext("2d"),playerI,"yasmine")
+    playerIcon=new PlayerIcon(canvas3.getContext("2d"),playerI,sessionStorage.getItem("playername"))
     playerlevel=new LevelIcon(canvas3.getContext("2d"),localStorage.getItem("level"))
     playerLives=new  Lives(canvas3.getContext("2d"),0.23,0.055,0.02,0.061,"blue",player.lives)
     playerScore=new ScoreIcon(canvas3.getContext("2d"),player)

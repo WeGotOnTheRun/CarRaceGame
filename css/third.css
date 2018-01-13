@@ -15,7 +15,7 @@ text-align:center;
 }
 .slide{
 	position:fixed;
-    background-color: #ff3333;
+    background-color: #ba0c2f;
     border: none;
     color: black;
     padding: 25px;
@@ -43,7 +43,7 @@ right:100px;
   width: 150px;
   height: 50px;
   border-radius: 10px 5px 5px 10px;
-  background: #ff3333;
+  background: #ba0c2f;
   font: 22px Comic Sans MS;
   color: black;
   line-height: 50px;
