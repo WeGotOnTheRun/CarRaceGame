@@ -46,7 +46,7 @@ class Game
   }
   generateBonus()
   {
-    let bonus= new Bonus((500/2-13),(270/2-180),30,60)
+    let bonus= new BonusOrBomb((500/2-13),(270/2-180),30,60)
     this._bonusArr.push(bonus)
   }
   moveEnemy()
@@ -126,7 +126,7 @@ class Game
            A.src="sounds/wow.wav" //wow sound.
            A.volume=0.9
            A.play()
-           console.log("WOW! you now have time extra",bonusArr[i].value ,"secs")
+           console.log("WOW! you now have time extra",this._bonusArr[i].value ,"secs")
          }else{ //type=3
            this._player.lives+=this._bonusArr[i].value
            console.log(this._player.lives)
@@ -145,6 +145,7 @@ class Game
      }
    }
    size=this._enemyArr.length;
+
 if(this._bonusFlag==0){
    for(let i=0;i<size;i++)
    {

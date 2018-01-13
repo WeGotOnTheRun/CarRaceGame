@@ -1,4 +1,4 @@
-class Bonus{
+class BonusOrBomb{
   constructor(x,y,w,h) {
     this._type=0
     this._value=0
@@ -108,8 +108,7 @@ class Bonus{
  }
 
   bonusType(){
-    var typeArr = [1,2,3]
-    var rand = typeArr[Math.floor(Math.random() * typeArr.length)]
+    var rand = typeArr[Math.floor(Math.random() *5)]
     if(rand===1){
       this._type=1
       this._bonus=Bonus1
