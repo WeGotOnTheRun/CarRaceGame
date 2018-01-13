@@ -1,0 +1,77 @@
+body{
+background:black;
+
+}
+  .move{
+	position:fixed;
+	left:37%;
+  top:-5%;
+	font:100px Comic Sans MS;
+	margin:5% auto;
+	padding:1%;
+	color: #ba0c2f;
+
+
+}
+
+ a{
+  position:fixed;
+  display: block;
+ width: 11%;
+  height: 7%;
+  border-radius: 10px 5px 5px 10px;
+   margin-right: 10%;
+  background: #ba0c2f;
+  font: 30px Comic Sans MS;
+  color: black;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+    transition: background 0.3s linear 0s, color 0.3s linear 0s;
+  }
+   a:hover{
+    background: #C0C0C0;
+      color:#FFF;
+}
+#a1{
+ left:40%;
+  top:35%;}
+  #a2{
+ left:40%;
+  top:50%;}
+   #a3{
+ left:40%;
+  top:65%;}
+  #up{
+	  position:fixed;
+	  top:-300px;
+	  left:200px;
+	animation-name:drivecar;
+	animation-duration: 4s;
+	animation-fill-mode: forwards;
+	animation-iteration-count:infinite;
+
+
+  }
+   #down{
+	  position:fixed;
+	  top:800px;
+	  right:200px;
+	animation-name:drivecar2;
+     animation-duration: 3s;
+	animation-fill-mode: forwards;
+	animation-iteration-count:infinite;
+
+
+  }
+  @keyframes drivecar{
+	  from { transform : translatey(5px)}
+	  to  {transform : translatey(1100px)
+
+  }}
+
+   @keyframes drivecar2 {
+	  from { transform : translatey(5px)}
+	  to  {transform : translatey(-1000px)}
+
+   }

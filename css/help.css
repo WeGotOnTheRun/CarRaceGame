@@ -1,0 +1,31 @@
+*{
+	padding:0px;
+	margin:0px;
+	
+	
+}
+
+body{
+	
+background:#ba0c2f;
+}
+
+ a{
+	
+	color:black;
+	text-decoration:none;
+	font:30px Comic Sans MS;
+	padding:20px;
+   padding-right:100px;
+}
+ ul li{
+padding:15px;
+list-style-type:none;
+display:block;
+border-bottom:1px solid black;
+}
+ ul li:hover{
+background:#666;
+transition:linear all 0.40s;
+margin-left:1px;
+}
