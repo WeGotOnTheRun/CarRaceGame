@@ -73,26 +73,27 @@ class Game{
     let _this=this
     this._gameTimer=setInterval(function (){_this.timerUp()},1000)
   }
-
-  stopTimer(){
+  stopTimer()
+  {
     clearInterval(this._gameTimer)
   }
-
-  moveEnemies(){
+  moveEnemies()
+  {
     let _this=this
     this._moveEnemiesTimer=setInterval(function (){_this.moveEnemy()},this._player.level.moveEnemySpeed)
   }
-
-  stopMovingEnemies(){
+  stopMovingEnemies()
+  {
     clearInterval(this._moveEnemiesTimer)
   }
-
-  checkCollision(){
-   let size=this._bonusArr.length;
+  checkCollision()
+  {
+  let size=this._bonusArr.length;
    for(let i=0;i<size;i++){
      this.checkBorders(this._bonusArr[i],i,1)
      size=this._bonusArr.length
-     if(size==0){
+     if(size==0)
+     {
         break
      }
      if(((this._bonusArr[i].location.x<=this._player.car.location.x && this._bonusArr[i].location.x+this._bonusArr[i].size.w>=this._player.car.location.x)
@@ -199,20 +200,27 @@ class Game{
          case 0:
                 this._playerLives.drawHeart(0.23*window.innerWidth,"white")
                 sessionStorage.setItem("lives",3)
-                status=false
-                this.gameFinish(status)
+                this._road.stopTimer()
                 this._player.car.stopTimer()
-                this._playerScore.stop()
-                // document.getElementById("img").src="img/sad.ico"
-                // document.getElementById("header").src="Game over"
-                // document.getElementById("level").innerText="play again->";
-                // document.getElementById("level").onclick=function(){
-                //  location.href="frist.html"
-                //}
-          //  document.getElementById("div").style.opacity="1"
-                //this.result()
 
-                break;
+                this.stopFiringEnemies()
+                this.stopMovingEnemies()
+                this._playerScore.stop()
+                this._levelTimer.stopTimer()
+                this.stopTimer()
+                aud.src="sounds/loser.wav"
+                aud.volume=0.6
+                aud.play()
+                document.getElementById("img").src="img/sad.ico"
+                document.getElementById("header").src="Game over"
+                document.getElementById("level").innerText="play again->";
+                document.getElementById("level").onclick=function(){
+                 location.href="frist.html"
+                }
+            document.getElementById("div").style.opacity="1"
+            this.result()
+
+            break;
          break;
        }
        }
@@ -220,20 +228,21 @@ class Game{
 
   this._bonusFlag=0
    }
+  checkBorders(ob,index,type)
+   {
+       if(ob.location.y>=window.innerHeight-1)
+       {
+         switch (type) {
+           case 0:
+             this._enemyArr.splice(index, 1)
+             break
 
-  checkBorders(ob,index,type){
-     if(ob.location.y>=window.innerHeight-1){
-       switch (type) {
-         case 0:
-           this._enemyArr.splice(index, 1)
+           default:
+          case 1:
+            this._bonusArr.splice(index, 1)
            break
-
-         default:
-        case 1:
-          this._bonusArr.splice(index, 1)
-         break
+         }
        }
-     }
    }
    //generate bonus type!
 
@@ -266,8 +275,14 @@ timerUp() {
    }
    if(this._player.level.time==0 &&this._player.level.number<3){
 
-     status=true
-     this.gameFinish(status)
+     aud.src="sounds/clapping.wav"
+     aud.play();
+     this._road.stopTimer()
+     this.stopFiringEnemies()
+     this.stopMovingEnemies()
+     this._playerScore.stop()
+     this._levelTimer.stopTimer()
+     this.stopTimer()
      //localStorage.setItem(levelPassed,levelsTimeArr[0],staticCounter)
      if(this._player.level.number==1){
     //    localStorage.getItem(levelPassed)
@@ -285,21 +300,28 @@ timerUp() {
          localStorage.setItem("highLevel",3)
          document.getElementById("level").innerText="level 3->";
      }
-  //   document.getElementById("div").style.opacity="1"
+     document.getElementById("div").style.opacity="1"
 
    }
    else if (this._player.level.time==0 && this._player.level.number==3){
      levelPassed++
      levelsTimeArr[2]=this._player.time
      this._player.time=this._player.level.time
-     status=true
-     this.gameFinish(status)
-     // document.getElementById("img").src="img/winner.png";
-     // document.getElementById("header").innerHTML="WoOooOooW";
-     // document.getElementById("text").innerHTML="you win";
-     // document.getElementById("level").innerText="play again";
-     // document.getElementById("level").onclick=function(){  location.href="frist.html";}
-     // document.getElementById("div").style.opacity="1"
+     aud.src="sounds/winner.wav"
+     aud.play();
+     this._road.stopTimer()
+     this.stopFiringEnemies()
+     this.stopMovingEnemies()
+     this._playerScore.stop()
+     this._levelTimer.stopTimer()
+     this.stopTimer()
+     document.getElementById("img").src="img/winner.png";
+     document.getElementById("header").innerHTML="WoOooOooW";
+     document.getElementById("text").innerHTML="you win";
+     document.getElementById("level").innerText="play again";
+     document.getElementById("level").onclick=function(){  location.href="frist.html";}
+     document.getElementById("div").style.opacity="1"
+     this.result()
 
    }
 
@@ -427,13 +449,16 @@ timerUp() {
    if(this._player.playerAchievements.bestTime>this._achievement.bestTime){
      this._player.playerAchievements.bestTime=0
    }
-   var resultDiv=document.getElementById("innerResult")
+
+   var resultDiv=document.getElementById("d2")
 
    var finishName = document.createTextNode("your name is: "+this._player.name)
    resultDiv.appendChild(finishName)
+   finishName.aligh="left"
 
    var finishLevel = document.createTextNode("finish at level: "+this._player.level.number)
    resultDiv.appendChild(finishLevel)
+   finishLevel.aligh="left"
 
    var finishScore = document.createTextNode("your score is: "+this._player.score)
    resultDiv.appendChild(finishScore)
@@ -448,44 +473,47 @@ timerUp() {
      var finishResult = document.createTextNode("you lost!")
      resultDiv.appendChild(finishResult)
    }
-   //
-   // //achievements.
-   // if(this._player.playerAchievements.winning===true){
-   //   document.getElementById("win3").src="img/wonWithoutDying.png"
-   // }
-   // if(this._player.playerAchievements.highScore>0){
-   //   document.getElementById("highScore").src="img/newHighScore.png"
-   // }
+    if(this._player.playerAchievements.highScore>0){
+      var highScore = document.createElement("img")
+      highScore.src = "img/highScore.png"
+      highScore.width=80
+      highScore.height=80
+      highScore.align="left"
+      resultDiv.appendChild(highScore)
+    }
+    if(this._player.playerAchievements.winning===true){
+      var win3 = document.createElement("img")
+      win3.src = "img/wonWithoutDying.png"
+      win3.width=80
+      win3.height=80
+      win3.align="right"
+      resultDiv.appendChild(win3)
+      document.getElementById("win3").src="img/wonWithoutDying.png"
+    }
    if(this._player.playerAchievements.goldCollecter===true){
      var goldimg = document.createElement("img")
      goldimg.src = "img/gold10.png"
+     goldimg.width=80
+     goldimg.height=80
+     goldimg.align="left"
      resultDiv.appendChild(goldimg)
    }
    if(this._player.playerAchievements.silverCollecter===true){
      var silverimg = document.createElement("img")
      silverimg.src = "img/silver5.png"
-     // silverimg.width=200
-     // silverimg.height=300
+     silverimg.width=100
+     silverimg.height=100
+     silverimg.align="right"
      resultDiv.appendChild(silverimg)
    }
    if(this._player.playerAchievements.bronzeCollecter===true){
       var bronzeimg = document.createElement("img")
       bronzeimg.src = "img/bronze3.png"
+      bronzeimg.width=100
+      bronzeimg.height=100
+      bronzeimg.align="middle"
       resultDiv.appendChild(bronzeimg)
    }
-   // if(this._player.playerAchievements.bestTime>0){
-   //   document.getElementById("bestTime").src="img/bestTime.png"
-   // }
-   // if(this._player.playerAchievements.time1>0){
-   //   document.getElementById("won1").src="img/won1.png"
-   // }
-   // if(this._player.playerAchievements.time1>0){
-   //   document.getElementById("won2").src="img/won2.png"
-   // }
-   // if(this._player.playerAchievements.time1>0){
-   //   document.getElementById("won3").src="img/won3.png"
-   // }
-   document.getElementById("result").style.opacity="1"
 
  }
 
@@ -512,23 +540,6 @@ timerUp() {
  }
 
  gameFinish(status){
-   if(status==="true"){
-     aud.src="sounds/clapping.wav"
-   }else if(status==="true"&&this._player.level.number==3){
-     aud.src="sounds/winner.wav"
-   }else if(status==="false"){
-     aud.src="sounds/loser.wav"
-   }
-   this.result()
-   aud.play()
-   this._player.status=status
-   this._road.stopTimer()
-   this.stopFiringEnemies()
-   this.stopMovingEnemies()
-   this._playerScore.stop()
-   this._levelTimer.stopTimer()
-   this.stopTimer()
-   //this.result()
- }
 
+ }
 }
