@@ -203,16 +203,16 @@ class Game{
                 this.gameFinish(status)
                 this._player.car.stopTimer()
                 this._playerScore.stop()
-                document.getElementById("img").src="img/sad.ico"
-                document.getElementById("header").src="Game over"
-                document.getElementById("level").innerText="play again->";
-                document.getElementById("level").onclick=function(){
-                 location.href="frist.html"
-                }
-            document.getElementById("div").style.opacity="1"
-            this.result()
+                // document.getElementById("img").src="img/sad.ico"
+                // document.getElementById("header").src="Game over"
+                // document.getElementById("level").innerText="play again->";
+                // document.getElementById("level").onclick=function(){
+                //  location.href="frist.html"
+                //}
+          //  document.getElementById("div").style.opacity="1"
+                //this.result()
 
-            break;
+                break;
          break;
        }
        }
@@ -285,7 +285,7 @@ timerUp() {
          localStorage.setItem("highLevel",3)
          document.getElementById("level").innerText="level 3->";
      }
-     document.getElementById("div").style.opacity="1"
+  //   document.getElementById("div").style.opacity="1"
 
    }
    else if (this._player.level.time==0 && this._player.level.number==3){
@@ -294,13 +294,12 @@ timerUp() {
      this._player.time=this._player.level.time
      status=true
      this.gameFinish(status)
-     document.getElementById("img").src="img/winner.png";
-     document.getElementById("header").innerHTML="WoOooOooW";
-     document.getElementById("text").innerHTML="you win";
-     document.getElementById("level").innerText="play again";
-     document.getElementById("level").onclick=function(){  location.href="frist.html";}
-     document.getElementById("div").style.opacity="1"
-     this.result()
+     // document.getElementById("img").src="img/winner.png";
+     // document.getElementById("header").innerHTML="WoOooOooW";
+     // document.getElementById("text").innerHTML="you win";
+     // document.getElementById("level").innerText="play again";
+     // document.getElementById("level").onclick=function(){  location.href="frist.html";}
+     // document.getElementById("div").style.opacity="1"
 
    }
 
@@ -430,16 +429,16 @@ timerUp() {
    }
    var resultDiv=document.getElementById("innerResult")
 
-   var finishName = document.createTextNode("your name is: ",this._player.name)
+   var finishName = document.createTextNode("your name is: "+this._player.name)
    resultDiv.appendChild(finishName)
 
-   var finishLevel = document.createTextNode("finish at level: ",this._player.level.number)
+   var finishLevel = document.createTextNode("finish at level: "+this._player.level.number)
    resultDiv.appendChild(finishLevel)
 
-   var finishScore = document.createTextNode("your score is: ",this._player.score)
+   var finishScore = document.createTextNode("your score is: "+this._player.score)
    resultDiv.appendChild(finishScore)
 
-   var finishCar = document.createTextNode("your car model is: ",this._player.cModel)
+   var finishCar = document.createTextNode("your car model is: "+this._player.cModel)
    resultDiv.appendChild(finishCar)
 
    if(this._player.status===true){
@@ -520,6 +519,7 @@ timerUp() {
    }else if(status==="false"){
      aud.src="sounds/loser.wav"
    }
+   this.result()
    aud.play()
    this._player.status=status
    this._road.stopTimer()
@@ -528,6 +528,7 @@ timerUp() {
    this._playerScore.stop()
    this._levelTimer.stopTimer()
    this.stopTimer()
+   //this.result()
  }
 
 }
