@@ -73,27 +73,26 @@ class Game{
     let _this=this
     this._gameTimer=setInterval(function (){_this.timerUp()},1000)
   }
-  stopTimer()
-  {
+
+  stopTimer(){
     clearInterval(this._gameTimer)
   }
-  moveEnemies()
-  {
+
+  moveEnemies(){
     let _this=this
     this._moveEnemiesTimer=setInterval(function (){_this.moveEnemy()},this._player.level.moveEnemySpeed)
   }
-  stopMovingEnemies()
-  {
+
+  stopMovingEnemies(){
     clearInterval(this._moveEnemiesTimer)
   }
-  checkCollision()
-  {
-  let size=this._bonusArr.length;
+
+  checkCollision(){
+   let size=this._bonusArr.length;
    for(let i=0;i<size;i++){
      this.checkBorders(this._bonusArr[i],i,1)
      size=this._bonusArr.length
-     if(size==0)
-     {
+     if(size==0){
         break
      }
      if(((this._bonusArr[i].location.x<=this._player.car.location.x && this._bonusArr[i].location.x+this._bonusArr[i].size.w>=this._player.car.location.x)
@@ -200,17 +199,10 @@ class Game{
          case 0:
                 this._playerLives.drawHeart(0.23*window.innerWidth,"white")
                 sessionStorage.setItem("lives",3)
-                this._road.stopTimer()
+                status=false
+                this.gameFinish(status)
                 this._player.car.stopTimer()
-
-                this.stopFiringEnemies()
-                this.stopMovingEnemies()
                 this._playerScore.stop()
-                this._levelTimer.stopTimer()
-                this.stopTimer()
-                aud.src="sounds/loser.wav"
-                aud.volume=0.6
-                aud.play()
                 document.getElementById("img").src="img/sad.ico"
                 document.getElementById("header").src="Game over"
                 document.getElementById("level").innerText="play again->";
@@ -228,21 +220,20 @@ class Game{
 
   this._bonusFlag=0
    }
-  checkBorders(ob,index,type)
-   {
-       if(ob.location.y>=window.innerHeight-1)
-       {
-         switch (type) {
-           case 0:
-             this._enemyArr.splice(index, 1)
-             break
 
-           default:
-          case 1:
-            this._bonusArr.splice(index, 1)
+  checkBorders(ob,index,type){
+     if(ob.location.y>=window.innerHeight-1){
+       switch (type) {
+         case 0:
+           this._enemyArr.splice(index, 1)
            break
-         }
+
+         default:
+        case 1:
+          this._bonusArr.splice(index, 1)
+         break
        }
+     }
    }
    //generate bonus type!
 
@@ -275,14 +266,8 @@ timerUp() {
    }
    if(this._player.level.time==0 &&this._player.level.number<3){
 
-     aud.src="sounds/clapping.wav"
-     aud.play();
-     this._road.stopTimer()
-     this.stopFiringEnemies()
-     this.stopMovingEnemies()
-     this._playerScore.stop()
-     this._levelTimer.stopTimer()
-     this.stopTimer()
+     status=true
+     this.gameFinish(status)
      //localStorage.setItem(levelPassed,levelsTimeArr[0],staticCounter)
      if(this._player.level.number==1){
     //    localStorage.getItem(levelPassed)
@@ -307,14 +292,8 @@ timerUp() {
      levelPassed++
      levelsTimeArr[2]=this._player.time
      this._player.time=this._player.level.time
-     aud.src="sounds/winner.wav"
-     aud.play();
-     this._road.stopTimer()
-     this.stopFiringEnemies()
-     this.stopMovingEnemies()
-     this._playerScore.stop()
-     this._levelTimer.stopTimer()
-     this.stopTimer()
+     status=true
+     this.gameFinish(status)
      document.getElementById("img").src="img/winner.png";
      document.getElementById("header").innerHTML="WoOooOooW";
      document.getElementById("text").innerHTML="you win";
@@ -451,16 +430,16 @@ timerUp() {
    }
    var resultDiv=document.getElementById("innerResult")
 
-   var finishName = document.createTextNode("your name is: "+this._player.name)
+   var finishName = document.createTextNode("your name is: ",this._player.name)
    resultDiv.appendChild(finishName)
 
-   var finishLevel = document.createTextNode("finish at level: "+this._player.level.number)
+   var finishLevel = document.createTextNode("finish at level: ",this._player.level.number)
    resultDiv.appendChild(finishLevel)
 
-   var finishScore = document.createTextNode("your score is: "+this._player.score)
+   var finishScore = document.createTextNode("your score is: ",this._player.score)
    resultDiv.appendChild(finishScore)
 
-   var finishCar = document.createTextNode("your car model is: "+this._player.cModel)
+   var finishCar = document.createTextNode("your car model is: ",this._player.cModel)
    resultDiv.appendChild(finishCar)
 
    if(this._player.status===true){
@@ -534,6 +513,21 @@ timerUp() {
  }
 
  gameFinish(status){
-
+   if(status==="true"){
+     aud.src="sounds/clapping.wav"
+   }else if(status==="true"&&this._player.level.number==3){
+     aud.src="sounds/winner.wav"
+   }else if(status==="false"){
+     aud.src="sounds/loser.wav"
+   }
+   aud.play()
+   this._player.status=status
+   this._road.stopTimer()
+   this.stopFiringEnemies()
+   this.stopMovingEnemies()
+   this._playerScore.stop()
+   this._levelTimer.stopTimer()
+   this.stopTimer()
  }
+
 }
