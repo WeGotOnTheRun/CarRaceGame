@@ -12,6 +12,11 @@ class Game
     this._player=player
     this._road=road
 
+    this._bonusArr=[]
+    this._bonusFlag=0;
+    this._bonusTime=this._player.level.generateBonusTime
+    this._medalsCounterArr=[0,0,0]
+
     this._generateEnemiesTimer=''
     this._moveEnemiesTimer=''
 
@@ -30,15 +35,29 @@ class Game
 
   generateEnemy()
   {
-    console.log("oidjsoij");
     let enemy= new enemyCar()
     this._enemyArr.push(enemy)
+
+    if(--this._player.level.generateBonusTime==0)
+    {
+        this.generateBonus()
+        this._player.level.generateBonusTime=this._bonusTime
+    }
+  }
+  generateBonus()
+  {
+    let bonus= new Bonus((500/2-13),(270/2-180),30,60)
+    this._bonusArr.push(bonus)
   }
   moveEnemy()
   {
     for(let i=0;i<=this._enemyArr.length-1;i++)
     {
         this._enemyArr[i].move()
+    }
+    for(let i=0;i<=this._bonusArr.length-1;i++)
+    {
+        this._bonusArr[i].move()
     }
     this.checkCollision();
   }
@@ -71,10 +90,65 @@ class Game
   }
   checkCollision()
   {
-   let size=this._enemyArr.length;
+  let size=this._bonusArr.length;
+   for(let i=0;i<size;i++){
+     this.checkBorders(this._bonusArr[i],i,1);
+     size=this._bonusArr.length
+     if(((this._bonusArr[i].location.x<=this._player.car.location.x && this._bonusArr[i].location.x+this._bonusArr[i].size.w>=this._player.car.location.x)
+     ||(this._bonusArr[i].location.x>this._player.car.location.x && this._bonusArr[i].location.x<this._player.car.location.x+this._player.car.size.w ))
+     &&(((this._bonusArr[i].location.y+this._bonusArr[i].size.h>=this._player.car.location.y)&&(this._bonusArr[i].location.y+this._bonusArr[i].size.h<this._player.car.location.y+this._player.car.size.h) )
+     || (this._bonusArr[i].location.y>this._player.car.location.y && this._bonusArr[i].location.y<this._player.car.location.y+this._player.car.size.h))
+     ){
+         console.log("bonus");
+         this._bonusFlag=1
+         this.stopMovingEnemies()
+         if(this._bonusArr[i].type===1){
+           this._player.score+=this._bonusArr[i].value
+           console.log(this._player.score)
+           var A=new Audio()
+           A.src="sounds/money.mp3" //wow sound.
+           A.volume=0.9
+           A.play()
+           console.log("WOW! you earned ",this._bonusArr[i].value)
+           if(this._bonusArr[i].value==1000){
+             this._medalsCounterArr[0]+=1
+           }else if(this._bonusArr[i].value==500){
+             this._medalsCounterArr[1]+=1
+           }else{
+             this._medalsCounterArr[2]+=1
+           }
+         }else if(this._bonusArr[i].type===2){
+   //        pp.level.time+=bonusArr[i].value //finish line lazm tkon thabta.
+           console.log(this._player.level.time)
+           this._player.level.time+=this._bonusArr[i].value
+           console.log("after gaining 5",this._player.level.time)
+           var A=new Audio()
+           A.src="sounds/wow.wav" //wow sound.
+           A.volume=0.9
+           A.play()
+           console.log("WOW! you now have time extra",bonusArr[i].value ,"secs")
+         }else{ //type=3
+           this._player.lives+=this._bonusArr[i].value
+           console.log(this._player.lives)
+           var A=new Audio()
+           A.src="sounds/wow.wav" //wow sound.
+           A.volume=0.9
+           A.play()
+           console.log("Hooray! you now have",this._bonusArr[i].value,"lives")
+         }
+         this._bonusArr[i].remove()
+         this._bonusArr.splice(i,1)
+         size=size-1
+         this.moveEnemies()
+
+         break
+     }
+   }
+   size=this._enemyArr.length;
+if(this._bonusFlag==0){
    for(let i=0;i<size;i++)
    {
-     this.checkBorders(this._enemyArr[i],i);
+     this.checkBorders(this._enemyArr[i],i,0);
      size=this._enemyArr.length;
      if(((this._enemyArr[i].location.x<=this._player.car.location.x && this._enemyArr[i].location.x+this._enemyArr[i].size.w>=this._player.car.location.x)
      ||(this._enemyArr[i].location.x>this._player.car.location.x && this._enemyArr[i].location.x<this._player.car.location.x+this._player.car.size.w ))
@@ -116,7 +190,7 @@ class Game
                 document.getElementById("header").src="Game over"
                 document.getElementById("level").innerText="play again->";
                 document.getElementById("level").onclick=function(){
-                  location.href="frist.html"
+                 location.href="frist.html"
                 }
             document.getElementById("div").style.opacity="1"
 
@@ -127,12 +201,23 @@ class Game
 
        }
    }
+}
+  this._bonusFlag=0
    }
-  checkBorders(ob,index)
+  checkBorders(ob,index,type)
    {
        if(ob.location.y>=window.innerHeight-1)
        {
-         this._enemyArr.splice(index, 1);
+         switch (type) {
+           case 0:
+             this._enemyArr.splice(index, 1)
+             break
+
+           default:
+          case 1:
+            this._bonusArr.splice(index, 1)
+           break
+         }
        }
    }
    //generate bonus type!
