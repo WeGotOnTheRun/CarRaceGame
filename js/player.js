@@ -1,5 +1,5 @@
 class Player{
-  constructor(name,m,winning,highScore) {
+  constructor(name,m,winning,highScore,bestTime,time1,time2,time3,goldCollecter,silverCollecter,bronzeCollecter) {
     this._name=name
     this._score=0
     this._level=''
@@ -10,18 +10,29 @@ class Player{
     else {
       this._lives=sessionStorage.getItem("lives")
     }
-    this._playerAchievements={winning,highScore}
+    this._playerAchievements={winning,highScore,bestTime,time1,time2,time3,goldCollecter,silverCollecter,bronzeCollecter}
     this._cModel=m
+    this._status=0
+    this._time=0
     this._car=''
   }
-  set car(car)
-  {
+
+  set car(car){
     this._car=car
   }
-  get car()
-  {
+
+  get car(){
     return this._car
   }
+
+  set status(s){
+    this._status=s
+  }
+
+  set time(t){
+    this._time=t
+  }
+
   set playerAchievements(a){
     this._playerAchievements=a
   }
@@ -39,11 +50,11 @@ class Player{
   }
 
   set level(l){
-	this._level=l
+  this._level=l
   }
 
  set score(s){
-	this._score=s
+  this._score=s
   }
 
   set name(s){
@@ -51,10 +62,15 @@ class Player{
   }
 
   get level(){
-	   return this._level
+     return this._level
   }
+
+  get time(){
+    return this._time
+  }
+
   get score(){
-  	return this._score
+    return this._score
   }
 
   get name(){
@@ -67,6 +83,10 @@ class Player{
 
   get playerAchievements(){
     return this._playerAchievements
+  }
+
+  get status(){
+    return this._status
   }
 
 }
