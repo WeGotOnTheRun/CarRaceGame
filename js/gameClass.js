@@ -253,7 +253,6 @@ timerUp() {
      this._player.time=this._player.level.time
    }
    staticCounter++
-   --this._player.time
    if(this._player.time<=0&&this._player.level.time<=1){
      levelPassed--
      if(this._player.lives===0){
@@ -301,6 +300,7 @@ timerUp() {
          document.getElementById("level").innerText="level 3->";
      }
      document.getElementById("div").style.opacity="1"
+     this.result()
 
    }
    else if (this._player.level.time==0 && this._player.level.number==3){
@@ -460,19 +460,19 @@ timerUp() {
    resultDiv.appendChild(finishLevel)
    finishLevel.aligh="left"
 
-   var finishScore = document.createTextNode("your score is: "+this._player.score)
+   var finishScore = document.createTextNode("your score is: "+this._player.level.score)
    resultDiv.appendChild(finishScore)
 
    var finishCar = document.createTextNode("your car model is: "+this._player.cModel)
    resultDiv.appendChild(finishCar)
 
-   if(this._player.status===true){
-     var finishResult = document.createTextNode("you won!")
-     resultDiv.appendChild(finishResult)
-   }else{
-     var finishResult = document.createTextNode("you lost!")
-     resultDiv.appendChild(finishResult)
-   }
+   // if(this._player.status===true){
+   //   var finishResult = document.createTextNode("you won!")
+   //   resultDiv.appendChild(finishResult)
+   // }else{
+   //   var finishResult = document.createTextNode("you lost!")
+   //   resultDiv.appendChild(finishResult)
+   // }
     if(this._player.playerAchievements.highScore>0){
       var highScore = document.createElement("img")
       highScore.src = "img/highScore.png"
