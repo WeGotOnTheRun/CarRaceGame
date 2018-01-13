@@ -13,7 +13,11 @@ class Lives
         {
           this.drawHeart((beginX+(0.03*i))*window.innerWidth,color)
         }
-      
+        for(let i=lives;i<3;i++)
+        {
+          this.drawHeart((beginX+(0.03*i))*window.innerWidth,"white")
+        }
+
     }
     drawHeart(x,color){
         this._context.save();
