@@ -215,7 +215,7 @@ class Game{
                 document.getElementById("header").src="Game over"
                 document.getElementById("level").innerText="play again->";
                 document.getElementById("level").onclick=function(){
-                 location.href="frist.html"
+                 location.href="first.html"
                 }
             document.getElementById("div").style.opacity="1"
             this.result()
@@ -460,7 +460,7 @@ timerUp() {
    resultDiv.appendChild(finishLevel)
    finishLevel.aligh="left"
 
-   var finishScore = document.createTextNode("your score is: "+this._player.level.score)
+   var finishScore = document.createTextNode("your score is: "+this._player.score)
    resultDiv.appendChild(finishScore)
 
    var finishCar = document.createTextNode("your car model is: "+this._player.cModel)
