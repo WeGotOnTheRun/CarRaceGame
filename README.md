@@ -11,7 +11,7 @@
   <p>you can have the project by downloading the project and run the first.html on any browser.</p><br>
 
 <b>Usage:</b><br>
-  <i>after installing it you will have 3 three options.</i><br>
+  <i>after installing it you will have 3 options.</i><br>
   1- play: to start playing, first choose your car, then write your name, after that choose the level, then you are ready to go.<br>
   2- help:<br>
       -How to play: this will tell you how to play the game.<br>
