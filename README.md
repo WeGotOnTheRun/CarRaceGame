@@ -22,8 +22,8 @@
   <b>Note: </b>if you couldn't a level one, you can't play the higher level.<br>
   
 <b>Contributing:</b></br> this project is made by:<br>
-  1- Mena Gabara: https://github.com/menagabara<br>
-  2- Yasmine Hamdy: https://github.com/YasmineHamdy<br>
-  3- Nada Khaled: https://github.com/nadakhaled<br>
+  1- [Mena Gabara](https://github.com/menagabara)<br>
+  2- [Yasmine Hamdy](https://github.com/YasmineHamdy) <br>
+  3- [Nada Khaled](https://github.com/nadakhaled) <br>
 
 <b>Credits: </b><br>all copyrights reserved.
