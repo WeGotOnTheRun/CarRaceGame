@@ -28,7 +28,11 @@ window.onload = function init(){
               player.level=new level(60,10,2,1,600,2,500,9,10)
       break;
     case "3":
+<<<<<<< HEAD
               player.level=new level(80,20,3,1,600,0.5,100,9,15)
+=======
+              player.level=new level(80,20,3,1,400,0.5,100,9,15)
+>>>>>>> 765487e460c8655c91bf262fab648e0a24a04aff
       break;
 
     default:

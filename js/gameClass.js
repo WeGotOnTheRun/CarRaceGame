@@ -215,7 +215,7 @@ class Game{
                 document.getElementById("header").src="Game over"
                 document.getElementById("level").innerText="play again->";
                 document.getElementById("level").onclick=function(){
-                 location.href="frist.html"
+                 location.href="first.html"
                 }
             document.getElementById("div").style.opacity="1"
             this.result()
