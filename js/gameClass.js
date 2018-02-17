@@ -460,7 +460,7 @@ timerUp() {
    resultDiv.appendChild(finishLevel)
    finishLevel.aligh="left"
 
-   var finishScore = document.createTextNode("your score is: "+this._player.level.score)
+   var finishScore = document.createTextNode("your score is: "+this._player.score)
    resultDiv.appendChild(finishScore)
 
    var finishCar = document.createTextNode("your car model is: "+this._player.cModel)
